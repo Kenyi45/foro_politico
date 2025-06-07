@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight, Users, Globe, Lightbulb } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
@@ -12,6 +12,32 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   onLearnMoreClick
 }) => {
   const { t } = useLanguage();
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Imágenes del slider
+  const backgroundImages = [
+    {
+      src: '/palacio.jpg',
+      alt: 'Palacio de Gobierno'
+    },
+    {
+      src: '/congreso.jpg', 
+      alt: 'Congreso de la República'
+    },
+    {
+      src: '/justicia.jpg',
+      alt: 'Palacio de Justicia'
+    }
+  ];
+
+  // Slider automático
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % backgroundImages.length);
+    }, 5000); // Cambia cada 5 segundos
+
+    return () => clearInterval(interval);
+  }, [backgroundImages.length]);
 
   const handleRegisterClick = () => {
     onRegisterClick?.();
@@ -31,13 +57,20 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 
   return (
     <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image - Malecon Miraflores Lima */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/malecon-miraflores-lima.avif')",
-        }}
-      ></div>
+      {/* Background Image Slider */}
+      <div className="absolute inset-0">
+        {backgroundImages.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
+              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{
+              backgroundImage: `url('${image.src}')`,
+            }}
+          />
+        ))}
+      </div>
       
       {/* Dark Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary-900/90 via-primary-800/85 to-neutral-900/90"></div>
@@ -58,7 +91,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           <Globe className="w-6 h-6 text-cyan-200/45" />
         </div>
         <div className="absolute bottom-1/3 left-1/3 animate-pulse-slow animation-delay-300">
-                          <Lightbulb className="w-7 h-7 text-primary-200/45" />
+          <Lightbulb className="w-7 h-7 text-primary-200/45" />
         </div>
       </div>
 
