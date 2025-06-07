@@ -90,7 +90,7 @@ function AppContent() {
         <CountdownSection />
 
         {/* Thematic Axes Section */}
-        <ThematicAxesSection />
+        {/* <ThematicAxesSection /> */}
 
         {/* About Section - Enhanced */}
         <section id="sobre" className="section-padding institutional-gradient">

@@ -16,7 +16,6 @@ const Header: React.FC<HeaderProps> = ({ isScrolled = false }) => {
     { label: t('nav.inicio'), href: '#inicio' },
     { label: t('nav.caracteristicas'), href: '#caracteristicas' },
     { label: t('nav.sobre'), href: '#sobre' },
-    { label: t('nav.ejes'), href: '#ejes-tematicos' },
     { label: t('nav.equipo'), href: '#equipo' },
     { label: t('nav.galeria'), href: '#galeria' },
     { label: t('nav.eventos'), href: '#eventos' }
