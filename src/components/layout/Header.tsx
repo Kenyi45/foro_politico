@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { NavigationItem } from '../../types/index';
 import { useLanguage } from '../../contexts/LanguageContext';
-import LanguageSelector from '../ui/LanguageSelector';
 
 interface HeaderProps {
   isScrolled?: boolean;
@@ -62,7 +61,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled = false }) => {
               <span className="text-white font-bold text-xl">FJP</span>
             </div>
             <div className="hidden sm:block">
-              <h1 className={`font-display font-bold text-lg leading-tight tracking-tight ${
+              <h1 className={`font-primary font-bold text-lg leading-tight tracking-tight ${
                 scrolled ? 'text-gray-900' : 'text-white'
               }`}>
                 Foro de Jóvenes<br />
@@ -86,11 +85,8 @@ const Header: React.FC<HeaderProps> = ({ isScrolled = false }) => {
             ))}
           </div>
 
-          {/* CTA Button, Language Selector & Mobile Menu Toggle */}
+          {/* CTA Button & Mobile Menu Toggle */}
           <div className="flex items-center space-x-4">
-            {/* Language Selector */}
-            <LanguageSelector variant={scrolled ? 'light' : 'dark'} />
-            
             <button 
               onClick={() => handleNavClick('#registro')}
               className="btn-secondary hidden sm:block"
@@ -130,11 +126,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled = false }) => {
                   {item.label}
                 </button>
               ))}
-              <div className="pt-4 border-t border-gray-100 space-y-2">
-                {/* Language Selector Mobile */}
-                <div className="px-4">
-                  <LanguageSelector variant="light" />
-                </div>
+              <div className="pt-4 border-t border-gray-100">
                 <button 
                   onClick={() => handleNavClick('#registro')}
                   className="btn-secondary w-full text-center"

@@ -93,7 +93,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           <p className="text-lg sm:text-xl md:text-2xl font-medium leading-relaxed text-white/90 mb-8 sm:mb-12 max-w-4xl mx-auto animate-slide-up animation-delay-150">
             {t('hero.subtitle.part1')}{' '}
             <span className="font-semibold text-accent-200">{t('hero.subtitle.defend')}</span>,{' '}
-            <span className="font-semibold text-gold-100">{t('hero.subtitle.strengthen')}</span> {t('hero.slogan.and')}{' '}
+            <span className="font-semibold text-gold-100">{t('hero.subtitle.strengthen')}</span>{' '}
             <span className="font-semibold text-primary-100">{t('hero.subtitle.preserve')}</span>{' '}
             {t('hero.subtitle.part2')}
           </p>

@@ -11,7 +11,7 @@
   }
   
 body {
-    font-family: 'Source Sans Pro', system-ui, -apple-system, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     line-height: 1.6;
     color: #0f172a;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
@@ -22,21 +22,12 @@ body {
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 600;
     line-height: 1.2;
-    letter-spacing: -0.025em;
   }
 
-  .font-display {
-    font-family: 'Playfair Display', serif;
-  }
-
-  .font-body {
-    font-family: 'Source Sans Pro', system-ui, sans-serif;
-  }
-
-  .font-accent {
+  .font-primary {
     font-family: 'Inter', system-ui, sans-serif;
   }
 
@@ -366,29 +357,29 @@ body {
     animation: float 10s ease-in-out infinite;
   }
 
-  /* Professional Typography */
+  /* Professional Typography - Inter Font */
   .heading-display {
-    @apply text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight;
+    @apply font-primary text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight;
   }
 
   .heading-xl {
-    @apply text-4xl md:text-5xl font-bold leading-tight tracking-tight;
+    @apply font-primary text-4xl md:text-5xl font-bold leading-tight tracking-tight;
   }
 
   .heading-lg {
-    @apply text-3xl md:text-4xl font-bold leading-tight;
+    @apply font-primary text-3xl md:text-4xl font-bold leading-tight;
   }
 
   .heading-md {
-    @apply text-2xl md:text-3xl font-semibold leading-tight;
+    @apply font-primary text-2xl md:text-3xl font-semibold leading-tight;
   }
 
   .body-lg {
-    @apply text-lg md:text-xl leading-relaxed;
+    @apply font-primary text-lg md:text-xl leading-relaxed;
   }
 
   .body-md {
-    @apply text-base md:text-lg leading-relaxed;
+    @apply font-primary text-base md:text-lg leading-relaxed;
   }
 
   /* Responsive Design Utilities */
@@ -408,91 +399,91 @@ body {
     @apply max-w-7xl mx-auto;
   }
 
-  /* Advanced Typography Styles */
+  /* Standardized Typography Styles - Inter Font Family */
   .title-hero {
-    @apply font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-none tracking-tight text-shadow-lg;
-    font-variation-settings: 'wght' 800;
+    @apply font-primary text-5xl md:text-6xl lg:text-7xl font-bold leading-none tracking-tight text-shadow-lg;
+    font-weight: 800;
   }
 
   .title-section {
-    @apply font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight;
-    font-variation-settings: 'wght' 700;
+    @apply font-primary text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight;
+    font-weight: 700;
   }
 
   .title-card {
-    @apply font-display text-2xl md:text-3xl font-semibold leading-tight tracking-tight;
-    font-variation-settings: 'wght' 600;
+    @apply font-primary text-2xl md:text-3xl font-semibold leading-tight tracking-tight;
+    font-weight: 600;
   }
 
   .subtitle-hero {
-    @apply font-body text-xl md:text-2xl font-medium leading-relaxed;
-    font-variation-settings: 'wght' 500;
+    @apply font-primary text-xl md:text-2xl font-medium leading-relaxed;
+    font-weight: 500;
   }
 
   .subtitle-section {
-    @apply font-body text-lg md:text-xl font-normal leading-relaxed;
-    font-variation-settings: 'wght' 400;
+    @apply font-primary text-lg md:text-xl font-normal leading-relaxed;
+    font-weight: 400;
   }
 
   .text-institutional {
-    @apply font-body text-base md:text-lg leading-relaxed tracking-wide;
-    font-variation-settings: 'wght' 400;
+    @apply font-primary text-base md:text-lg leading-relaxed tracking-wide;
+    font-weight: 400;
     letter-spacing: 0.025em;
   }
 
   .text-formal {
-    @apply font-accent text-sm md:text-base font-medium leading-relaxed;
-    font-variation-settings: 'wght' 500;
+    @apply font-primary text-sm md:text-base font-medium leading-relaxed;
+    font-weight: 500;
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
 
   .text-elegant {
-    @apply font-display text-lg md:text-xl font-normal leading-relaxed;
-    font-variation-settings: 'wght' 400;
+    @apply font-primary text-lg md:text-xl font-normal leading-relaxed;
+    font-weight: 400;
     font-style: italic;
   }
 
   .text-political {
-    @apply font-body text-base md:text-lg font-semibold leading-relaxed;
-    font-variation-settings: 'wght' 600;
+    @apply font-primary text-base md:text-lg font-semibold leading-relaxed;
+    font-weight: 600;
     letter-spacing: 0.01em;
   }
 
   .quote-text {
-    @apply font-display text-xl md:text-2xl font-medium leading-relaxed;
-    font-variation-settings: 'wght' 500;
+    @apply font-primary text-xl md:text-2xl font-medium leading-relaxed;
+    font-weight: 500;
     font-style: italic;
   }
 
   .badge-text {
-    @apply font-accent text-xs md:text-sm font-semibold;
-    font-variation-settings: 'wght' 600;
+    @apply font-primary text-xs md:text-sm font-semibold;
+    font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
 
   .button-text {
-    @apply font-accent text-sm md:text-base font-semibold;
-    font-variation-settings: 'wght' 600;
+    @apply font-primary text-sm md:text-base font-semibold;
+    font-weight: 600;
     letter-spacing: 0.025em;
   }
 
   .nav-text {
-    @apply font-accent text-sm md:text-base font-medium;
-    font-variation-settings: 'wght' 500;
+    @apply font-primary text-sm md:text-base font-medium;
+    font-weight: 500;
     letter-spacing: 0.025em;
   }
 
   .stat-number {
-    @apply font-display text-3xl md:text-4xl lg:text-5xl font-bold;
-    font-variation-settings: 'wght' 800;
+    @apply font-primary text-3xl md:text-4xl lg:text-5xl font-bold;
+    font-weight: 800;
     line-height: 1;
   }
 
   .stat-label {
-    @apply font-body text-sm md:text-base font-medium;
-    font-variation-settings: 'wght' 500;
+    @apply font-primary text-sm md:text-base font-medium;
+    font-weight: 500;
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
@@ -510,33 +501,40 @@ body {
     letter-spacing: -0.025em;
   }
 
-  /* Font Weight Variations */
+  /* Standardized Font Weight Classes - Inter Font */
   .font-light {
-    font-variation-settings: 'wght' 300;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 300;
   }
 
   .font-normal {
-    font-variation-settings: 'wght' 400;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 400;
   }
 
   .font-medium {
-    font-variation-settings: 'wght' 500;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 500;
   }
 
   .font-semibold {
-    font-variation-settings: 'wght' 600;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 600;
   }
 
   .font-bold {
-    font-variation-settings: 'wght' 700;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 700;
   }
 
   .font-extrabold {
-    font-variation-settings: 'wght' 800;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 800;
   }
 
   .font-black {
-    font-variation-settings: 'wght' 900;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 900;
   }
 
   /* Custom Button Animations */
