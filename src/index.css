@@ -1,13 +1,541 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@300;400;500;600;700;800;900&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300;1,400;1,600;1,700;1,900&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+  
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    font-family: 'Source Sans Pro', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    color: #0f172a;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+
+  .font-display {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .font-body {
+    font-family: 'Source Sans Pro', system-ui, sans-serif;
+  }
+
+  .font-accent {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  ::selection {
+    background-color: rgba(220, 38, 38, 0.2);
+    color: #1d4ed8;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-primary-500/50 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95;
+  }
+  
+  .btn-secondary {
+    @apply bg-gradient-to-r from-accent-500 to-accent-600 hover:from-accent-600 hover:to-accent-700 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-accent-500/50 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary-500/50 focus:ring-offset-2 hover:scale-105 active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply text-primary-600 hover:bg-primary-50 font-semibold py-3 px-8 rounded-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary-500/50 focus:ring-offset-2 hover:scale-105 active:scale-95;
+  }
+
+  .btn-gold {
+    @apply bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-gold-500/50 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95;
+  }
+  
+  .card {
+    @apply bg-white rounded-2xl shadow-soft hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1;
+  }
+
+  .card-elevated {
+    @apply bg-white rounded-2xl shadow-large hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2;
+  }
+
+  .card-glass {
+    @apply bg-white/70 backdrop-blur-lg border border-white/20 rounded-2xl shadow-soft hover:shadow-xl transition-all duration-300;
+  }
+  
+  .section-padding {
+    @apply py-20 px-4 sm:px-6 lg:px-8;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-500 via-accent-500 to-gold-500 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-peach {
+    @apply bg-gradient-to-r from-primary-400 via-accent-400 to-gold-400 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-primary-500 to-primary-600 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-accent {
+    @apply bg-gradient-to-r from-accent-500 to-accent-600 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-gold-500 to-gold-600 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-terracotta {
+    @apply bg-gradient-to-r from-terracotta-500 to-terracotta-600 bg-clip-text text-transparent;
+  }
+  
+  .hero-gradient {
+    @apply bg-gradient-to-br from-primary-800 via-terracotta-700 to-primary-700;
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+  }
+  
+  .peach-gradient {
+    background: linear-gradient(135deg, 
+      rgba(230, 126, 34, 0.9) 0%, 
+      rgba(241, 105, 91, 0.8) 50%, 
+      rgba(245, 158, 11, 0.9) 100%);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+  }
+  
+  .accent-gradient {
+    @apply bg-gradient-to-r from-accent-500 to-gold-500;
+  }
+
+  .mesh-gradient {
+    background: linear-gradient(45deg, 
+      rgba(230, 126, 34, 0.8) 0%, 
+      rgba(241, 105, 91, 0.6) 25%, 
+      rgba(245, 158, 11, 0.7) 50%, 
+      rgba(219, 127, 95, 0.9) 75%, 
+      rgba(230, 126, 34, 0.5) 100%);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+  }
+
+  .sunset-gradient {
+    background: linear-gradient(135deg, 
+      rgba(230, 126, 34, 0.95) 0%, 
+      rgba(241, 105, 91, 0.85) 35%, 
+      rgba(245, 158, 11, 0.9) 70%, 
+      rgba(219, 127, 95, 0.8) 100%);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+  }
+
+  .turquoise-gradient {
+    background: linear-gradient(135deg, 
+      rgba(20, 184, 166, 0.9) 0%, 
+      rgba(6, 182, 212, 0.85) 25%, 
+      rgba(14, 165, 233, 0.8) 50%, 
+      rgba(59, 130, 246, 0.85) 75%, 
+      rgba(99, 102, 241, 0.9) 100%);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+  }
+
+  .institutional-gradient {
+    @apply bg-gradient-to-br from-neutral-50 via-white to-primary-50/30;
+  }
+
+  .warm-gradient {
+    @apply bg-gradient-to-br from-primary-50 via-gold-50 to-accent-50;
+  }
+
+  .professional-shadow {
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06),
+      0 0 0 1px rgba(0, 0, 0, 0.05);
+  }
+
+  .luxury-shadow {
+    box-shadow: 
+      0 25px 50px -12px rgba(0, 0, 0, 0.25),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  /* Form Styles */
+  .form-input {
+    @apply w-full px-4 py-3 border border-neutral-300 rounded-xl focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-200 bg-white text-neutral-900 placeholder-neutral-500;
+  }
+
+  .form-textarea {
+    @apply w-full px-4 py-3 border border-neutral-300 rounded-xl focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-200 bg-white text-neutral-900 placeholder-neutral-500 resize-none;
+  }
+
+  .form-select {
+    @apply w-full px-4 py-3 border border-neutral-300 rounded-xl focus:ring-4 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-200 bg-white text-neutral-900;
+  }
+
+  /* Badge Styles */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .badge-primary {
+    @apply bg-primary-100 text-primary-800;
+  }
+
+  .badge-accent {
+    @apply bg-accent-100 text-accent-800;
+  }
+
+  .badge-gold {
+    @apply bg-gold-100 text-gold-800;
+  }
+
+  .badge-success {
+    @apply bg-green-100 text-green-800;
+  }
+
+  .badge-warning {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+
+  .badge-error {
+    @apply bg-red-100 text-red-800;
+  }
+}
+
+@layer utilities {
+  .animation-delay-75 {
+    animation-delay: 75ms;
+  }
+  
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+  
+  .animation-delay-150 {
+    animation-delay: 150ms;
+  }
+  
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+  
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+
+  .animation-delay-700 {
+    animation-delay: 700ms;
+  }
+
+  .animation-delay-1000 {
+    animation-delay: 1000ms;
+  }
+  
+  .glass-effect {
+    backdrop-filter: blur(16px) saturate(180%);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .glass-morphism {
+    backdrop-filter: blur(20px) saturate(200%);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .text-shadow-white {
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
+  }
+
+  /* Scroll Animations */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+  }
+
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #1e40af, #f97316);
+    border-radius: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #1e3a8a, #ea580c);
+  }
+
+  /* Professional Grid Patterns */
+  .grid-pattern {
+    background-image: 
+      linear-gradient(rgba(30, 64, 175, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30, 64, 175, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .dot-pattern {
+    background-image: radial-gradient(circle, rgba(30, 64, 175, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  /* Shimmer Effect */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    animation: shimmer 2.5s linear infinite;
+  }
+
+  /* Floating Elements */
+  .float-1 {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .float-2 {
+    animation: float 8s ease-in-out infinite reverse;
+  }
+
+  .float-3 {
+    animation: float 10s ease-in-out infinite;
+  }
+
+  /* Professional Typography */
+  .heading-display {
+    @apply text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight;
+  }
+
+  .heading-xl {
+    @apply text-4xl md:text-5xl font-bold leading-tight tracking-tight;
+  }
+
+  .heading-lg {
+    @apply text-3xl md:text-4xl font-bold leading-tight;
+  }
+
+  .heading-md {
+    @apply text-2xl md:text-3xl font-semibold leading-tight;
+  }
+
+  .body-lg {
+    @apply text-lg md:text-xl leading-relaxed;
+  }
+
+  .body-md {
+    @apply text-base md:text-lg leading-relaxed;
+  }
+
+  /* Responsive Design Utilities */
+  .container-fluid {
+    @apply w-full px-4 sm:px-6 lg:px-8;
+  }
+
+  .content-width {
+    @apply max-w-4xl mx-auto;
+  }
+
+  .section-width {
+    @apply max-w-6xl mx-auto;
+  }
+
+  .full-width {
+    @apply max-w-7xl mx-auto;
+  }
+
+  /* Advanced Typography Styles */
+  .title-hero {
+    @apply font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-none tracking-tight text-shadow-lg;
+    font-variation-settings: 'wght' 800;
+  }
+
+  .title-section {
+    @apply font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight;
+    font-variation-settings: 'wght' 700;
+  }
+
+  .title-card {
+    @apply font-display text-2xl md:text-3xl font-semibold leading-tight tracking-tight;
+    font-variation-settings: 'wght' 600;
+  }
+
+  .subtitle-hero {
+    @apply font-body text-xl md:text-2xl font-medium leading-relaxed;
+    font-variation-settings: 'wght' 500;
+  }
+
+  .subtitle-section {
+    @apply font-body text-lg md:text-xl font-normal leading-relaxed;
+    font-variation-settings: 'wght' 400;
+  }
+
+  .text-institutional {
+    @apply font-body text-base md:text-lg leading-relaxed tracking-wide;
+    font-variation-settings: 'wght' 400;
+    letter-spacing: 0.025em;
+  }
+
+  .text-formal {
+    @apply font-accent text-sm md:text-base font-medium leading-relaxed;
+    font-variation-settings: 'wght' 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .text-elegant {
+    @apply font-display text-lg md:text-xl font-normal leading-relaxed;
+    font-variation-settings: 'wght' 400;
+    font-style: italic;
+  }
+
+  .text-political {
+    @apply font-body text-base md:text-lg font-semibold leading-relaxed;
+    font-variation-settings: 'wght' 600;
+    letter-spacing: 0.01em;
+  }
+
+  .quote-text {
+    @apply font-display text-xl md:text-2xl font-medium leading-relaxed;
+    font-variation-settings: 'wght' 500;
+    font-style: italic;
+  }
+
+  .badge-text {
+    @apply font-accent text-xs md:text-sm font-semibold;
+    font-variation-settings: 'wght' 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .button-text {
+    @apply font-accent text-sm md:text-base font-semibold;
+    font-variation-settings: 'wght' 600;
+    letter-spacing: 0.025em;
+  }
+
+  .nav-text {
+    @apply font-accent text-sm md:text-base font-medium;
+    font-variation-settings: 'wght' 500;
+    letter-spacing: 0.025em;
+  }
+
+  .stat-number {
+    @apply font-display text-3xl md:text-4xl lg:text-5xl font-bold;
+    font-variation-settings: 'wght' 800;
+    line-height: 1;
+  }
+
+  .stat-label {
+    @apply font-body text-sm md:text-base font-medium;
+    font-variation-settings: 'wght' 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* Professional Letter Spacing */
+  .tracking-presidential {
+    letter-spacing: 0.15em;
+  }
+
+  .tracking-institutional {
+    letter-spacing: 0.05em;
+  }
+
+  .tracking-elegant {
+    letter-spacing: -0.025em;
+  }
+
+  /* Font Weight Variations */
+  .font-light {
+    font-variation-settings: 'wght' 300;
+  }
+
+  .font-normal {
+    font-variation-settings: 'wght' 400;
+  }
+
+  .font-medium {
+    font-variation-settings: 'wght' 500;
+  }
+
+  .font-semibold {
+    font-variation-settings: 'wght' 600;
+  }
+
+  .font-bold {
+    font-variation-settings: 'wght' 700;
+  }
+
+  .font-extrabold {
+    font-variation-settings: 'wght' 800;
+  }
+
+  .font-black {
+    font-variation-settings: 'wght' 900;
+  }
 }
