@@ -62,6 +62,7 @@ const translations = {
     'about.values.transparency.desc': 'Promovemos la apertura y honestidad',
 
     // Features Section
+    'features.badge': 'Nuestras Fortalezas',
     'features.title': '¿Qué nos hace',
     'features.title.highlight': 'únicos',
     'features.description': 'Nuestro foro se distingue por crear un ambiente donde la juventud puede desarrollar su potencial político y social de manera integral',
@@ -74,27 +75,6 @@ const translations = {
     'features.impact.title': 'Impacto Local',
     'features.impact.desc': 'Transformamos las ideas en acciones concretas que benefician a nuestras comunidades',
     'features.cta': '¿Listo para formar parte de esta experiencia?',
-
-    // Statistics Section
-    'stats.badge': 'Nuestro Impacto Global',
-    'stats.title': 'Transformando el',
-    'stats.title.highlight': 'Futuro Político',
-    'stats.description': 'Cada número representa el compromiso de jóvenes líderes que están construyendo un mundo más justo, participativo y democrático',
-    'stats.leaders': 'Jóvenes Líderes',
-    'stats.leaders.desc': 'Participantes activos de 18-35 años',
-    'stats.countries': 'Países Representados',
-    'stats.countries.desc': 'Presencia en 5 continentes',
-    'stats.projects': 'Proyectos Incubados',
-    'stats.projects.desc': 'Iniciativas políticas y sociales',
-    'stats.years': 'Años de Trayectoria',
-    'stats.years.desc': 'Construyendo liderazgo juvenil',
-    'stats.awards': 'Premios Recibidos',
-    'stats.awards.desc': 'Reconocimientos internacionales',
-    'stats.cities': 'Ciudades Sede',
-    'stats.cities.desc': 'Eventos realizados mundialmente',
-    'stats.satisfaction': 'Tasa de satisfacción',
-    'stats.followers': 'Seguidores en redes',
-    'stats.community': 'Comunidad activa',
 
     // Team Section
     'team.badge': 'Nuestros Panelistas',
@@ -112,6 +92,7 @@ const translations = {
     'team.advisor.stats.continents': 'Continentes',
 
     // Gallery Section
+    'gallery.badge': 'Momentos Memorables',
     'gallery.title': 'Galería de',
     'gallery.title.highlight': 'Momentos',
     'gallery.description': 'Revive los momentos más memorables de nuestros foros anteriores en Buenos Aires 2023 y Buenos Aires 2024',
@@ -143,7 +124,6 @@ const translations = {
     'registration.immediate': 'Confirmación inmediata',
     'registration.support': 'Soporte 24/7',
     'registration.email.text': '¿Dudas? Escríbenos a',
-    'registration.discount': '⚡ Descuento por Registro Temprano: 50% OFF',
 
     // Testimonials Section - Historias de Transformación
     'testimonials.badge': 'Testimonios de Impacto',
@@ -152,6 +132,7 @@ const translations = {
     'testimonials.description': 'Conoce cómo el foro ha impactado la carrera de jóvenes líderes que ahora transforman sus comunidades y países',
 
     // Thematic Axes Section - Ejes Temáticos del Foro
+    'thematic.badge': 'Temas Centrales',
     'thematic.title': 'Ejes Temáticos del',
     'thematic.title.highlight': 'Foro',
     'thematic.description': 'Exploramos las temáticas más relevantes para el desarrollo político y social de las nuevas generaciones',
@@ -258,6 +239,7 @@ const translations = {
     'about.values.transparency.desc': 'We promote openness and honesty',
 
     // Features Section
+    'features.badge': 'Our Strengths',
     'features.title': 'What makes us',
     'features.title.highlight': 'unique',
     'features.description': 'Our forum stands out by creating an environment where youth can develop their political and social potential comprehensively',
@@ -270,27 +252,6 @@ const translations = {
     'features.impact.title': 'Local Impact',
     'features.impact.desc': 'We transform ideas into concrete actions that benefit our communities',
     'features.cta': 'Ready to be part of this experience?',
-
-    // Statistics Section
-    'stats.badge': 'Our Global Impact',
-    'stats.title': 'Transforming the',
-    'stats.title.highlight': 'Political Future',
-    'stats.description': 'Each number represents the commitment of young leaders who are building a more just, participatory and democratic world',
-    'stats.leaders': 'Young Leaders',
-    'stats.leaders.desc': 'Active participants aged 18-35',
-    'stats.countries': 'Countries Represented',
-    'stats.countries.desc': 'Presence in 5 continents',
-    'stats.projects': 'Incubated Projects',
-    'stats.projects.desc': 'Political and social initiatives',
-    'stats.years': 'Years of Experience',
-    'stats.years.desc': 'Building youth leadership',
-    'stats.awards': 'Awards Received',
-    'stats.awards.desc': 'International recognitions',
-    'stats.cities': 'Host Cities',
-    'stats.cities.desc': 'Events held worldwide',
-    'stats.satisfaction': 'Satisfaction rate',
-    'stats.followers': 'Social media followers',
-    'stats.community': 'Active community',
 
     // Team Section
     'team.badge': 'Our Panelists',
@@ -308,6 +269,7 @@ const translations = {
     'team.advisor.stats.continents': 'Continents',
 
     // Gallery Section
+    'gallery.badge': 'Memorable Moments',
     'gallery.title': 'Gallery of',
     'gallery.title.highlight': 'Moments',
     'gallery.description': 'Relive the most memorable moments from our previous forums in Buenos Aires 2023 and Buenos Aires 2024',
@@ -339,7 +301,6 @@ const translations = {
     'registration.immediate': 'Immediate confirmation',
     'registration.support': '24/7 support',
     'registration.email.text': 'Questions? Write to us at',
-    'registration.discount': '⚡ Early Registration Discount: 50% OFF',
 
     // Testimonials Section - Transformation Stories
     'testimonials.badge': 'Impact Testimonials',
@@ -348,6 +309,7 @@ const translations = {
     'testimonials.description': 'Learn how the forum has impacted the careers of young leaders who now transform their communities and countries',
 
     // Thematic Axes Section - Forum Thematic Axes
+    'thematic.badge': 'Central Themes',
     'thematic.title': 'Forum Thematic',
     'thematic.title.highlight': 'Axes',
     'thematic.description': 'We explore the most relevant themes for the political and social development of new generations',

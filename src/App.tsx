@@ -15,12 +15,11 @@ import Header from './components/layout/Header';
 // Section Components
 import HeroSection from './components/sections/HeroSection';
 import FeaturesSection from './components/sections/FeaturesSection';
-import StatisticsSection from './components/sections/StatisticsSection';
+import TeamSection from './components/sections/TeamSection';
+import TestimonialsSection from './components/sections/TestimonialsSection';
+import GallerySection from './components/sections/GallerySection';
 import CountdownSection from './components/sections/CountdownSection';
 import ThematicAxesSection from './components/sections/ThematicAxesSection';
-import TestimonialsSection from './components/sections/TestimonialsSection';
-import TeamSection from './components/sections/TeamSection';
-import GallerySection from './components/sections/GallerySection';
 
 // Common Components
 import Button from './components/common/Button';
@@ -86,9 +85,6 @@ function AppContent() {
 
         {/* Features Section */}
         <FeaturesSection />
-
-        {/* Statistics Section */}
-        <StatisticsSection />
 
         {/* Countdown Section */}
         <CountdownSection />
@@ -282,11 +278,6 @@ function AppContent() {
             {/* CTA Buttons */}
             <div className="text-center">
               <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 max-w-2xl mx-auto">
-                <div className="mb-6">
-                                      <div className="inline-flex items-center px-3 py-1 rounded-full bg-gold-500/20 text-gold-200 text-sm font-medium mb-4">
-                      {t('registration.discount')}
-                    </div>
-                  </div>
 
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <button
