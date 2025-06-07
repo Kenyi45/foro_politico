@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { NavigationItem } from '../../types/index';
+import { useLanguage } from '../../contexts/LanguageContext';
+import LanguageSelector from '../ui/LanguageSelector';
 
 interface HeaderProps {
   isScrolled?: boolean;
@@ -9,15 +11,16 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ isScrolled = false }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolledState, setIsScrolledState] = useState(false);
+  const { t } = useLanguage();
 
   const navigationItems: NavigationItem[] = [
-    { label: 'Inicio', href: '#inicio' },
-    { label: 'Sobre el Foro', href: '#sobre' },
-    { label: 'Eventos', href: '#eventos' },
-    { label: 'Participantes', href: '#participantes' },
-    { label: 'Galería', href: '#galeria' },
-    { label: 'Blog', href: '#blog' },
-    { label: 'Contacto', href: '#contacto' }
+    { label: t('nav.inicio'), href: '#inicio' },
+    { label: t('nav.caracteristicas'), href: '#caracteristicas' },
+    { label: t('nav.sobre'), href: '#sobre' },
+    { label: t('nav.ejes'), href: '#ejes-tematicos' },
+    { label: t('nav.equipo'), href: '#equipo' },
+    { label: t('nav.galeria'), href: '#galeria' },
+    { label: t('nav.eventos'), href: '#eventos' }
   ];
 
   useEffect(() => {
@@ -83,13 +86,16 @@ const Header: React.FC<HeaderProps> = ({ isScrolled = false }) => {
             ))}
           </div>
 
-          {/* CTA Button & Mobile Menu Toggle */}
+          {/* CTA Button, Language Selector & Mobile Menu Toggle */}
           <div className="flex items-center space-x-4">
+            {/* Language Selector */}
+            <LanguageSelector variant={scrolled ? 'light' : 'dark'} />
+            
             <button 
               onClick={() => handleNavClick('#registro')}
               className="btn-secondary hidden sm:block"
             >
-              Regístrate Ahora
+              {t('nav.registro')}
             </button>
             
             {/* Mobile Menu Toggle */}
@@ -124,12 +130,16 @@ const Header: React.FC<HeaderProps> = ({ isScrolled = false }) => {
                   {item.label}
                 </button>
               ))}
-              <div className="pt-4 border-t border-gray-100">
+              <div className="pt-4 border-t border-gray-100 space-y-2">
+                {/* Language Selector Mobile */}
+                <div className="px-4">
+                  <LanguageSelector variant="light" />
+                </div>
                 <button 
                   onClick={() => handleNavClick('#registro')}
                   className="btn-secondary w-full text-center"
                 >
-                  Regístrate Ahora
+                  {t('nav.registro')}
                 </button>
               </div>
             </div>

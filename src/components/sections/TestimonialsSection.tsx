@@ -3,9 +3,11 @@ import { ChevronLeft, ChevronRight, Quote, Star, MapPin } from 'lucide-react';
 import { useForumStore } from '../../stores/useForumStore';
 import Card from '../common/Card';
 import Button from '../common/Button';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 const TestimonialsSection: React.FC = () => {
-  // const { testimonials } = useForumStore(); // Using enhanced testimonials instead
+  const { testimonials } = useForumStore();
+  const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
@@ -106,19 +108,18 @@ const TestimonialsSection: React.FC = () => {
         <div className="text-center max-w-4xl mx-auto mb-16">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white mb-6">
             <Quote className="w-4 h-4 mr-2" />
-            <span className="font-semibold text-sm">Testimonios de Impacto</span>
+            <span className="font-semibold text-sm">{t('testimonials.badge')}</span>
           </div>
           
-          <h2 className="title-section text-white mb-6">
-            Historias de{' '}
+          <h2 className="title-section text-white mb-6 animate-slide-up">
+            {t('testimonials.title')}{' '}
             <span className="text-accent-200 font-extrabold">
-              Transformación
+              {t('testimonials.title.highlight')}
             </span>
           </h2>
           
           <p className="text-xl text-white/80 leading-relaxed">
-            Conoce cómo el foro ha impactado la carrera de jóvenes líderes 
-            que ahora transforman sus comunidades y países
+            {t('testimonials.description')}
           </p>
         </div>
 
@@ -228,21 +229,6 @@ const TestimonialsSection: React.FC = () => {
           >
             {isAutoPlaying ? 'Pausar rotación automática' : 'Activar rotación automática'}
           </button>
-        </div>
-
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <Card variant="glass" className="max-w-2xl mx-auto bg-white/5 backdrop-blur-sm border-white/10">
-            <h3 className="text-2xl font-bold text-white mb-4">
-              ¿Listo para escribir tu historia de éxito?
-            </h3>
-            <p className="text-white/80 mb-6">
-              Únete a la próxima generación de líderes que están transformando el mundo
-            </p>
-            <Button variant="secondary" size="lg">
-              Aplicar al Foro 2024
-            </Button>
-          </Card>
         </div>
       </div>
     </section>

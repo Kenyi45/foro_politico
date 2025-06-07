@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, Users, Globe, Lightbulb } from 'lucide-react';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 interface HeroSectionProps {
   onRegisterClick?: () => void;
@@ -10,6 +11,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   onRegisterClick,
   onLearnMoreClick
 }) => {
+  const { t } = useLanguage();
+
   const handleRegisterClick = () => {
     onRegisterClick?.();
     const element = document.querySelector('#registro');
@@ -36,17 +39,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         }}
       ></div>
       
-      {/* Turquoise Overlay */}
-      <div className="absolute inset-0 turquoise-gradient opacity-85"></div>
+      {/* Dark Gradient Overlay - Same style as "Únete al Cambio" */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-900/90 via-primary-800/85 to-neutral-900/90"></div>
       
-      {/* Additional Dark Overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40"></div>
-      
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-15">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-teal-300/40 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-400/35 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-128 h-128 bg-blue-300/30 rounded-full blur-3xl"></div>
+      {/* Background Elements - Same as "Únete al Cambio" */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-10 w-64 h-64 bg-accent-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 bg-gold-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary-400/5 rounded-full blur-3xl"></div>
       </div>
 
       {/* Floating Elements */}
@@ -63,39 +63,39 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 container-custom text-center px-4">
+      <div className="container-custom relative z-10 text-center px-4">
         <div className="max-w-4xl mx-auto">
           {/* Badge */}
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white mb-8 animate-fade-in">
             <span className="w-2 h-2 bg-accent-500 rounded-full mr-2 animate-pulse"></span>
-            <span className="badge-text text-white">3ra Edición Panamericana • 2-4 Octubre 2025 • Lima, Perú</span>
+            <span className="badge-text text-white">{t('hero.badge')}</span>
           </div>
 
           {/* Main Title */}
           <h1 className="title-hero text-white mb-6 animate-slide-up tracking-elegant">
-            América que{' '}
+            {t('hero.title')}{' '}
             <span className="text-primary-100 font-extrabold">
-              Defiende
+              {t('hero.title.highlight')}
             </span>{' '}
-            la Libertad
+            {t('hero.title.end')}
           </h1>
 
           {/* Official Slogan */}
           <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 mb-8 max-w-4xl mx-auto animate-slide-up animation-delay-75">
             <h2 className="text-formal text-white text-center leading-tight tracking-presidential">
-              "DEFENDIENDO LA LIBERTAD FRENTE AL{' '}
-              <span className="text-accent-300">SOCIALISMO</span> Y LA{' '}
-              <span className="text-gold-200">CULTURA WOKE</span>"
+              "{t('hero.slogan')}{' '}
+              <span className="text-accent-300">{t('hero.slogan.socialism')}</span> {t('hero.slogan.and')}{' '}
+              <span className="text-gold-200">{t('hero.slogan.woke')}</span>"
             </h2>
           </div>
 
           {/* Subtitle */}
           <p className="subtitle-hero text-white/90 mb-12 max-w-3xl mx-auto animate-slide-up animation-delay-150">
-            Un encuentro continental para{' '}
-            <span className="font-semibold text-accent-200">defender</span>,{' '}
-            <span className="font-semibold text-gold-100">fortalecer</span> y{' '}
-            <span className="font-semibold text-primary-100">preservar</span>{' '}
-            los valores de libertad y democracia en América
+            {t('hero.subtitle.part1')}{' '}
+            <span className="font-semibold text-accent-200">{t('hero.subtitle.defend')}</span>,{' '}
+            <span className="font-semibold text-gold-100">{t('hero.subtitle.strengthen')}</span> {t('hero.slogan.and')}{' '}
+            <span className="font-semibold text-primary-100">{t('hero.subtitle.preserve')}</span>{' '}
+            {t('hero.subtitle.part2')}
           </p>
 
           {/* CTA Buttons */}
@@ -104,7 +104,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               onClick={handleRegisterClick}
               className="group bg-accent-500 hover:bg-accent-600 text-white py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-accent-500/25 flex items-center space-x-2"
             >
-              <span className="button-text">Participa del Foro</span>
+              <span className="button-text">{t('hero.cta.participate')}</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
             
@@ -112,7 +112,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               onClick={handleLearnMoreClick}
               className="group bg-white/10 hover:bg-white/20 text-white py-4 px-8 rounded-full transition-all duration-300 backdrop-blur-sm border border-white/30 hover:border-white/50 flex items-center space-x-2"
             >
-              <span className="button-text">Conoce Más</span>
+              <span className="button-text">{t('hero.cta.learn')}</span>
             </button>
           </div>
 
@@ -120,15 +120,15 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto animate-fade-in animation-delay-500">
             <div className="text-center">
               <div className="stat-number text-white mb-2">250+</div>
-              <div className="stat-label text-white/80">Invitados Esperados</div>
+              <div className="stat-label text-white/80">{t('hero.stats.guests')}</div>
             </div>
             <div className="text-center">
               <div className="stat-number text-white mb-2">23</div>
-              <div className="stat-label text-white/80">Países Panamericanos</div>
+              <div className="stat-label text-white/80">{t('hero.stats.countries')}</div>
             </div>
             <div className="text-center">
               <div className="stat-number text-white mb-2">3</div>
-              <div className="stat-label text-white/80">Días de Actividades</div>
+              <div className="stat-label text-white/80">{t('hero.stats.days')}</div>
             </div>
           </div>
         </div>

@@ -810,18 +810,18 @@ export const detailedThematicAxes: ThematicAxisDetail[] = [
 
 export const previousForumEvents: ForumEventSummary[] = [
   {
-    id: 'bogota-2023',
-    title: '2do Foro Panamericano de Jóvenes Políticos',
+    id: 'buenos-aires-2023',
+    title: '1er Foro Panamericano de Jóvenes Políticos',
     year: 2023,
-    city: 'Bogotá',
-    country: 'Colombia',
+    city: 'Buenos Aires',
+    country: 'Argentina',
     dates: '15-17 Septiembre 2023',
     participants: 220,
     countries: 18,
     keyHighlights: [
       'Primera cumbre virtual-presencial híbrida',
       'Lanzamiento de la Red Panamericana de Jóvenes Políticos',
-      'Firma del Pacto de Bogotá por la Democracia Juvenil',
+      'Firma del Pacto de Buenos Aires por la Democracia Juvenil',
       '15 proyectos de impacto presentados'
     ],
     coverImage: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=800&fit=crop',
@@ -848,23 +848,23 @@ export const previousForumEvents: ForumEventSummary[] = [
 ];
 
 export const galleryPhotos: GalleryPhoto[] = [
-  // Bogotá 2023 Photos
+  // Buenos Aires 2023 Photos
   {
-    id: 'bog-001',
-    title: 'Ceremonia de Apertura - Bogotá 2023',
+    id: 'ba23-001',
+    title: 'Ceremonia de Apertura - Buenos Aires 2023',
     image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop',
     description: 'Momento de la ceremonia inaugural con la participación de líderes juveniles de 18 países americanos',
     event: previousForumEvents[0] as any,
     category: 'ceremonies',
     photographer: 'María González',
-    location: 'Centro de Convenciones Corferias, Bogotá',
+    location: 'Centro de Convenciones Buenos Aires',
     date: new Date('2023-09-15T09:00:00'),
     tags: ['apertura', 'ceremonia', 'líderes', 'banderas'],
     createdAt: new Date('2023-09-15'),
     updatedAt: new Date('2023-09-15')
   },
   {
-    id: 'bog-002',
+    id: 'ba23-002',
     title: 'Panel de Gobernanza Digital',
     image: 'https://images.unsplash.com/photo-1559223607-a43c990c692c?w=800&h=600&fit=crop',
     description: 'Debate intenso sobre el futuro de la participación ciudadana digital en América Latina',
@@ -878,7 +878,7 @@ export const galleryPhotos: GalleryPhoto[] = [
     updatedAt: new Date('2023-09-15')
   },
   {
-    id: 'bog-003',
+    id: 'ba23-003',
     title: 'Networking Coffee Break',
     image: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&h=600&fit=crop',
     description: 'Jóvenes políticos intercambiando experiencias y creando alianzas estratégicas',
@@ -892,7 +892,7 @@ export const galleryPhotos: GalleryPhoto[] = [
     updatedAt: new Date('2023-09-15')
   },
   {
-    id: 'bog-004',
+    id: 'ba23-004',
     title: 'Taller de Liderazgo Transformacional',
     image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop',
     description: 'Sesión práctica donde los participantes desarrollaron sus habilidades de liderazgo',
@@ -906,7 +906,7 @@ export const galleryPhotos: GalleryPhoto[] = [
     updatedAt: new Date('2023-09-16')
   },
   {
-    id: 'bog-005',
+    id: 'ba23-005',
     title: 'Conferencia Magistral: El Futuro de América',
     image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&h=600&fit=crop',
     description: 'Dr. Elena Vásquez, ex-Ministra de Educación, compartiendo su visión sobre el continente',
@@ -920,10 +920,10 @@ export const galleryPhotos: GalleryPhoto[] = [
     updatedAt: new Date('2023-09-16')
   },
   {
-    id: 'bog-006',
-    title: 'Noche Cultural Colombiana',
+    id: 'ba23-006',
+    title: 'Noche Cultural Argentina',
     image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=600&fit=crop',
-    description: 'Celebración de la diversidad cultural con música, danza y gastronomía típica colombiana',
+    description: 'Celebración de la diversidad cultural con música, danza y gastronomía típica argentina',
     event: previousForumEvents[0] as any,
     category: 'social',
     photographer: 'Camila Santos',
@@ -1050,5 +1050,5 @@ export const galleryPhotos: GalleryPhoto[] = [
 ];
 
 // Update forum events with their photos
-previousForumEvents[0].photos = galleryPhotos.filter(photo => photo.id.startsWith('bog-'));
+previousForumEvents[0].photos = galleryPhotos.filter(photo => photo.id.startsWith('ba23-'));
 previousForumEvents[1].photos = galleryPhotos.filter(photo => photo.id.startsWith('ba-')); 

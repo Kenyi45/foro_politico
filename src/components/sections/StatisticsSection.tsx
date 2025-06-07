@@ -1,73 +1,68 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Users, Globe, Lightbulb, Calendar, Award, MapPin } from 'lucide-react';
-import { useForumStore } from '../../stores/useForumStore';
+import React, { useState, useEffect } from 'react';
+import { Award, Users, Globe, Lightbulb, Calendar, MapPin } from 'lucide-react';
 import Card from '../common/Card';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 interface AnimatedCounterProps {
   value: number;
   duration?: number;
   suffix?: string;
-  prefix?: string;
 }
 
 const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ 
   value, 
   duration = 2000, 
-  suffix = '', 
-  prefix = '' 
+  suffix = '' 
 }) => {
   const [count, setCount] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!isVisible) return;
-
     let startTime: number;
-    const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime;
-      const progress = Math.min((currentTime - startTime) / duration, 1);
+    let animationFrame: number;
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
       
-      // Easing function for smooth animation
-      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-      const currentCount = Math.floor(easeOutQuart * value);
-      
-      setCount(currentCount);
+      setCount(Math.floor(progress * value));
       
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        animationFrame = requestAnimationFrame(animate);
       }
     };
 
-    requestAnimationFrame(animate);
-  }, [isVisible, value, duration]);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          animationFrame = requestAnimationFrame(animate);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const element = document.getElementById(`counter-${value}`);
+    if (element) {
+      observer.observe(element);
+    }
+
+    return () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+      observer.disconnect();
+    };
+  }, [value, duration]);
 
   return (
-    <div ref={elementRef} className="tabular-nums font-bold">
-      {prefix}{count.toLocaleString()}{suffix}
-    </div>
+    <span id={`counter-${value}`}>
+      {count.toLocaleString()}{suffix}
+    </span>
   );
 };
 
 const StatisticsSection: React.FC = () => {
-  // const { statistics } = useForumStore(); // Using hardcoded enhanced stats instead
+  const { t } = useLanguage();
 
   const iconMap = {
     Users,
@@ -81,89 +76,92 @@ const StatisticsSection: React.FC = () => {
   const enhancedStats = [
     {
       id: '1',
-      label: 'Jóvenes Líderes',
+      label: t('stats.leaders'),
       value: 2847,
       suffix: '+',
       icon: 'Users',
       color: 'primary',
-      description: 'Participantes activos de 18-35 años'
+      description: t('stats.leaders.desc')
     },
     {
       id: '2',
-      label: 'Países Representados',
+      label: t('stats.countries'),
       value: 45,
       icon: 'Globe',
       color: 'accent',
-      description: 'Presencia en 5 continentes'
+      description: t('stats.countries.desc')
     },
     {
       id: '3',
-      label: 'Proyectos Incubados',
+      label: t('stats.projects'),
       value: 287,
       suffix: '+',
       icon: 'Lightbulb',
       color: 'gold',
-      description: 'Iniciativas políticas y sociales'
+      description: t('stats.projects.desc')
     },
     {
       id: '4',
-      label: 'Años de Trayectoria',
+      label: t('stats.years'),
       value: 8,
       icon: 'Calendar',
       color: 'primary',
-      description: 'Construyendo liderazgo juvenil'
+      description: t('stats.years.desc')
     },
     {
       id: '5',
-      label: 'Premios Recibidos',
+      label: t('stats.awards'),
       value: 12,
       icon: 'Award',
       color: 'gold',
-      description: 'Reconocimientos internacionales'
+      description: t('stats.awards.desc')
     },
     {
       id: '6',
-      label: 'Ciudades Sede',
+      label: t('stats.cities'),
       value: 23,
       icon: 'MapPin',
       color: 'accent',
-      description: 'Eventos realizados mundialmente'
+      description: t('stats.cities.desc')
     }
   ];
 
   const getColorClasses = (color: string) => {
-    const colorMap = {
-      primary: {
-        bg: 'bg-primary-500',
-        gradient: 'from-primary-500 to-primary-600',
-        text: 'text-primary-600',
-        glow: 'shadow-glow'
-      },
-      accent: {
-        bg: 'bg-accent-500',
-        gradient: 'from-accent-500 to-accent-600',
-        text: 'text-accent-600',
-        glow: 'shadow-glow-accent'
-      },
-      gold: {
-        bg: 'bg-gold-500',
-        gradient: 'from-gold-500 to-gold-600',
-        text: 'text-gold-600',
-        glow: 'shadow-glow-gold'
-      }
-    };
-    return colorMap[color as keyof typeof colorMap] || colorMap.primary;
+    switch (color) {
+      case 'primary':
+        return {
+          gradient: 'from-primary-500 to-primary-600',
+          text: 'text-primary-600',
+          glow: 'shadow-primary-500/25'
+        };
+      case 'accent':
+        return {
+          gradient: 'from-accent-500 to-accent-600', 
+          text: 'text-accent-600',
+          glow: 'shadow-accent-500/25'
+        };
+      case 'gold':
+        return {
+          gradient: 'from-gold-500 to-gold-600',
+          text: 'text-gold-600', 
+          glow: 'shadow-gold-500/25'
+        };
+      default:
+        return {
+          gradient: 'from-gray-500 to-gray-600',
+          text: 'text-gray-600',
+          glow: 'shadow-gray-500/25'
+        };
+    }
   };
 
   return (
-    <section className="section-padding bg-gradient-to-br from-neutral-50 to-white relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" 
-             style={{
-               backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Cpath d='m20 20 20-20v40z'/%3E%3C/g%3E%3C/svg%3E")`,
-             }}
-        />
+    <section className="section-padding relative overflow-hidden bg-gradient-to-br from-neutral-50 to-white">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary-100 rounded-full opacity-20"></div>
+        <div className="absolute top-1/2 -left-32 w-80 h-80 bg-accent-100 rounded-full opacity-20"></div>
+        <div className="absolute -bottom-16 left-1/3 w-64 h-64 bg-gold-100 rounded-full opacity-20"></div>
       </div>
 
       <div className="container-custom relative z-10">
@@ -171,19 +169,18 @@ const StatisticsSection: React.FC = () => {
         <div className="text-center max-w-4xl mx-auto mb-20">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary-100 text-primary-700 mb-6 animate-fade-in">
             <Award className="w-4 h-4 mr-2" />
-            <span className="font-semibold text-sm">Nuestro Impacto Global</span>
+            <span className="font-semibold text-sm">{t('stats.badge')}</span>
           </div>
           
           <h2 className="title-section text-neutral-900 mb-6 animate-slide-up">
-            Transformando el{' '}
+            {t('stats.title')}{' '}
             <span className="text-primary-700 font-extrabold">
-              Futuro Político
+              {t('stats.title.highlight')}
             </span>
           </h2>
           
           <p className="text-xl text-neutral-600 leading-relaxed animate-slide-up animation-delay-150">
-            Cada número representa el compromiso de jóvenes líderes que están 
-            construyendo un mundo más justo, participativo y democrático
+            {t('stats.description')}
           </p>
         </div>
 
@@ -244,17 +241,17 @@ const StatisticsSection: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
               <div className="text-center">
                 <div className="text-3xl font-bold text-primary-600 mb-2">95%</div>
-                <p className="text-neutral-600">Tasa de satisfacción</p>
+                <p className="text-neutral-600">{t('stats.satisfaction')}</p>
               </div>
               
               <div className="text-center">
                 <div className="text-3xl font-bold text-accent-600 mb-2">3.2k</div>
-                <p className="text-neutral-600">Seguidores en redes</p>
+                <p className="text-neutral-600">{t('stats.followers')}</p>
               </div>
               
               <div className="text-center">
                 <div className="text-3xl font-bold text-gold-600 mb-2">24/7</div>
-                <p className="text-neutral-600">Comunidad activa</p>
+                <p className="text-neutral-600">{t('stats.community')}</p>
               </div>
             </div>
           </Card>

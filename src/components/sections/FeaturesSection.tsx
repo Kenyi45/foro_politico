@@ -1,41 +1,37 @@
 import React from 'react';
 import { Users, MessageCircle, Globe, Zap } from 'lucide-react';
-
-interface Feature {
-  id: string;
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  color: string;
-}
+import { Feature } from '../../types';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 const FeaturesSection: React.FC = () => {
+  const { t } = useLanguage();
+
   const features: Feature[] = [
     {
       id: '1',
-      title: 'Liderazgo Joven',
-      description: 'Desarrollamos las habilidades de liderazgo necesarias para los desafíos del siglo XXI',
+      title: t('features.leadership.title'),
+      description: t('features.leadership.desc'),
       icon: <Users className="w-8 h-8" />,
       color: 'primary'
     },
     {
       id: '2',
-      title: 'Diálogo Democrático',
-      description: 'Fomentamos el debate constructivo y el intercambio de ideas entre diferentes perspectivas',
+      title: t('features.dialogue.title'),
+      description: t('features.dialogue.desc'),
       icon: <MessageCircle className="w-8 h-8" />,
       color: 'accent'
     },
     {
       id: '3',
-      title: 'Redes Internacionales',
-      description: 'Conectamos jóvenes líderes de todo el mundo para crear impacto global',
+      title: t('features.networks.title'),
+      description: t('features.networks.desc'),
       icon: <Globe className="w-8 h-8" />,
       color: 'gold'
     },
     {
       id: '4',
-      title: 'Impacto Local',
-      description: 'Transformamos las ideas en acciones concretas que benefician a nuestras comunidades',
+      title: t('features.impact.title'),
+      description: t('features.impact.desc'),
       icon: <Zap className="w-8 h-8" />,
       color: 'primary'
     }
@@ -75,13 +71,12 @@ const FeaturesSection: React.FC = () => {
       <div className="container-custom">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="title-section text-gray-900 mb-6">
-            ¿Qué nos hace{' '}
-            <span className="text-primary-700 font-extrabold">únicos</span>?
+          <h2 className="title-section text-neutral-900 mb-6 animate-slide-up">
+            {t('features.title')}{' '}
+            <span className="text-primary-700 font-extrabold">{t('features.title.highlight')}</span>?
           </h2>
           <p className="text-xl text-gray-600 leading-relaxed">
-            Nuestro foro se distingue por crear un ambiente donde la juventud 
-            puede desarrollar su potencial político y social de manera integral
+            {t('features.description')}
           </p>
         </div>
 
@@ -122,7 +117,7 @@ const FeaturesSection: React.FC = () => {
         {/* Bottom CTA */}
         <div className="text-center mt-16">
           <div className="inline-flex items-center space-x-2 text-primary-600 font-semibold">
-            <span>¿Listo para formar parte de esta experiencia?</span>
+            <span>{t('features.cta')}</span>
             <div className="w-2 h-2 bg-accent-500 rounded-full animate-pulse"></div>
           </div>
         </div>

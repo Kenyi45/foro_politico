@@ -12,12 +12,14 @@ import {
   ChevronRight,
   Download,
   Share2,
-  ZoomIn
+  ZoomIn,
+  Play
 } from 'lucide-react';
 import { previousForumEvents, galleryPhotos } from '../../data/mockData';
 import { GalleryPhoto, ForumEventSummary } from '../../types/index';
 import Card, { CardContent, CardHeader, CardTitle } from '../common/Card';
 import Button from '../common/Button';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 interface GallerySectionProps {
   className?: string;
@@ -29,15 +31,16 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [filteredPhotos, setFilteredPhotos] = useState<GalleryPhoto[]>(galleryPhotos);
+  const { t } = useLanguage();
 
   const categories = [
-    { id: 'all', label: 'Todas las Categorías', icon: <Grid className="w-4 h-4" /> },
-    { id: 'ceremonies', label: 'Ceremonias', icon: <Award className="w-4 h-4" /> },
-    { id: 'panel', label: 'Paneles', icon: <Users className="w-4 h-4" /> },
-    { id: 'workshops', label: 'Talleres', icon: <Filter className="w-4 h-4" /> },
-    { id: 'networking', label: 'Networking', icon: <Share2 className="w-4 h-4" /> },
-    { id: 'social', label: 'Eventos Sociales', icon: <Camera className="w-4 h-4" /> },
-    { id: 'speakers', label: 'Conferencias', icon: <Award className="w-4 h-4" /> }
+    { id: 'all', label: t('gallery.filter.all.categories'), icon: <Grid className="w-4 h-4" /> },
+    { id: 'ceremonies', label: t('gallery.categories.ceremonies'), icon: <Award className="w-4 h-4" /> },
+    { id: 'panel', label: t('gallery.categories.panel'), icon: <Users className="w-4 h-4" /> },
+    { id: 'workshops', label: t('gallery.categories.workshops'), icon: <Filter className="w-4 h-4" /> },
+    { id: 'networking', label: t('gallery.categories.networking'), icon: <Share2 className="w-4 h-4" /> },
+    { id: 'social', label: t('gallery.categories.social'), icon: <Camera className="w-4 h-4" /> },
+    { id: 'speakers', label: t('gallery.categories.speakers'), icon: <Award className="w-4 h-4" /> }
   ];
 
   useEffect(() => {
@@ -45,7 +48,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
 
     if (selectedEvent !== 'all') {
       filtered = filtered.filter(photo => 
-        selectedEvent === 'bogota-2023' ? photo.id.startsWith('bog-') : photo.id.startsWith('ba-')
+        selectedEvent === 'buenos-aires-2023' ? photo.id.startsWith('ba23-') : photo.id.startsWith('ba-')
       );
     }
 
@@ -98,54 +101,70 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
       <div className="container-custom">
         {/* Section Header */}
         <div className="text-center max-w-4xl mx-auto mb-16">
-          <h2 className="title-section text-gray-900 mb-6">
-            Galería de{' '}
-            <span className="text-primary-700 font-extrabold">Momentos</span>
+          <h2 className="title-section text-neutral-900 mb-6 animate-slide-up">
+            {t('gallery.title')}{' '}
+            <span className="text-primary-700 font-extrabold">{t('gallery.title.highlight')}</span>
           </h2>
           <p className="text-xl text-gray-600 leading-relaxed">
-            Revive los momentos más memorables de nuestros foros anteriores 
-            en Bogotá 2023 y Buenos Aires 2024
+            {t('gallery.description')}
           </p>
         </div>
 
         {/* Event Summary Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {previousForumEvents.map((event) => (
-            <Card key={event.id} variant="elevated" hover="lift">
-              <div className="relative h-64 overflow-hidden rounded-t-xl">
-                <img
-                  src={event.coverImage}
-                  alt={event.title}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div className="absolute bottom-4 left-4 text-white">
-                  <h3 className="text-xl font-bold mb-1">{event.city} {event.year}</h3>
-                  <p className="text-white/90">{event.dates}</p>
-                </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <Card variant="elevated" hover="lift" className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-bold text-neutral-900">Buenos Aires 2023</h3>
+              <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium">
+                1ra Edición
+              </span>
+            </div>
+            <p className="text-neutral-600 mb-4">
+              Nuestra primera edición reunió a 180 jóvenes líderes de 15 países para 
+              discutir el futuro de la democracia en América Latina.
+            </p>
+            <div className="grid grid-cols-3 gap-4 text-center">
+              <div>
+                <div className="text-2xl font-bold text-primary-600">180</div>
+                <div className="text-sm text-neutral-600">Participantes</div>
               </div>
-              <CardContent className="p-6">
-                <div className="grid grid-cols-2 gap-4 mb-4">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-primary-600">{event.participants}</div>
-                    <div className="text-sm text-neutral-600">Participantes</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-accent-600">{event.countries}</div>
-                    <div className="text-sm text-neutral-600">Países</div>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  {event.keyHighlights.slice(0, 2).map((highlight, index) => (
-                    <div key={index} className="flex items-start space-x-2">
-                      <div className="w-2 h-2 bg-primary-500 rounded-full mt-2 flex-shrink-0"></div>
-                      <span className="text-neutral-700 text-sm">{highlight}</span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+              <div>
+                <div className="text-2xl font-bold text-accent-600">15</div>
+                <div className="text-sm text-neutral-600">Países</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-gold-600">25</div>
+                <div className="text-sm text-neutral-600">Conferencias</div>
+              </div>
+            </div>
+          </Card>
+
+          <Card variant="elevated" hover="lift" className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-bold text-neutral-900">Buenos Aires 2024</h3>
+              <span className="px-3 py-1 bg-accent-100 text-accent-700 rounded-full text-sm font-medium">
+                2da Edición
+              </span>
+            </div>
+            <p className="text-neutral-600 mb-4">
+              La segunda edición expandió nuestro alcance con 220 participantes 
+              y un enfoque especial en innovación política y tecnología.
+            </p>
+            <div className="grid grid-cols-3 gap-4 text-center">
+              <div>
+                <div className="text-2xl font-bold text-primary-600">220</div>
+                <div className="text-sm text-neutral-600">Participantes</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-accent-600">18</div>
+                <div className="text-sm text-neutral-600">Países</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-gold-600">32</div>
+                <div className="text-sm text-neutral-600">Conferencias</div>
+              </div>
+            </div>
+          </Card>
         </div>
 
         {/* Filters */}
@@ -154,7 +173,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
             {/* Event Filter */}
             <div>
               <label className="block text-sm font-medium text-neutral-700 mb-2">
-                Filtrar por Evento
+                {t('gallery.filter.event')}
               </label>
               <div className="flex flex-wrap gap-2">
                 <button
@@ -165,17 +184,17 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
                       : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
                   }`}
                 >
-                  Todos los Eventos
+                  {t('gallery.filter.all.events')}
                 </button>
                 <button
-                  onClick={() => setSelectedEvent('bogota-2023')}
+                  onClick={() => setSelectedEvent('buenos-aires-2023')}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    selectedEvent === 'bogota-2023'
+                    selectedEvent === 'buenos-aires-2023'
                       ? 'bg-primary-600 text-white'
                       : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
                   }`}
                 >
-                  Bogotá 2023
+                  Buenos Aires 2023
                 </button>
                 <button
                   onClick={() => setSelectedEvent('buenos-aires-2024')}
@@ -193,138 +212,118 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
             {/* Category Filter */}
             <div>
               <label className="block text-sm font-medium text-neutral-700 mb-2">
-                Filtrar por Categoría
+                {t('gallery.filter.category')}
               </label>
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-4 py-2 rounded-lg border border-neutral-300 bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              >
+              <div className="flex flex-wrap gap-2">
                 {categories.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.label}
-                  </option>
+                  <button
+                    key={category.id}
+                    onClick={() => setSelectedCategory(category.id)}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center space-x-2 ${
+                      selectedCategory === category.id
+                        ? 'bg-accent-600 text-white'
+                        : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+                    }`}
+                  >
+                    {category.icon}
+                    <span>{category.label}</span>
+                  </button>
                 ))}
-              </select>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Photos Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+        {/* Photo Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredPhotos.map((photo, index) => (
             <div
               key={photo.id}
-              className="group relative aspect-square overflow-hidden rounded-xl cursor-pointer"
+              className="group relative cursor-pointer overflow-hidden rounded-xl bg-neutral-100 aspect-square"
               onClick={() => openLightbox(index)}
             >
-              <img
-                src={photo.image}
-                alt={photo.title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              {/* Photo placeholder with gradient */}
+              <div 
+                className="w-full h-full bg-gradient-to-br from-primary-200 via-accent-200 to-gold-200 
+                         group-hover:scale-110 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <h4 className="font-semibold text-sm mb-1 line-clamp-2">{photo.title}</h4>
-                  <div className="flex items-center space-x-2 text-xs text-white/80">
-                    <Calendar className="w-3 h-3" />
-                    <span>{formatDate(photo.date)}</span>
+              
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                    {photo.type === 'video' ? (
+                      <Play className="w-6 h-6 text-white" />
+                    ) : (
+                      <Grid className="w-6 h-6 text-white" />
+                    )}
                   </div>
                 </div>
-                <div className="absolute top-4 right-4">
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getCategoryColor(photo.category)}`}>
-                    {categories.find(c => c.id === photo.category)?.label}
+              </div>
+
+              {/* Photo Info */}
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                <div className="text-white">
+                  <h4 className="font-medium text-sm mb-1">{photo.title}</h4>
+                  <p className="text-xs opacity-80">{formatDate(photo.date)}</p>
+                  <span className={`inline-block px-2 py-1 rounded-full text-xs mt-2 ${getCategoryColor(photo.category)}`}>
+                    {categories.find(c => c.id === photo.category)?.label || photo.category}
                   </span>
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <ZoomIn className="w-8 h-8 text-white opacity-70" />
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Results Count */}
-        <div className="text-center text-neutral-600">
-          <p>Mostrando {filteredPhotos.length} de {galleryPhotos.length} fotografías</p>
-        </div>
+        {/* No results message */}
+        {filteredPhotos.length === 0 && (
+          <div className="text-center py-16">
+            <div className="w-24 h-24 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Camera className="w-12 h-12 text-neutral-400" />
+            </div>
+            <h3 className="text-xl font-semibold text-neutral-900 mb-2">No hay fotos disponibles</h3>
+            <p className="text-neutral-600">Intenta cambiar los filtros para ver más contenido.</p>
+          </div>
+        )}
 
         {/* Lightbox */}
-        {isLightboxOpen && (
+        {isLightboxOpen && filteredPhotos.length > 0 && (
           <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-            <div className="relative max-w-6xl max-h-full">
+            <div className="relative max-w-4xl max-h-full">
               {/* Close Button */}
               <button
                 onClick={closeLightbox}
-                className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-colors"
+                className="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors z-10"
               >
                 <X className="w-6 h-6" />
               </button>
 
-              {/* Navigation Buttons */}
-              {filteredPhotos.length > 1 && (
-                <>
-                  <button
-                    onClick={prevImage}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-colors"
-                  >
-                    <ChevronLeft className="w-6 h-6" />
-                  </button>
-                  <button
-                    onClick={nextImage}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-colors"
-                  >
-                    <ChevronRight className="w-6 h-6" />
-                  </button>
-                </>
-              )}
+              {/* Navigation Arrows */}
+              <button
+                onClick={prevImage}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+              >
+                <ChevronLeft className="w-8 h-8" />
+              </button>
+
+              <button
+                onClick={nextImage}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+              >
+                <ChevronRight className="w-8 h-8" />
+              </button>
 
               {/* Image */}
-              <div className="bg-white rounded-lg overflow-hidden">
-                <img
-                  src={filteredPhotos[currentImageIndex]?.image}
-                  alt={filteredPhotos[currentImageIndex]?.title}
-                  className="max-w-full max-h-[70vh] object-contain"
-                />
-                
-                {/* Image Info */}
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-neutral-900 mb-2">
-                        {filteredPhotos[currentImageIndex]?.title}
-                      </h3>
-                      <p className="text-neutral-700 mb-3">
-                        {filteredPhotos[currentImageIndex]?.description}
-                      </p>
-                    </div>
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${getCategoryColor(filteredPhotos[currentImageIndex]?.category)}`}>
-                      {categories.find(c => c.id === filteredPhotos[currentImageIndex]?.category)?.label}
-                    </span>
-                  </div>
-                  
-                  <div className="flex items-center justify-between text-sm text-neutral-600">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex items-center space-x-1">
-                        <Calendar className="w-4 h-4" />
-                        <span>{formatDate(filteredPhotos[currentImageIndex]?.date)}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <MapPin className="w-4 h-4" />
-                        <span>{filteredPhotos[currentImageIndex]?.location}</span>
-                      </div>
-                      {filteredPhotos[currentImageIndex]?.photographer && (
-                        <div className="flex items-center space-x-1">
-                          <Camera className="w-4 h-4" />
-                          <span>{filteredPhotos[currentImageIndex]?.photographer}</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="text-neutral-500">
-                      {currentImageIndex + 1} de {filteredPhotos.length}
-                    </div>
-                  </div>
+              <div className="bg-gradient-to-br from-primary-300 via-accent-300 to-gold-300 rounded-lg max-h-[80vh] aspect-video flex items-center justify-center">
+                <div className="text-white text-center p-8">
+                  <h3 className="text-2xl font-bold mb-2">{filteredPhotos[currentImageIndex]?.title}</h3>
+                  <p className="text-lg opacity-90">{formatDate(filteredPhotos[currentImageIndex]?.date)}</p>
                 </div>
+              </div>
+
+              {/* Image Counter */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 text-white text-sm">
+                {currentImageIndex + 1} / {filteredPhotos.length}
               </div>
             </div>
           </div>

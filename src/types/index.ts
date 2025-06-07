@@ -1,3 +1,5 @@
+import React from 'react';
+
 // Common Types
 export interface BaseEntity {
   id: string;
@@ -104,6 +106,14 @@ export interface NavigationItem {
   label: string;
   href: string;
   isActive?: boolean;
+}
+
+export interface Feature {
+  id: string;
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  color: string;
 }
 
 export interface FormState {
@@ -229,6 +239,7 @@ export interface GalleryPhoto extends BaseEntity {
   description: string;
   event: ForumEvent;
   category: 'panel' | 'networking' | 'workshops' | 'ceremonies' | 'social' | 'speakers';
+  type?: 'photo' | 'video';
   photographer?: string;
   location: string;
   date: Date;
