@@ -57,13 +57,6 @@ const RegistrationSection: React.FC = () => {
           <p className="text-xl text-white/80 max-w-2xl mx-auto mb-8">
             {mockForumEvent.title}
           </p>
-
-          {/* Registration CTA Title */}
-          <div className="mt-12">
-            <p className="text-lg text-white/80 max-w-3xl mx-auto">
-              {t('registration.description')}
-            </p>
-          </div>
         </div>
 
         {/* Countdown Display */}
@@ -129,6 +122,13 @@ const RegistrationSection: React.FC = () => {
             </div>
           </div>
         </div>
+
+        {/* Registration CTA Title */}
+        <div className="mt-12 mb-12">
+            <p className="text-lg text-white/80 max-w-3xl mx-auto">
+              {t('registration.description')}
+            </p>
+          </div>
 
         {/* Enhanced CTA Section */}
         <div className="text-center">
