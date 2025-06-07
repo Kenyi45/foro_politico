@@ -27,13 +27,13 @@ const TeamSection: React.FC = () => {
     <section className="section-padding bg-white" id="equipo">
       <div className="container-custom">
         {/* Section Header */}
-        <div className="text-center max-w-4xl mx-auto mb-20">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary-100 text-primary-700 mb-6">
+        <div className="text-center max-w-4xl mx-auto mb-16 sm:mb-20 px-4">
+          <div className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-primary-100 text-primary-700 mb-4 sm:mb-6">
             <span className="w-2 h-2 bg-primary-600 rounded-full mr-2"></span>
             <span className="badge-text">{t('team.badge')}</span>
           </div>
           
-          <h2 className="title-section text-neutral-900 mb-6 animate-slide-up">
+          <h2 className="title-section text-neutral-900 mb-4 sm:mb-6 animate-slide-up">
             {t('team.title')}{' '}
             <span className="text-primary-700 font-extrabold">
               {t('team.title.highlight')}
@@ -46,7 +46,7 @@ const TeamSection: React.FC = () => {
         </div>
 
         {/* Team Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16 px-4">
           {enhancedTeam.map((member, index) => (
             <Card 
               key={member.id}
@@ -57,9 +57,9 @@ const TeamSection: React.FC = () => {
             >
               {/* Member Photo */}
               <div className="relative overflow-hidden">
-                <div className="w-full h-64 bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center">
-                  <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg">
-                    <span className="text-2xl font-bold text-primary-600">
+                <div className="w-full h-48 sm:h-64 bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center">
+                  <div className="w-20 sm:w-24 h-20 sm:h-24 bg-white rounded-full flex items-center justify-center shadow-lg">
+                    <span className="text-xl sm:text-2xl font-bold text-primary-600">
                       {member.name.split(' ').map(n => n[0]).join('')}
                     </span>
                   </div>
@@ -68,20 +68,20 @@ const TeamSection: React.FC = () => {
               </div>
 
               {/* Member Info */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-neutral-900 mb-2 group-hover:text-primary-600 transition-colors">
+              <div className="p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2 group-hover:text-primary-600 transition-colors">
                   {member.name}
                 </h3>
-                <p className="text-primary-600 font-medium mb-1">{member.position}</p>
-                <p className="text-neutral-600 text-sm mb-4">{member.country}</p>
-                <p className="text-neutral-700 text-sm leading-relaxed mb-6">
+                <p className="text-primary-600 font-medium mb-1 text-sm sm:text-base">{member.position}</p>
+                <p className="text-neutral-600 text-xs sm:text-sm mb-3 sm:mb-4">{member.country}</p>
+                <p className="text-neutral-700 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">
                   {member.bio}
                 </p>
 
                 {/* Achievements */}
-                <div className="mb-6">
-                  <h4 className="text-sm font-semibold text-neutral-700 mb-3">{t('team.achievements')}</h4>
-                  <div className="space-y-2">
+                <div className="mb-4 sm:mb-6">
+                  <h4 className="text-xs sm:text-sm font-semibold text-neutral-700 mb-2 sm:mb-3">{t('team.achievements')}</h4>
+                  <div className="space-y-1 sm:space-y-2">
                     {member.achievements.map((achievement, idx) => (
                       <div key={idx} className="flex items-center text-xs text-neutral-600">
                         <div className="w-1.5 h-1.5 bg-accent-500 rounded-full mr-2 flex-shrink-0"></div>
@@ -92,8 +92,8 @@ const TeamSection: React.FC = () => {
                 </div>
 
                 {/* Languages */}
-                <div className="mb-6">
-                  <h4 className="text-sm font-semibold text-neutral-700 mb-2">{t('team.languages')}</h4>
+                <div className="mb-4 sm:mb-6">
+                  <h4 className="text-xs sm:text-sm font-semibold text-neutral-700 mb-2">{t('team.languages')}</h4>
                   <div className="flex flex-wrap gap-1">
                     {member.languages.map((language) => (
                       <span
@@ -108,13 +108,13 @@ const TeamSection: React.FC = () => {
 
                 {/* Social Media */}
                 <div>
-                  <h4 className="text-sm font-semibold text-neutral-700 mb-2">{t('team.social')}</h4>
+                  <h4 className="text-xs sm:text-sm font-semibold text-neutral-700 mb-2">{t('team.social')}</h4>
                   <div className="flex space-x-2">
                     <a
                       href={`https://twitter.com/${member.socialMedia.twitter}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center hover:bg-primary-700 transition-colors"
+                      className="w-7 sm:w-8 h-7 sm:h-8 bg-primary-600 text-white rounded-full flex items-center justify-center hover:bg-primary-700 transition-colors"
                     >
                       <span className="text-xs">T</span>
                     </a>
@@ -122,13 +122,13 @@ const TeamSection: React.FC = () => {
                       href={`https://linkedin.com${member.socialMedia.linkedin}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-8 h-8 bg-primary-700 text-white rounded-full flex items-center justify-center hover:bg-primary-800 transition-colors"
+                      className="w-7 sm:w-8 h-7 sm:h-8 bg-primary-700 text-white rounded-full flex items-center justify-center hover:bg-primary-800 transition-colors"
                     >
                       <span className="text-xs">L</span>
                     </a>
                     <a
                       href={`mailto:${member.socialMedia.email}`}
-                      className="w-8 h-8 bg-gray-600 text-white rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors"
+                      className="w-7 sm:w-8 h-7 sm:h-8 bg-gray-600 text-white rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors"
                     >
                       <span className="text-xs">@</span>
                     </a>

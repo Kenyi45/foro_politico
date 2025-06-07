@@ -11,28 +11,28 @@ const FeaturesSection: React.FC = () => {
       id: '1',
       title: t('features.leadership.title'),
       description: t('features.leadership.desc'),
-      icon: <Users className="w-8 h-8" />,
+      icon: <Users className="w-6 sm:w-8 h-6 sm:h-8" />,
       color: 'primary'
     },
     {
       id: '2',
       title: t('features.dialogue.title'),
       description: t('features.dialogue.desc'),
-      icon: <MessageCircle className="w-8 h-8" />,
+      icon: <MessageCircle className="w-6 sm:w-8 h-6 sm:h-8" />,
       color: 'accent'
     },
     {
       id: '3',
       title: t('features.networks.title'),
       description: t('features.networks.desc'),
-      icon: <Globe className="w-8 h-8" />,
+      icon: <Globe className="w-6 sm:w-8 h-6 sm:h-8" />,
       color: 'gold'
     },
     {
       id: '4',
       title: t('features.impact.title'),
       description: t('features.impact.desc'),
-      icon: <Zap className="w-8 h-8" />,
+      icon: <Zap className="w-6 sm:w-8 h-6 sm:h-8" />,
       color: 'primary'
     }
   ];
@@ -70,35 +70,35 @@ const FeaturesSection: React.FC = () => {
     <section className="section-padding bg-gray-50" id="caracteristicas">
       <div className="container-custom">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary-100 text-primary-700 mb-6">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 px-4">
+          <div className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-primary-100 text-primary-700 mb-4 sm:mb-6">
             <span className="w-2 h-2 bg-primary-600 rounded-full mr-2"></span>
             <span className="badge-text">{t('features.badge')}</span>
           </div>
           
-          <h2 className="title-section text-neutral-900 mb-6 animate-slide-up">
+          <h2 className="title-section text-neutral-900 mb-4 sm:mb-6 animate-slide-up">
             {t('features.title')}{' '}
             <span className="text-primary-700 font-extrabold">{t('features.title.highlight')}</span>?
           </h2>
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
             {t('features.description')}
           </p>
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 px-4">
           {features.map((feature, index) => {
             const colorClasses = getColorClasses(feature.color);
             
             return (
               <div
                 key={feature.id}
-                className={`group card p-8 text-center hover:shadow-2xl transition-all duration-500 animate-slide-up`}
+                className={`group card p-6 sm:p-8 text-center hover:shadow-2xl transition-all duration-500 animate-slide-up`}
                 style={{ animationDelay: `${index * 150}ms` }}
               >
                 {/* Icon Container */}
                 <div className={`
-                  w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center
+                  w-16 sm:w-20 h-16 sm:h-20 mx-auto mb-4 sm:mb-6 rounded-full flex items-center justify-center
                   ${colorClasses.bg} ${colorClasses.border} border-2
                   group-hover:scale-110 transition-transform duration-300
                 `}>
@@ -108,10 +108,10 @@ const FeaturesSection: React.FC = () => {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 group-hover:text-primary-600 transition-colors">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -120,9 +120,9 @@ const FeaturesSection: React.FC = () => {
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center mt-16">
+        <div className="text-center mt-12 sm:mt-16 px-4">
           <div className="inline-flex items-center space-x-2 text-primary-600 font-semibold">
-            <span>{t('features.cta')}</span>
+            <span className="text-sm sm:text-base">{t('features.cta')}</span>
             <div className="w-2 h-2 bg-accent-500 rounded-full animate-pulse"></div>
           </div>
         </div>

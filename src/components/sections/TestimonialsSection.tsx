@@ -105,45 +105,45 @@ const TestimonialsSection: React.FC = () => {
 
       <div className="container-custom relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-4xl mx-auto mb-16">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white mb-6">
-            <Quote className="w-4 h-4 mr-2" />
-            <span className="font-semibold text-sm">{t('testimonials.badge')}</span>
+        <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 px-4">
+          <div className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white mb-4 sm:mb-6">
+            <Quote className="w-3 sm:w-4 h-3 sm:h-4 mr-2" />
+            <span className="font-semibold text-xs sm:text-sm">{t('testimonials.badge')}</span>
           </div>
           
-          <h2 className="title-section text-white mb-6 animate-slide-up">
+          <h2 className="title-section text-white mb-4 sm:mb-6 animate-slide-up">
             {t('testimonials.title')}{' '}
             <span className="text-accent-200 font-extrabold">
               {t('testimonials.title.highlight')}
             </span>
           </h2>
           
-          <p className="text-xl text-white/80 leading-relaxed">
+          <p className="text-lg sm:text-xl text-white/80 leading-relaxed">
             {t('testimonials.description')}
           </p>
         </div>
 
         {/* Main Testimonial Display */}
-        <div className="max-w-6xl mx-auto mb-12">
+        <div className="max-w-6xl mx-auto mb-8 sm:mb-12 px-4">
           <Card 
             variant="glass" 
             size="lg" 
             hover="none"
             className="bg-white/10 backdrop-blur-lg border-white/20"
           >
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8 items-center p-4 sm:p-6 lg:p-8">
               {/* Profile Image */}
               <div className="lg:col-span-2 text-center">
                 <div className="relative inline-block">
-                  <div className="w-48 h-48 mx-auto rounded-2xl overflow-hidden shadow-2xl">
+                  <div className="w-36 sm:w-48 h-36 sm:h-48 mx-auto rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl">
                     <img
                       src={currentTestimonial.image}
                       alt={currentTestimonial.participant}
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="absolute -bottom-3 -right-3 w-12 h-12 bg-accent-500 rounded-full flex items-center justify-center shadow-lg">
-                    <Quote className="w-6 h-6 text-white" />
+                  <div className="absolute -bottom-2 sm:-bottom-3 -right-2 sm:-right-3 w-10 sm:w-12 h-10 sm:h-12 bg-accent-500 rounded-full flex items-center justify-center shadow-lg">
+                    <Quote className="w-4 sm:w-6 h-4 sm:h-6 text-white" />
                   </div>
                 </div>
               </div>
@@ -151,27 +151,27 @@ const TestimonialsSection: React.FC = () => {
               {/* Content */}
               <div className="lg:col-span-3 text-center lg:text-left">
                 {/* Stars */}
-                <div className="flex justify-center lg:justify-start mb-6">
+                <div className="flex justify-center lg:justify-start mb-4 sm:mb-6">
                   {renderStars(currentTestimonial.rating)}
                 </div>
 
                 {/* Quote */}
-                <blockquote className="text-xl lg:text-2xl text-white leading-relaxed mb-8 font-light">
+                <blockquote className="text-lg sm:text-xl lg:text-2xl text-white leading-relaxed mb-6 sm:mb-8 font-light">
                   "{currentTestimonial.content}"
                 </blockquote>
 
                 {/* Author Info */}
-                <div className="space-y-3">
-                  <h4 className="text-2xl font-bold text-white">
+                <div className="space-y-2 sm:space-y-3">
+                  <h4 className="text-xl sm:text-2xl font-bold text-white">
                     {currentTestimonial.participant}
                   </h4>
                   
-                  <p className="text-accent-200 font-semibold">
+                  <p className="text-accent-200 font-semibold text-sm sm:text-base">
                     {currentTestimonial.position}
                   </p>
                   
-                  <div className="flex items-center justify-center lg:justify-start space-x-2 text-white/70">
-                    <MapPin className="w-4 h-4" />
+                  <div className="flex items-center justify-center lg:justify-start space-x-2 text-white/70 text-xs sm:text-sm">
+                    <MapPin className="w-3 sm:w-4 h-3 sm:h-4" />
                     <span>{currentTestimonial.country}</span>
                     <span>•</span>
                     <span>Promoción {currentTestimonial.year}</span>
@@ -183,19 +183,19 @@ const TestimonialsSection: React.FC = () => {
         </div>
 
         {/* Navigation Controls */}
-        <div className="flex items-center justify-center space-x-6 mb-12">
+        <div className="flex items-center justify-center space-x-4 sm:space-x-6 mb-8 sm:mb-12 px-4">
           <Button
             variant="ghost"
             size="md"
             onClick={prevTestimonial}
-            className="text-white hover:bg-white/10 border border-white/20"
-            icon={<ChevronLeft />}
+            className="text-white hover:bg-white/10 border border-white/20 text-sm sm:text-base px-4 sm:px-6 py-2 sm:py-3"
+            icon={<ChevronLeft className="w-4 h-4" />}
           >
             Anterior
           </Button>
           
           {/* Indicators */}
-          <div className="flex space-x-2">
+          <div className="flex space-x-1 sm:space-x-2">
             {enhancedTestimonials.map((_, index) => (
               <button
                 key={index}
@@ -213,8 +213,8 @@ const TestimonialsSection: React.FC = () => {
             variant="ghost"
             size="md"
             onClick={nextTestimonial}
-            className="text-white hover:bg-white/10 border border-white/20"
-            icon={<ChevronRight />}
+            className="text-white hover:bg-white/10 border border-white/20 text-sm sm:text-base px-4 sm:px-6 py-2 sm:py-3"
+            icon={<ChevronRight className="w-4 h-4" />}
             iconPosition="right"
           >
             Siguiente

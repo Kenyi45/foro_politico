@@ -279,83 +279,84 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
     <section className={`section-padding bg-neutral-50 ${className}`} id="galeria">
       <div className="container-custom">
         {/* Section Header */}
-        <div className="text-center max-w-4xl mx-auto mb-16">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary-100 text-primary-700 mb-6">
+        <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 px-4">
+          <div className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-primary-100 text-primary-700 mb-4 sm:mb-6">
             <span className="w-2 h-2 bg-primary-600 rounded-full mr-2"></span>
             <span className="badge-text">{t('gallery.badge')}</span>
           </div>
           
-          <h2 className="title-section text-neutral-900 mb-6 animate-slide-up">
+          <h2 className="title-section text-neutral-900 mb-4 sm:mb-6 animate-slide-up">
             {t('gallery.title')}{' '}
             <span className="text-primary-700 font-extrabold">{t('gallery.title.highlight')}</span>
           </h2>
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
             {t('gallery.description')}
           </p>
         </div>
 
         {/* Gallery Tabs */}
-        <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden mb-8">
+        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-gray-100 overflow-hidden mb-6 sm:mb-8 mx-4 sm:mx-0">
           {/* Tab Navigation */}
           <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-2">
-            <div className="flex space-x-2 max-w-md mx-auto">
+            <div className="flex space-x-1 sm:space-x-2 max-w-md mx-auto">
               <button
                 onClick={() => setActiveTab('fotos')}
-                className={`flex-1 flex items-center justify-center space-x-2 px-6 py-3 rounded-2xl font-semibold transition-all duration-300 ${
+                className={`flex-1 flex items-center justify-center space-x-1 sm:space-x-2 px-3 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl font-semibold transition-all duration-300 text-sm sm:text-base ${
                   activeTab === 'fotos'
                     ? 'bg-white text-primary-700 shadow-lg transform scale-105'
                     : 'text-gray-600 hover:text-gray-800 hover:bg-white/50'
                 }`}
               >
-                <Camera className="w-5 h-5" />
-                <span>Galería de Fotos</span>
+                <Camera className="w-4 sm:w-5 h-4 sm:h-5" />
+                <span className="hidden sm:inline">Galería de Fotos</span>
+                <span className="sm:hidden">Fotos</span>
               </button>
               <button
                 onClick={() => setActiveTab('instagram')}
-                className={`flex-1 flex items-center justify-center space-x-2 px-6 py-3 rounded-2xl font-semibold transition-all duration-300 ${
+                className={`flex-1 flex items-center justify-center space-x-1 sm:space-x-2 px-3 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl font-semibold transition-all duration-300 text-sm sm:text-base ${
                   activeTab === 'instagram'
                     ? 'bg-gradient-to-r from-accent-600 to-accent-800 text-white shadow-lg transform scale-105'
                     : 'text-gray-600 hover:text-gray-800 hover:bg-white/50'
                 }`}
               >
-                <Instagram className="w-5 h-5" />
+                <Instagram className="w-4 sm:w-5 h-4 sm:h-5" />
                 <span>Instagram</span>
               </button>
-              </div>
             </div>
+          </div>
 
           {/* Tab Content */}
-          <div className="p-8">
-                        {activeTab === 'fotos' && (
+          <div className="p-4 sm:p-8">
+            {activeTab === 'fotos' && (
               <div className="animate-fade-in">
                 {/* Photo Gallery Header */}
-                <div className="text-center mb-8">
-                                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-600 to-primary-800 rounded-3xl mb-4 shadow-2xl">
-                    <Camera className="w-8 h-8 text-white" />
-            </div>
-                  <h3 className="text-3xl font-bold text-gray-900 mb-3">Galería del Evento</h3>
-                  <p className="text-lg text-gray-600 mb-6">Explora los momentos más importantes de cada edición</p>
-                  <div className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 rounded-full border border-primary-200">
+                <div className="text-center mb-6 sm:mb-8">
+                  <div className="inline-flex items-center justify-center w-12 sm:w-16 h-12 sm:h-16 bg-gradient-to-br from-primary-600 to-primary-800 rounded-2xl sm:rounded-3xl mb-3 sm:mb-4 shadow-2xl">
+                    <Camera className="w-6 sm:w-8 h-6 sm:h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">Galería del Evento</h3>
+                  <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">Explora los momentos más importantes de cada edición</p>
+                  <div className="inline-flex items-center space-x-2 px-3 sm:px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 rounded-full border border-primary-200">
                     <span className="w-2 h-2 bg-primary-600 rounded-full animate-pulse"></span>
-                    <span className="text-primary-800 font-medium text-sm">Fotos profesionales del evento</span>
-            </div>
-        </div>
+                    <span className="text-primary-800 font-medium text-xs sm:text-sm">Fotos profesionales del evento</span>
+                  </div>
+                </div>
 
                 {/* Photo Slider Navigation */}
-                <div className="flex justify-center items-center space-x-4 mb-6">
-                <button
+                <div className="flex justify-center items-center space-x-3 sm:space-x-4 mb-4 sm:mb-6">
+                  <button
                     onClick={prevPhotoSlide}
-                    className="nav-button w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center"
+                    className="nav-button w-8 sm:w-10 h-8 sm:h-10 bg-white rounded-full shadow-lg flex items-center justify-center"
                   >
-                    <ChevronLeft className="w-5 h-5 text-gray-600" />
-                </button>
+                    <ChevronLeft className="w-4 sm:w-5 h-4 sm:h-5 text-gray-600" />
+                  </button>
                   
-                  <div className="flex space-x-2">
+                  <div className="flex space-x-1 sm:space-x-2">
                     {photoSlides.map((_, index) => (
-                <button
+                      <button
                         key={index}
                         onClick={() => goToPhotoSlide(index)}
-                        className={`dot-indicator w-3 h-3 rounded-full ${
+                        className={`dot-indicator w-2 sm:w-3 h-2 sm:h-3 rounded-full ${
                           currentPhotoSlide === index 
                             ? 'bg-primary-600 active' 
                             : 'bg-gray-300 hover:bg-gray-400'
@@ -364,156 +365,122 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
                     ))}
                   </div>
                   
-                <button
+                  <button
                     onClick={nextPhotoSlide}
-                    className="nav-button w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center"
+                    className="nav-button w-8 sm:w-10 h-8 sm:h-10 bg-white rounded-full shadow-lg flex items-center justify-center"
                   >
-                    <ChevronRight className="w-5 h-5 text-gray-600" />
-                </button>
+                    <ChevronRight className="w-4 sm:w-5 h-4 sm:h-5 text-gray-600" />
+                  </button>
                 </div>
 
                 {/* Photo Slider Container */}
-                <div className="slider-container relative overflow-hidden rounded-2xl">
+                <div className="slider-container relative overflow-hidden rounded-xl sm:rounded-2xl">
                   <div 
                     className="flex transition-transform duration-500 ease-in-out"
                     style={{ transform: `translateX(-${currentPhotoSlide * 100}%)` }}
                   >
                     {photoSlides.map((slide, index) => (
-                      <div key={slide.id} className="slide-content w-full flex-shrink-0 px-4">
+                      <div key={slide.id} className="slide-content w-full flex-shrink-0 px-2 sm:px-4">
                         {/* Event Header */}
-                        <div className="text-center mb-6">
-                          <div className={`inline-flex items-center space-x-3 px-6 py-3 rounded-2xl shadow-lg mb-4 ${
+                        <div className="text-center mb-4 sm:mb-6">
+                          <div className={`inline-flex items-center space-x-2 sm:space-x-3 px-4 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl shadow-lg mb-3 sm:mb-4 ${
                             slide.color === 'primary' ? 'bg-gradient-to-r from-primary-600 to-primary-700' : 'bg-gradient-to-r from-accent-600 to-accent-700'
                           } text-white`}>
-                            <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                              <Camera className="w-4 h-4" />
+                            <div className="w-6 sm:w-8 h-6 sm:h-8 bg-white/20 rounded-full flex items-center justify-center">
+                              <Camera className="w-3 sm:w-4 h-3 sm:h-4" />
                             </div>
                             <div className="text-left">
-                              <h4 className="text-xl font-bold">{slide.title}</h4>
-                              <p className="text-sm opacity-90">{slide.subtitle}</p>
+                              <h4 className="text-lg sm:text-xl font-bold">{slide.title}</h4>
+                              <p className="text-xs sm:text-sm opacity-90">{slide.subtitle}</p>
                             </div>
                           </div>
-                          <p className="text-gray-600 mb-4">{slide.description}</p>
+                          <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">{slide.description}</p>
                           
                           {/* Stats */}
-                          <div className="grid grid-cols-3 gap-4 max-w-md mx-auto mb-6">
+                          <div className="grid grid-cols-3 gap-3 sm:gap-4 max-w-md mx-auto mb-4 sm:mb-6">
                             {slide.stats.map((stat, statIndex) => (
                               <div key={statIndex} className="text-center">
-                                <div className={`text-2xl font-bold ${
+                                <div className={`text-xl sm:text-2xl font-bold ${
                                   slide.color === 'primary' ? 'text-primary-700' : 'text-accent-700'
                                 }`}>{stat.number}</div>
-                                <div className="text-sm text-gray-600">{stat.label}</div>
+                                <div className="text-xs sm:text-sm text-gray-600">{stat.label}</div>
                               </div>
                             ))}
-              </div>
-            </div>
+                          </div>
+                        </div>
 
                         {/* Category Filters */}
-                        <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-4 mb-6">
-                          <div className="text-center mb-4">
-                            <label className="text-sm font-medium text-gray-700">
-                              <Filter className="w-4 h-4 inline mr-2" />
+                        <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl sm:rounded-2xl p-3 sm:p-4 mb-4 sm:mb-6">
+                          <div className="text-center mb-3 sm:mb-4">
+                            <label className="text-xs sm:text-sm font-medium text-gray-700">
+                              <Filter className="w-3 sm:w-4 h-3 sm:h-4 inline mr-2" />
                               Filtrar por categoría
-              </label>
+                            </label>
                           </div>
-                          <div className="flex flex-wrap justify-center gap-2">
-                {categories.map((category) => (
-                  <button
-                    key={category.id}
-                    onClick={() => setSelectedCategory(category.id)}
-                                className={`px-3 py-2 rounded-xl text-xs font-medium transition-all duration-200 flex items-center space-x-1 ${
-                      selectedCategory === category.id
+                          <div className="flex flex-wrap justify-center gap-1 sm:gap-2">
+                            {categories.map((category) => (
+                              <button
+                                key={category.id}
+                                onClick={() => setSelectedCategory(category.id)}
+                                className={`px-2 sm:px-3 py-1 sm:py-2 rounded-lg sm:rounded-xl text-xs font-medium transition-all duration-200 flex items-center space-x-1 ${
+                                  selectedCategory === category.id
                                     ? `${slide.color === 'primary' ? 'bg-primary-700' : 'bg-accent-700'} text-white shadow-lg transform scale-105`
                                     : 'bg-white text-gray-700 hover:bg-gray-100 shadow-sm'
-                    }`}
-                  >
-                    {category.icon}
-                    <span>{category.label}</span>
-                  </button>
-                ))}
-          </div>
-        </div>
+                                }`}
+                              >
+                                {category.icon}
+                                <span className="hidden sm:inline">{category.label}</span>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
 
-        {/* Photo Grid */}
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 max-w-6xl mx-auto">
+                        {/* Photo Grid */}
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-4 max-w-6xl mx-auto">
                           {filteredPhotos.slice(0, 12).map((photo, photoIndex) => (
-            <div
-              key={photo.id}
-                              className="photo-card group relative cursor-pointer overflow-hidden rounded-xl aspect-square shadow-md hover:shadow-xl transition-all duration-300"
+                            <div
+                              key={photo.id}
+                              className="photo-card group relative cursor-pointer overflow-hidden rounded-lg sm:rounded-xl aspect-square shadow-md hover:shadow-xl transition-all duration-300"
                               onClick={() => openLightbox(photoIndex)}
-            >
-              {/* Photo placeholder with gradient */}
+                            >
+                              {/* Photo placeholder with gradient */}
                               <div className={`w-full h-full ${
                                 slide.color === 'primary' 
                                   ? 'bg-gradient-to-br from-primary-200 via-primary-300 to-primary-400' 
                                   : 'bg-gradient-to-br from-accent-200 via-accent-300 to-accent-400'
                               } group-hover:scale-110 transition-transform duration-500`} />
-              
-              {/* Overlay */}
+                              
+                              {/* Overlay */}
                               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
                                 <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100">
-                                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
-                    {photo.type === 'video' ? (
-                      <Play className="w-6 h-6 text-white" />
-                    ) : (
-                                      <ZoomIn className="w-6 h-6 text-white" />
-                    )}
-                  </div>
-                </div>
-              </div>
+                                  <div className="w-8 sm:w-12 h-8 sm:h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
+                                    {photo.type === 'video' ? (
+                                      <Play className="w-4 sm:w-6 h-4 sm:h-6 text-white" />
+                                    ) : (
+                                      <ZoomIn className="w-4 sm:w-6 h-4 sm:h-6 text-white" />
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
 
-              {/* Photo Info */}
-                              <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent">
-                <div className="text-white">
+                              {/* Photo Info */}
+                              <div className="absolute bottom-0 left-0 right-0 p-1 sm:p-2 bg-gradient-to-t from-black/70 to-transparent">
+                                <div className="text-white">
                                   <h4 className="font-medium text-xs mb-1 line-clamp-1">{photo.title}</h4>
-                                  <span className={`inline-block px-2 py-1 rounded-full text-xs ${getCategoryColor(photo.category)} bg-opacity-80`}>
-                    {categories.find(c => c.id === photo.category)?.label || photo.category}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-                        {/* Show more button */}
-                        {filteredPhotos.length > 12 && (
-                          <div className="text-center mt-6">
-                            <button
-                              onClick={() => {/* Logic to show all photos */}}
-                              className={`inline-flex items-center space-x-2 px-6 py-3 ${
-                                slide.color === 'primary' 
-                                  ? 'bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800' 
-                                  : 'bg-gradient-to-r from-accent-600 to-accent-700 hover:from-accent-700 hover:to-accent-800'
-                              } text-white rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105`}
-                            >
-                              <Grid className="w-4 h-4" />
-                              <span>Ver todas las fotos ({filteredPhotos.length})</span>
-                            </button>
-                          </div>
-                        )}
-
-        {/* No results message */}
-        {filteredPhotos.length === 0 && (
-                          <div className="text-center py-12">
-                            <div className={`w-24 h-24 ${
-                              slide.color === 'primary' 
-                                ? 'bg-gradient-to-br from-primary-100 to-primary-200' 
-                                : 'bg-gradient-to-br from-accent-100 to-accent-200'
-                            } rounded-full flex items-center justify-center mx-auto mb-4`}>
-                              <Camera className={`w-12 h-12 ${
-                                slide.color === 'primary' ? 'text-primary-500' : 'text-accent-500'
-                              }`} />
+                                  <span className={`inline-block px-1 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs ${getCategoryColor(photo.category)} bg-opacity-80`}>
+                                    {categories.find(c => c.id === photo.category)?.label || photo.category}
+                                  </span>
+                                </div>
+                              </div>
                             </div>
-                            <h3 className="text-xl font-bold text-gray-900 mb-2">No hay fotos disponibles</h3>
-                            <p className="text-gray-600">Intenta cambiar los filtros para ver más contenido.</p>
-                          </div>
-                        )}
+                          ))}
+                        </div>
                       </div>
                     ))}
                   </div>
-            </div>
-          </div>
-        )}
+                </div>
+              </div>
+            )}
 
             {activeTab === 'instagram' && (
               <div className="animate-fade-in">

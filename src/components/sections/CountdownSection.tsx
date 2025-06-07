@@ -33,35 +33,35 @@ const CountdownSection: React.FC = () => {
 
       <div className="container-custom relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-accent-500/20 border border-accent-500/30 text-accent-200 mb-6">
-            <Calendar className="w-4 h-4 mr-2" />
-            <span className="text-sm font-medium">{t('countdown.badge')}</span>
+        <div className="text-center mb-12 sm:mb-16 px-4">
+          <div className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-accent-500/20 border border-accent-500/30 text-accent-200 mb-4 sm:mb-6">
+            <Calendar className="w-3 sm:w-4 h-3 sm:h-4 mr-2" />
+            <span className="badge-text">{t('countdown.badge')}</span>
           </div>
           
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="title-section text-white mb-4">
             {isExpired ? t('countdown.title.started') : t('countdown.title.remaining')}
           </h2>
           
-          <p className="text-xl text-white/80 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto">
             {mockForumEvent.title}
           </p>
         </div>
 
         {/* Countdown Display */}
         {!isExpired && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16 max-w-4xl mx-auto px-4">
             {timeUnits.map((unit, index) => (
               <div
                 key={unit.label}
                 className="text-center animate-bounce-in"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 group">
-                  <div className="text-4xl md:text-5xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 group">
+                  <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300">
                     {formatTime(unit.value)}
                   </div>
-                  <div className="text-white/70 font-medium uppercase tracking-wider text-sm">
+                  <div className="text-white/70 font-medium uppercase tracking-wider text-xs sm:text-sm">
                     {unit.label}
                   </div>
                 </div>
@@ -71,18 +71,18 @@ const CountdownSection: React.FC = () => {
         )}
 
         {/* Event Details */}
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
             {/* Date & Location */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-accent-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-6 h-6 text-accent-300" />
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/10">
+              <div className="flex items-start space-x-3 sm:space-x-4">
+                <div className="w-10 sm:w-12 h-10 sm:h-12 bg-accent-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-5 sm:w-6 h-5 sm:h-6 text-accent-300" />
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold mb-2">{t('countdown.location.title')}</h3>
-                  <p className="text-white/80 mb-1">{mockForumEvent.location}</p>
-                  <p className="text-white/60 text-sm">
+                  <h3 className="text-white font-semibold mb-2 text-sm sm:text-base">{t('countdown.location.title')}</h3>
+                  <p className="text-white/80 mb-1 text-sm sm:text-base">{mockForumEvent.location}</p>
+                  <p className="text-white/60 text-xs sm:text-sm">
                     {mockForumEvent.startDate.toLocaleDateString('es-ES', {
                       weekday: 'long',
                       year: 'numeric',
@@ -95,15 +95,15 @@ const CountdownSection: React.FC = () => {
             </div>
 
             {/* Duration */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-gold-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Clock className="w-6 h-6 text-gold-300" />
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/10">
+              <div className="flex items-start space-x-3 sm:space-x-4">
+                <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gold-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Clock className="w-5 sm:w-6 h-5 sm:h-6 text-gold-300" />
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold mb-2">{t('countdown.duration.title')}</h3>
-                  <p className="text-white/80 mb-1">{t('countdown.duration.intensive')}</p>
-                  <p className="text-white/60 text-sm">
+                  <h3 className="text-white font-semibold mb-2 text-sm sm:text-base">{t('countdown.duration.title')}</h3>
+                  <p className="text-white/80 mb-1 text-sm sm:text-base">{t('countdown.duration.intensive')}</p>
+                  <p className="text-white/60 text-xs sm:text-sm">
                     {t('countdown.duration.activities')}
                   </p>
                 </div>
@@ -112,25 +112,25 @@ const CountdownSection: React.FC = () => {
           </div>
 
           {/* Registration Status */}
-          <div className="text-center bg-gradient-to-r from-accent-500/20 to-gold-500/20 backdrop-blur-sm rounded-xl p-8 border border-white/10">
+          <div className="text-center bg-gradient-to-r from-accent-500/20 to-gold-500/20 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-white/10">
             <div className="flex items-center justify-center space-x-2 mb-4">
               <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-white font-semibold">{t('countdown.registration.open')}</span>
+              <span className="text-white font-semibold text-sm sm:text-base">{t('countdown.registration.open')}</span>
             </div>
             
-            <div className="flex items-center justify-center space-x-8 mb-6 text-white/80">
+            <div className="flex items-center justify-center space-x-6 sm:space-x-8 mb-4 sm:mb-6 text-white/80">
               <div className="text-center">
-                <div className="text-2xl font-bold text-white">{mockForumEvent.registeredCount}</div>
-                <div className="text-sm">{t('countdown.registration.registered')}</div>
+                <div className="text-xl sm:text-2xl font-bold text-white">{mockForumEvent.registeredCount}</div>
+                <div className="text-xs sm:text-sm">{t('countdown.registration.registered')}</div>
               </div>
-              <div className="w-px h-8 bg-white/20"></div>
+              <div className="w-px h-6 sm:h-8 bg-white/20"></div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-white">{mockForumEvent.capacity - mockForumEvent.registeredCount}</div>
-                <div className="text-sm">{t('countdown.registration.available')}</div>
+                <div className="text-xl sm:text-2xl font-bold text-white">{mockForumEvent.capacity - mockForumEvent.registeredCount}</div>
+                <div className="text-xs sm:text-sm">{t('countdown.registration.available')}</div>
               </div>
             </div>
 
-            <button className="btn-secondary text-lg px-8 py-4">
+            <button className="btn-secondary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4">
               {t('countdown.registration.button')}
             </button>
           </div>

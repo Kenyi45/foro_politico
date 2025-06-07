@@ -384,49 +384,58 @@ body {
 
   /* Responsive Design Utilities */
   .container-fluid {
-    @apply w-full px-4 sm:px-6 lg:px-8;
+    @apply w-full px-3 sm:px-4 md:px-6 lg:px-8;
   }
 
   .content-width {
-    @apply max-w-4xl mx-auto;
+    @apply max-w-2xl sm:max-w-3xl lg:max-w-4xl mx-auto;
   }
 
   .section-width {
-    @apply max-w-6xl mx-auto;
+    @apply max-w-4xl sm:max-w-5xl lg:max-w-6xl mx-auto;
   }
 
   .full-width {
-    @apply max-w-7xl mx-auto;
+    @apply max-w-5xl sm:max-w-6xl lg:max-w-7xl mx-auto;
   }
 
-  /* Standardized Typography Styles - Inter Font Family */
+  /* Enhanced Section Padding - Mobile First */
+  .section-padding {
+    @apply py-12 px-4 sm:py-16 sm:px-6 md:py-20 lg:px-8;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Responsive Typography Improvements */
   .title-hero {
-    @apply font-primary text-5xl md:text-6xl lg:text-7xl font-bold leading-none tracking-tight text-shadow-lg;
+    @apply font-primary text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-none tracking-tight text-shadow-lg;
     font-weight: 800;
   }
 
   .title-section {
-    @apply font-primary text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight;
+    @apply font-primary text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight tracking-tight;
     font-weight: 700;
   }
 
   .title-card {
-    @apply font-primary text-2xl md:text-3xl font-semibold leading-tight tracking-tight;
+    @apply font-primary text-xl sm:text-2xl md:text-3xl font-semibold leading-tight tracking-tight;
     font-weight: 600;
   }
 
   .subtitle-hero {
-    @apply font-primary text-xl md:text-2xl font-medium leading-relaxed;
+    @apply font-primary text-lg sm:text-xl md:text-2xl font-medium leading-relaxed;
     font-weight: 500;
   }
 
   .subtitle-section {
-    @apply font-primary text-lg md:text-xl font-normal leading-relaxed;
+    @apply font-primary text-base sm:text-lg md:text-xl font-normal leading-relaxed;
     font-weight: 400;
   }
 
   .text-institutional {
-    @apply font-primary text-base md:text-lg leading-relaxed tracking-wide;
+    @apply font-primary text-sm sm:text-base md:text-lg leading-relaxed tracking-wide;
     font-weight: 400;
     letter-spacing: 0.025em;
   }
@@ -457,32 +466,32 @@ body {
   }
 
   .badge-text {
-    @apply font-primary text-xs md:text-sm font-semibold;
+    @apply font-primary text-xs sm:text-sm font-semibold;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
 
   .button-text {
-    @apply font-primary text-sm md:text-base font-semibold;
+    @apply font-primary text-sm sm:text-base font-semibold;
     font-weight: 600;
     letter-spacing: 0.025em;
   }
 
   .nav-text {
-    @apply font-primary text-sm md:text-base font-medium;
+    @apply font-primary text-sm sm:text-base font-medium;
     font-weight: 500;
     letter-spacing: 0.025em;
   }
 
   .stat-number {
-    @apply font-primary text-3xl md:text-4xl lg:text-5xl font-bold;
+    @apply font-primary text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold;
     font-weight: 800;
     line-height: 1;
   }
 
   .stat-label {
-    @apply font-primary text-sm md:text-base font-medium;
+    @apply font-primary text-xs sm:text-sm md:text-base font-medium;
     font-weight: 500;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -637,5 +646,50 @@ body {
 
   .animate-fade-in {
     animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  /* Mobile-specific improvements */
+  @media (max-width: 640px) {
+    .container-custom {
+      @apply px-3;
+    }
+    
+    .section-padding {
+      @apply py-10 px-3;
+    }
+    
+    .card {
+      @apply rounded-lg;
+    }
+    
+    .title-section {
+      @apply leading-snug;
+    }
+    
+    .subtitle-section {
+      @apply leading-relaxed;
+    }
+  }
+
+  /* Tablet improvements */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .container-custom {
+      @apply px-6;
+    }
+    
+    .section-padding {
+      @apply py-16 px-6;
+    }
+  }
+
+  /* Desktop improvements */
+  @media (min-width: 1025px) {
+    .container-custom {
+      @apply px-8;
+    }
+    
+    .section-padding {
+      @apply py-20 px-8;
+    }
   }
 }
