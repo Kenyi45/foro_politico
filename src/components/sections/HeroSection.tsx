@@ -58,45 +58,67 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           <Globe className="w-6 h-6 text-cyan-200/45" />
         </div>
         <div className="absolute bottom-1/3 left-1/3 animate-pulse-slow animation-delay-300">
-          <Lightbulb className="w-7 h-7 text-blue-200/45" />
+                          <Lightbulb className="w-7 h-7 text-primary-200/45" />
         </div>
       </div>
 
       {/* Main Content */}
       <div className="container-custom relative z-10 text-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
-          {/* Badge */}
-          <div className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white mb-6 sm:mb-8 animate-fade-in">
-            <span className="w-2 h-2 bg-accent-500 rounded-full mr-2 animate-pulse"></span>
-            <span className="badge-text text-white text-xs sm:text-sm">{t('hero.badge')}</span>
+
+          {/* Main Content in Two Columns */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-6 sm:mb-8 items-center">
+            {/* Left Column - Main Forum Logo Centered */}
+            <div className="animate-slide-up">
+              <div className="flex justify-center">
+                <img 
+                  src="/Logo_FORO.png" 
+                  alt="III Foro Panamericano de Jóvenes Políticos" 
+                  className="h-40 sm:h-52 md:h-64 lg:h-56 xl:h-72 2xl:h-80 w-auto object-contain logo-glow"
+                />
+              </div>
+            </div>
+
+            {/* Right Column - Official Slogan Centered and Expanded */}
+            <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl 2xl:max-w-4xl mx-auto bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:p-10 animate-slide-up animation-delay-100 flex items-center">
+              <h3 className="w-full text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-white leading-tight tracking-presidential font-semibold text-center">
+                <span className="block">"{t('hero.slogan')}{' '}</span>
+                <span className="block">
+                  <span className="text-accent-300">{t('hero.slogan.socialism')}</span> {t('hero.slogan.and')}{' '}
+                  <span className="text-gold-200">{t('hero.slogan.woke')}</span>"
+                </span>
+              </h3>
+            </div>
           </div>
 
-          {/* Main Title */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-none tracking-tight text-white mb-6 animate-slide-up text-shadow-lg">
-            {t('hero.title')}{' '}
-            <span className="text-primary-100 font-extrabold">
-              {t('hero.title.highlight')}
-            </span>{' '}
-            {t('hero.title.end')}
-          </h1>
-
-          {/* Official Slogan */}
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 max-w-4xl mx-auto animate-slide-up animation-delay-75">
-            <h2 className="text-sm sm:text-base md:text-lg lg:text-xl text-white text-center leading-tight tracking-presidential font-medium">
-              "{t('hero.slogan')}{' '}
-              <span className="text-accent-300">{t('hero.slogan.socialism')}</span> {t('hero.slogan.and')}{' '}
-              <span className="text-gold-200">{t('hero.slogan.woke')}</span>"
-            </h2>
+          {/* Organizers Section */}
+          <div className="mb-6 sm:mb-8 animate-slide-up animation-delay-150">
+            <p className="text-white/80 text-sm sm:text-base mb-4 font-medium">
+              Un evento hecho posible por:
+            </p>
+            <div className="flex items-center justify-center space-x-8 sm:space-x-12 md:space-x-16">
+              {/* Universidad Vida y Desarrollo Logo */}
+              <div className="flex items-center justify-center">
+                <img 
+                  src="/Logo_UVD.png" 
+                  alt="Universidad Vida y Desarrollo" 
+                  className="h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain logo-glow"
+                />
+              </div>
+              
+              {/* Separator */}
+              <div className="w-px h-8 sm:h-12 bg-white/30"></div>
+              
+              {/* Interamericana Partners Logo */}
+              <div className="flex items-center justify-center">
+                <img 
+                  src="/Logo_IP.png" 
+                  alt="Interamericana Partners" 
+                  className="h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain logo-glow"
+                />
+              </div>
+            </div>
           </div>
-
-          {/* Subtitle */}
-          <p className="text-lg sm:text-xl md:text-2xl font-medium leading-relaxed text-white/90 mb-8 sm:mb-12 max-w-4xl mx-auto animate-slide-up animation-delay-150">
-            {t('hero.subtitle.part1')}{' '}
-            <span className="font-semibold text-accent-200">{t('hero.subtitle.defend')}</span>,{' '}
-            <span className="font-semibold text-gold-100">{t('hero.subtitle.strengthen')}</span>{' '}
-            <span className="font-semibold text-primary-100">{t('hero.subtitle.preserve')}</span>{' '}
-            {t('hero.subtitle.part2')}
-          </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 animate-bounce-in animation-delay-300">

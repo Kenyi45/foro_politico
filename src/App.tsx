@@ -18,7 +18,7 @@ import FeaturesSection from './components/sections/FeaturesSection';
 import TeamSection from './components/sections/TeamSection';
 import TestimonialsSection from './components/sections/TestimonialsSection';
 import GallerySection from './components/sections/GallerySection';
-import CountdownSection from './components/sections/CountdownSection';
+import RegistrationSection from './components/sections/RegistrationSection';
 import ThematicAxesSection from './components/sections/ThematicAxesSection';
 
 // Common Components
@@ -85,9 +85,6 @@ function AppContent() {
 
         {/* Features Section */}
         <FeaturesSection />
-
-        {/* Countdown Section */}
-        <CountdownSection />
 
         {/* Thematic Axes Section */}
         {/* <ThematicAxesSection /> */}
@@ -248,76 +245,8 @@ function AppContent() {
           </div>
         </section>
 
-        {/* Registration CTA Section - Dark Style like Testimonials */}
-        <section id="registro" className="section-padding bg-gradient-to-br from-primary-900 via-primary-800 to-neutral-900 relative overflow-hidden">
-          {/* Background Elements */}
-          <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-64 h-64 bg-accent-500/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 right-10 w-80 h-80 bg-gold-500/10 rounded-full blur-3xl"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary-400/5 rounded-full blur-3xl"></div>
-          </div>
-
-          <div className="container-custom relative z-10">
-            {/* Section Header */}
-            <div className="text-center max-w-4xl mx-auto mb-16">
-                              <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white mb-6">
-                  <span className="w-2 h-2 bg-gold-400 rounded-full mr-2"></span>
-                  <span className="font-semibold text-sm">{t('registration.badge')}</span>
-                </div>
-                
-                <h2 className="title-section text-white mb-6 animate-slide-up">
-                  {t('registration.title')}{' '}
-                  <span className="text-accent-200 font-extrabold">{t('registration.title.highlight')}</span>!
-                </h2>
-                
-                <p className="text-xl text-white/80 leading-relaxed">
-                  {t('registration.description')}
-                </p>
-            </div>
-            
-            {/* CTA Buttons */}
-            <div className="text-center">
-              <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 max-w-2xl mx-auto">
-
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button
-                      onClick={handleRegisterClick}
-                      className="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white font-bold px-8 py-4 text-lg rounded-xl transition-all duration-300 hover:scale-105 shadow-lg"
-                    >
-                      {t('registration.cta.register')}
-                    </button>
-                    
-                    <button className="bg-white/10 hover:bg-white/20 text-white border border-white/30 hover:border-white/50 font-semibold px-8 py-4 text-lg rounded-xl transition-all duration-300">
-                      {t('registration.cta.info')}
-                    </button>
-                </div>
-
-                <div className="mt-6 text-sm text-white/70">
-                                      <div className="flex items-center justify-center space-x-4">
-                      <span className="flex items-center">
-                        <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
-                        {t('registration.secure')}
-                      </span>
-                      <span className="flex items-center">
-                        <span className="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
-                        {t('registration.immediate')}
-                      </span>
-                      <span className="flex items-center">
-                        <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-                        {t('registration.support')}
-                      </span>
-                    </div>
-                    <p className="mt-3">
-                      {t('registration.email.text')}{' '}
-                      <a href="mailto:registro@forumjp.org" className="text-accent-200 hover:text-accent-100 font-medium">
-                        registro@forumjp.org
-                      </a>
-                    </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Registration Section - Combined with Countdown */}
+        <RegistrationSection />
       </main>
 
       {/* Footer - Enhanced */}

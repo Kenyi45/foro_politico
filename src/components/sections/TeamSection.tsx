@@ -114,7 +114,7 @@ const TeamSection: React.FC = () => {
                       href={`https://twitter.com/${member.socialMedia.twitter}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
+                      className="w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center hover:bg-primary-700 transition-colors"
                     >
                       <span className="text-xs">T</span>
                     </a>
@@ -122,7 +122,7 @@ const TeamSection: React.FC = () => {
                       href={`https://linkedin.com${member.socialMedia.linkedin}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-8 h-8 bg-blue-700 text-white rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors"
+                      className="w-8 h-8 bg-primary-700 text-white rounded-full flex items-center justify-center hover:bg-primary-800 transition-colors"
                     >
                       <span className="text-xs">L</span>
                     </a>

@@ -43,9 +43,9 @@ const ThematicAxisDetailView: React.FC<ThematicAxisDetailViewProps> = ({ axis, o
 
   const getSessionTypeColor = (type: ThematicSession['type']) => {
     switch (type) {
-      case 'panel': return 'bg-blue-100 text-blue-800';
-      case 'workshop': return 'bg-green-100 text-green-800';
-      case 'conference': return 'bg-purple-100 text-purple-800';
+      case 'panel': return 'bg-primary-100 text-primary-800';
+      case 'workshop': return 'bg-success-100 text-success-800';
+      case 'conference': return 'bg-accent-100 text-accent-800';
       case 'debate': return 'bg-orange-100 text-orange-800';
       default: return 'bg-gray-100 text-gray-800';
     }

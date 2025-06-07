@@ -237,13 +237,19 @@ export interface GalleryPhoto extends BaseEntity {
   title: string;
   image: string;
   description: string;
-  event: ForumEvent;
-  category: 'panel' | 'networking' | 'workshops' | 'ceremonies' | 'social' | 'speakers';
+  event?: ForumEvent;
+  category: 'panel' | 'networking' | 'workshops' | 'ceremonies' | 'social' | 'speakers' | 'instagram';
   type?: 'photo' | 'video';
   photographer?: string;
   location: string;
   date: Date;
   tags: string[];
+  // Nuevos campos para Instagram
+  isInstagramPost?: boolean;
+  instagramUrl?: string;
+  instagramPostId?: string;
+  likes?: number;
+  comments?: number;
 }
 
 export interface ForumEventSummary {

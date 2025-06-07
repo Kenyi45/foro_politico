@@ -1046,6 +1046,122 @@ export const galleryPhotos: GalleryPhoto[] = [
     tags: ['clausura', 'compromiso', 'lima-2025', 'continuidad'],
     createdAt: new Date('2024-03-10'),
     updatedAt: new Date('2024-03-10')
+  },
+
+  // Instagram Posts - Buenos Aires 2024 (Contenido Real)
+  
+  // DÍA 1 - Buenos Aires 2024
+  {
+    id: 'ig-ba24-d1-video',
+    title: 'Buenos Aires 2024 - Día 1 🎬',
+    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop',
+    description: 'Resumen del primer día del Foro Buenos Aires 2024. ¡Los mejores momentos de apertura y primeras conferencias! #ForoBuenosAires2024 #Día1',
+    category: 'instagram',
+    type: 'video',
+    location: 'Buenos Aires, Argentina',
+    date: new Date('2024-07-19T20:00:00'),
+    tags: ['buenos-aires-2024', 'día-1', 'apertura', 'video'],
+    isInstagramPost: true,
+    instagramUrl: 'https://www.instagram.com/p/C9TAruWRTtB/?hl=es-la',
+    instagramPostId: 'C9TAruWRTtB',
+    likes: 1847,
+    comments: 156,
+    createdAt: new Date('2024-07-19'),
+    updatedAt: new Date('2024-07-19')
+  },
+  {
+    id: 'ig-ba24-d1-fotos',
+    title: 'Buenos Aires 2024 - Fotos Día 1 📸',
+    image: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&h=600&fit=crop',
+    description: 'Galería de 8 fotos del primer día: ceremonias, paneles y networking. ¡Revive los momentos destacados! #ForoBuenosAires2024 #Fotos',
+    category: 'instagram',
+    type: 'photo',
+    location: 'Buenos Aires, Argentina',
+    date: new Date('2024-07-19T18:30:00'),
+    tags: ['buenos-aires-2024', 'día-1', 'fotos', 'galería'],
+    isInstagramPost: true,
+    instagramUrl: 'https://www.instagram.com/p/C9Q3y3fMRgv/?hl=es-la&img_index=1',
+    instagramPostId: 'C9Q3y3fMRgv',
+    likes: 2134,
+    comments: 198,
+    createdAt: new Date('2024-07-19'),
+    updatedAt: new Date('2024-07-19')
+  },
+
+  // DÍA 2 - Buenos Aires 2024
+  {
+    id: 'ig-ba24-d2-video',
+    title: 'Buenos Aires 2024 - Día 2 🎬',
+    image: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800&h=600&fit=crop',
+    description: 'Segundo día lleno de debates intensos y talleres de liderazgo. ¡La pasión política se vive en cada momento! #ForoBuenosAires2024 #Día2',
+    category: 'instagram',
+    type: 'video',
+    location: 'Buenos Aires, Argentina',
+    date: new Date('2024-07-20T20:30:00'),
+    tags: ['buenos-aires-2024', 'día-2', 'debates', 'video'],
+    isInstagramPost: true,
+    instagramUrl: 'https://www.instagram.com/p/C9VznBhsTqI/?hl=es-la',
+    instagramPostId: 'C9VznBhsTqI',
+    likes: 1956,
+    comments: 187,
+    createdAt: new Date('2024-07-20'),
+    updatedAt: new Date('2024-07-20')
+  },
+  {
+    id: 'ig-ba24-d2-fotos',
+    title: 'Buenos Aires 2024 - Fotos Día 2 📸',
+    image: 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=800&h=600&fit=crop',
+    description: 'Colección de 7 fotos del segundo día: paneles, talleres y momentos de camaradería entre líderes jóvenes. #ForoBuenosAires2024 #Liderazgo',
+    category: 'instagram',
+    type: 'photo',
+    location: 'Buenos Aires, Argentina',
+    date: new Date('2024-07-20T19:00:00'),
+    tags: ['buenos-aires-2024', 'día-2', 'fotos', 'liderazgo'],
+    isInstagramPost: true,
+    instagramUrl: 'https://www.instagram.com/p/C9Tu1s8Mai1/?hl=es-la&img_index=1',
+    instagramPostId: 'C9Tu1s8Mai1',
+    likes: 2387,
+    comments: 234,
+    createdAt: new Date('2024-07-20'),
+    updatedAt: new Date('2024-07-20')
+  },
+
+  // DÍA 3 - Buenos Aires 2024
+  {
+    id: 'ig-ba24-d3-video',
+    title: 'Buenos Aires 2024 - Día 3 🎬',
+    image: 'https://images.unsplash.com/photo-1551818255-e6e10975bc17?w=800&h=600&fit=crop',
+    description: 'Gran final del Foro Buenos Aires 2024. Clausura emotiva y compromisos para el futuro de América Latina. ¡Hasta Lima 2025! #ForoBuenosAires2024 #Clausura',
+    category: 'instagram',
+    type: 'video',
+    location: 'Buenos Aires, Argentina',
+    date: new Date('2024-07-21T21:00:00'),
+    tags: ['buenos-aires-2024', 'día-3', 'clausura', 'video'],
+    isInstagramPost: true,
+    instagramUrl: 'https://www.instagram.com/p/C9aq7rlhoEm/?hl=es-la',
+    instagramPostId: 'C9aq7rlhoEm',
+    likes: 2845,
+    comments: 312,
+    createdAt: new Date('2024-07-21'),
+    updatedAt: new Date('2024-07-21')
+  },
+  {
+    id: 'ig-ba24-d3-fotos',
+    title: 'Buenos Aires 2024 - Fotos Día 3 📸',
+    image: 'https://images.unsplash.com/photo-1518834107812-67b0b7c58434?w=800&h=600&fit=crop',
+    description: 'Últimas 9 fotos memorables: ceremonias de clausura, despedidas y promesas de reencuentro. ¡Gracias Buenos Aires! #ForoBuenosAires2024 #Memories',
+    category: 'instagram',
+    type: 'photo',
+    location: 'Buenos Aires, Argentina',
+    date: new Date('2024-07-21T19:30:00'),
+    tags: ['buenos-aires-2024', 'día-3', 'fotos', 'clausura'],
+    isInstagramPost: true,
+    instagramUrl: 'https://www.instagram.com/p/C9WC95ps5BZ/?hl=es-la&img_index=1',
+    instagramPostId: 'C9WC95ps5BZ',
+    likes: 3156,
+    comments: 287,
+    createdAt: new Date('2024-07-21'),
+    updatedAt: new Date('2024-07-21')
   }
 ];
 

@@ -1,0 +1,375 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.4s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-out;
+}
+
+/* Hover effects for photo cards */
+.photo-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.photo-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Tab transition effects */
+.tab-button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tab-button.active {
+  transform: scale(1.05);
+}
+
+/* Instagram embed loading state */
+.instagram-embed {
+  position: relative;
+}
+
+.instagram-embed::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 8px;
+  z-index: -1;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Slider specific styles */
+.instagram-slider {
+  scroll-behavior: smooth;
+}
+
+.slide-item {
+  scroll-snap-align: start;
+}
+
+/* Improved hover effects for navigation buttons */
+.nav-button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Dot indicators */
+.dot-indicator {
+  transition: all 0.3s ease;
+}
+
+.dot-indicator.active {
+  transform: scale(1.25);
+  box-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+}
+
+/* Enhanced Instagram embed container */
+.instagram-embed iframe {
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.instagram-embed:hover iframe {
+  transform: scale(1.02);
+}
+
+/* Slide transition improvements */
+.slider-container {
+  overflow-x: hidden;
+  scroll-snap-type: x mandatory;
+}
+
+.slide-content {
+  scroll-snap-align: center;
+  transform: translateZ(0);
+}
+
+/* Loading skeleton for Instagram embeds */
+.instagram-embed.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer 2s infinite;
+  border-radius: 12px;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Responsive animations for mobile */
+@media (max-width: 768px) {
+  .animate-fade-in {
+    animation-duration: 0.3s;
+  }
+  
+  .photo-card:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  .instagram-embed iframe {
+    height: 400px !important;
+  }
+
+  .slide-content {
+    padding: 0 1rem;
+  }
+
+  .nav-button {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+/* Photo Gallery Slider Specific Styles */
+.photo-slider-container {
+  background: linear-gradient(135deg, #fafbff 0%, #f0f4ff 100%);
+  border: 1px solid #e0e7ff;
+  min-height: 500px;
+  border-radius: 1rem;
+}
+
+.photo-slide-content {
+  padding: 1rem;
+  height: 100%;
+}
+
+.photo-grid-compact {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .photo-grid-compact {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .photo-grid-compact {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 800px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .photo-grid-compact {
+    grid-template-columns: repeat(6, 1fr);
+    max-width: 1200px;
+  }
+}
+
+.photo-card-compact {
+  aspect-ratio: 1;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.photo-card-compact:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+/* Event header styles for photo slider */
+.event-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 1rem;
+  color: white;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.event-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #3b82f6;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+/* Compact filter styles */
+.compact-filters {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.filter-button {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.filter-button.active {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Enhanced photo grid animations */
+.photo-grid-item {
+  animation: slideInUp 0.4s ease-out forwards;
+  opacity: 0;
+}
+
+.photo-grid-item:nth-child(1) { animation-delay: 0.05s; }
+.photo-grid-item:nth-child(2) { animation-delay: 0.1s; }
+.photo-grid-item:nth-child(3) { animation-delay: 0.15s; }
+.photo-grid-item:nth-child(4) { animation-delay: 0.2s; }
+.photo-grid-item:nth-child(5) { animation-delay: 0.25s; }
+.photo-grid-item:nth-child(6) { animation-delay: 0.3s; }
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero Section Enhancement Styles */
+.text-shadow-2xl {
+  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.8), 0 6px 10px rgba(0, 0, 0, 0.6);
+}
+
+.text-shadow-lg {
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Enhanced gradient text effect */
+.bg-gradient-forum {
+  background: linear-gradient(135deg, #E64027 0%, #F59E0B 50%, #213D6C 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Logo enhancement */
+.logo-glow {
+  filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.3)) 
+          drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+  transition: all 0.3s ease;
+}
+
+.logo-glow:hover {
+  filter: drop-shadow(0 6px 12px rgba(255, 255, 255, 0.4)) 
+          drop-shadow(0 12px 24px rgba(0, 0, 0, 0.6));
+  transform: scale(1.05);
+} 

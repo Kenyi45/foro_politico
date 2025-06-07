@@ -101,6 +101,13 @@ const translations: Record<string, string> = {
   'gallery.categories.networking': 'Networking',
   'gallery.categories.social': 'Eventos Sociales',
   'gallery.categories.speakers': 'Conferencias',
+  'gallery.categories.instagram': 'Instagram',
+  'gallery.instagram.follow': 'Síguenos en Instagram',
+  'gallery.instagram.realtime': 'Los mejores momentos en tiempo real',
+  'gallery.instagram.follow.button': 'Seguir',
+  'gallery.instagram.view': 'Ver en Instagram',
+  'gallery.instagram.likes': 'Me gusta',
+  'gallery.instagram.comments': 'Comentarios',
 
   // Events Section
   'events.badge': 'Programa Completo',
