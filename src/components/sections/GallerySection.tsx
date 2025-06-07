@@ -27,7 +27,7 @@ interface GallerySectionProps {
 }
 
 const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
-  const [activeTab, setActiveTab] = useState<'fotos' | 'instagram'>('fotos');
+  const [activeTab, setActiveTab] = useState<'fotos' | 'instagram'>('instagram');
   const [selectedEvent, setSelectedEvent] = useState<string>('all');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -299,18 +299,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
           {/* Tab Navigation */}
           <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-2">
             <div className="flex space-x-1 sm:space-x-2 max-w-md mx-auto">
-              <button
-                onClick={() => setActiveTab('fotos')}
-                className={`flex-1 flex items-center justify-center space-x-1 sm:space-x-2 px-3 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl font-semibold transition-all duration-300 text-sm sm:text-base ${
-                  activeTab === 'fotos'
-                    ? 'bg-white text-primary-700 shadow-lg transform scale-105'
-                    : 'text-gray-600 hover:text-gray-800 hover:bg-white/50'
-                }`}
-              >
-                <Camera className="w-4 sm:w-5 h-4 sm:h-5" />
-                <span className="hidden sm:inline">Galería de Fotos</span>
-                <span className="sm:hidden">Fotos</span>
-              </button>
+              {/* Tab "fotos" ocultado temporalmente */}
               <button
                 onClick={() => setActiveTab('instagram')}
                 className={`flex-1 flex items-center justify-center space-x-1 sm:space-x-2 px-3 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl font-semibold transition-all duration-300 text-sm sm:text-base ${
@@ -596,7 +585,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
                 </div>
 
                 {/* Call to Action */}
-                <div className="text-center mt-12 pt-8 border-t border-gray-200">
+                {/* <div className="text-center mt-12 pt-8 border-t border-gray-200">
                   <div className="bg-gradient-to-br from-accent-50 to-accent-100 rounded-2xl p-8 max-w-2xl mx-auto">
                     <h4 className="text-xl font-bold text-gray-900 mb-3">¿Te perdiste algo?</h4>
                     <p className="text-gray-600 mb-6">Síguenos en Instagram para no perderte ningún momento</p>
@@ -608,7 +597,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
                       <span className="text-lg font-bold">Seguir @foro_politicos</span>
                     </button>
                   </div>
-                </div>
+                </div> */}
               </div>
             )}
           </div>
