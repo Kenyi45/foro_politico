@@ -81,48 +81,6 @@ const RegistrationSection: React.FC = () => {
           </div>
         )}
 
-        {/* Event Details */}
-        <div className="max-w-5xl mx-auto mb-12 sm:mb-16 px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            {/* Date & Location */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/10">
-              <div className="flex items-start space-x-3 sm:space-x-4">
-                <div className="w-10 sm:w-12 h-10 sm:h-12 bg-accent-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-5 sm:w-6 h-5 sm:h-6 text-accent-300" />
-                </div>
-                <div>
-                  <h3 className="text-white font-semibold mb-2 text-sm sm:text-base">{t('countdown.location.title')}</h3>
-                  <p className="text-white/80 mb-1 text-sm sm:text-base">{mockForumEvent.location}</p>
-                  <p className="text-white/60 text-xs sm:text-sm">
-                    {mockForumEvent.startDate.toLocaleDateString('es-ES', {
-                      weekday: 'long',
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Duration */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/10">
-              <div className="flex items-start space-x-3 sm:space-x-4">
-                <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gold-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Clock className="w-5 sm:w-6 h-5 sm:h-6 text-gold-300" />
-                </div>
-                <div>
-                  <h3 className="text-white font-semibold mb-2 text-sm sm:text-base">{t('countdown.duration.title')}</h3>
-                  <p className="text-white/80 mb-1 text-sm sm:text-base">{t('countdown.duration.intensive')}</p>
-                  <p className="text-white/60 text-xs sm:text-sm">
-                    {t('countdown.duration.activities')}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Registration CTA Title */}
         <div className="mt-8 sm:mt-12 mb-8 sm:mb-12 px-4">
           <p className="text-base sm:text-lg text-white/80 max-w-3xl mx-auto text-center">
