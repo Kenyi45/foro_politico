@@ -484,6 +484,77 @@ body {
     letter-spacing: 0.025em;
   }
 
+  /* Professional Navigation Styles */
+  .nav-item-professional {
+    @apply relative overflow-hidden;
+    background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%);
+  }
+
+  .nav-item-professional::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .nav-item-professional:hover::before {
+    left: 100%;
+  }
+
+  .nav-indicator {
+    @apply absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .nav-item-active .nav-indicator {
+    transform: scaleX(1);
+  }
+
+  .navbar-glass {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+      0 8px 32px 0 rgba(31, 38, 135, 0.37),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .navbar-transparent {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .mobile-menu-glass {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+      0 25px 45px -12px rgba(0, 0, 0, 0.25),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .logo-glow {
+    box-shadow: 
+      0 0 20px rgba(33, 61, 108, 0.3),
+      0 0 40px rgba(33, 61, 108, 0.2),
+      0 0 60px rgba(33, 61, 108, 0.1);
+  }
+
+  .logo-glow-scrolled {
+    box-shadow: 
+      0 4px 14px 0 rgba(33, 61, 108, 0.2),
+      0 2px 4px 0 rgba(33, 61, 108, 0.1);
+  }
+
   .stat-number {
     @apply font-primary text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold;
     font-weight: 800;
