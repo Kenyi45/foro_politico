@@ -75,15 +75,21 @@ const Header: React.FC<HeaderProps> = ({ isScrolled = false }) => {
         <div className="flex items-center justify-between py-4 lg:py-6">
           {/* Logo mejorado */}
           <div className="flex items-center space-x-4">
-            <div className={`relative w-14 h-14 rounded-2xl transition-all duration-300 ${
-              scrolled 
-                ? 'bg-gradient-to-br from-primary-600 to-primary-700 shadow-lg shadow-primary-600/25' 
-                : 'bg-gradient-to-br from-primary-500/90 to-primary-600/90 shadow-xl shadow-primary-600/40'
-            }`}>
-              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-2xl"></div>
-              <div className="relative flex items-center justify-center w-full h-full">
-                <span className="text-white font-bold text-xl tracking-tight">FJP</span>
-              </div>
+            <div className="relative w-14 h-14">
+              <img 
+                src="/Logo.png" 
+                alt="Foro de Jóvenes Políticos" 
+                className={`w-full h-full object-contain transition-all duration-300 filter ${
+                  scrolled 
+                    ? 'drop-shadow-lg' 
+                    : 'drop-shadow-2xl'
+                }`}
+                style={{
+                  filter: scrolled 
+                    ? 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1)) drop-shadow(0 2px 4px rgba(33, 61, 108, 0.1))'
+                    : 'drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15)) drop-shadow(0 4px 8px rgba(33, 61, 108, 0.2))'
+                }}
+              />
             </div>
             <div className="hidden sm:block">
               <h1 className={`font-primary font-bold text-lg leading-tight tracking-tight transition-colors duration-300 ${
