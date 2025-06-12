@@ -133,7 +133,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               {/* Universidad Vida y Desarrollo Logo */}
               <div className="flex items-center justify-center">
                 <img 
-                  src="/Logo_UVD.png" 
+                  src="/Logo_IP.png" 
                   alt="Universidad Vida y Desarrollo" 
                   className="h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain logo-glow"
                 />
@@ -145,7 +145,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               {/* Interamericana Partners Logo */}
               <div className="flex items-center justify-center">
                 <img 
-                  src="/Logo_IP.png" 
+                  src="/Logo_UVD.png" 
                   alt="Interamericana Partners" 
                   className="h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain logo-glow"
                 />
