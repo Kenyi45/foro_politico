@@ -1,10 +1,62 @@
-# Getting Started with Create React App
+# Foro de Jóvenes Políticos 🌟
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Una plataforma web moderna para conectar y empoderar a jóvenes líderes políticos de todo el mundo.
 
-## Available Scripts
+## 🚀 Características
 
-In the project directory, you can run:
+- ✅ **Diseño Moderno**: Interfaz responsive con Tailwind CSS
+- ✅ **Multiidioma**: Soporte para español e inglés
+- ✅ **Registro Gratuito**: Sistema de registro simple y accesible
+- ✅ **Animaciones**: Experiencia fluida con Framer Motion
+- ✅ **Galería Interactiva**: Showcase de eventos anteriores
+- ✅ **Countdown Timer**: Contador regresivo para el evento
+- ✅ **Testimoniales**: Carrusel de testimonios de participantes
+
+## 🛠️ Tecnologías Utilizadas
+
+- **Frontend**: React 19 + TypeScript
+- **Styling**: Tailwind CSS
+- **Animaciones**: Framer Motion
+- **Icons**: Lucide React
+- **Estado**: Zustand
+- **Build**: Create React App
+
+## ⚙️ Configuración Inicial
+
+### 1. Clonar el Repositorio
+
+```bash
+git clone [URL_DEL_REPO]
+cd forum-jovenes-politicos
+```
+
+### 2. Instalar Dependencias
+
+```bash
+npm install
+```
+
+### 3. Configurar Variables de Entorno
+
+```bash
+# Copiar el archivo de ejemplo
+cp env.example .env
+
+# Editar .env con tus configuraciones
+nano .env
+```
+
+**Variables disponibles:**
+```env
+REACT_APP_APP_NAME=Foro de Jóvenes Políticos
+REACT_APP_DEFAULT_LANGUAGE=es
+REACT_APP_EVENT_DATE=2024-12-31T23:59:59.000Z
+REACT_APP_EVENT_LOCATION=Lima, Perú
+```
+
+## 🚀 Comandos Disponibles
+
+En el directorio del proyecto, puedes ejecutar:
 
 ### `npm start`
 
@@ -27,20 +79,84 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
 ### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 💡 Uso del Sistema de Registro
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Ejemplo Básico
 
-## Learn More
+```tsx
+import PaymentButton from './components/payment/PaymentButton';
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+function App() {
+  const handleRegistrationSuccess = (result) => {
+    console.log('¡Registro exitoso!', result);
+    // Redirigir a página de confirmación
+  };
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  return (
+    <PaymentButton
+      description="Registro al Foro"
+      customerEmail="usuario@email.com"
+      onSuccess={handleRegistrationSuccess}
+    />
+  );
+}
+```
+
+## 📁 Estructura del Proyecto
+
+```
+forum-jovenes-politicos/
+├── src/
+│   ├── components/
+│   │   ├── payment/           # 📝 Componentes de registro
+│   │   │   └── PaymentButton.tsx
+│   │   ├── sections/          # Secciones de la página
+│   │   └── common/            # Componentes reutilizables
+│   ├── services/
+│   │   └── locationService.ts # 🌍 Servicio de localización
+│   └── ...
+└── env.example               # 🔑 Variables de entorno
+```
+
+## 🌟 Funcionalidades Principales
+
+### Registro de Participantes
+- Formulario de registro simple
+- Validación de email
+- Confirmación instantánea
+- Acceso completo a materiales
+
+### Interfaz Multiidioma
+- Soporte para español e inglés
+- Cambio dinámico de idioma
+- Contenido localizado
+
+### Diseño Responsive
+- Optimizado para móviles
+- Experiencia de usuario fluida
+- Componentes adaptativos
+
+## 🤝 Contribución
+
+1. Fork el proyecto
+2. Crea una rama (`git checkout -b feature/nueva-funcionalidad`)
+3. Commit tus cambios (`git commit -am 'Agrega nueva funcionalidad'`)
+4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
+5. Abre un Pull Request
+
+## 📚 Recursos
+
+- [Create React App Docs](https://facebook.github.io/create-react-app/docs/getting-started)
+- [React Documentation](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [Framer Motion](https://www.framer.com/motion/)
+
+---
+
+**Desarrollado con ❤️ para el Foro de Jóvenes Políticos**

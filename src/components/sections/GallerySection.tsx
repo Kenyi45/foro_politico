@@ -47,7 +47,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
     
     return (
       <div className="instagram-embed w-full" style={{ maxWidth: `${maxWidth}px` }}>
-        <div className="relative rounded-2xl overflow-hidden shadow-xl bg-white">
+        <div className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-md bg-white border border-gray-100">
           <iframe
             src={embedUrl}
             width="100%"
@@ -58,17 +58,17 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
             style={{ 
               border: 'none',
               width: '100%',
-              minWidth: '300px'
+              minWidth: '280px'
             }}
             title="Instagram Post"
             loading="lazy"
           />
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/10 to-transparent p-3">
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/10 to-transparent p-2 sm:p-3">
             <a 
               href={url} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 text-xs text-gray-600 hover:text-accent-700 transition-colors bg-white/80 backdrop-blur-sm rounded-full px-3 py-1"
+              className="inline-flex items-center space-x-1 text-xs text-gray-600 hover:text-accent-700 transition-colors bg-white/80 backdrop-blur-sm rounded-md px-2 py-1"
             >
               <ExternalLink className="w-3 h-3" />
               <span>Ver en Instagram</span>
@@ -295,16 +295,16 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
         </div>
 
         {/* Gallery Tabs */}
-        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-gray-100 overflow-hidden mb-6 sm:mb-8 mx-4 sm:mx-0">
+        <div className="bg-white rounded-lg sm:rounded-2xl shadow-lg border border-gray-100 overflow-hidden mb-4 sm:mb-6 mx-2 sm:mx-0">
           {/* Tab Navigation */}
-          <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-2">
+          <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-1.5 sm:p-2">
             <div className="flex space-x-1 sm:space-x-2 max-w-md mx-auto">
               {/* Tab "fotos" ocultado temporalmente */}
               <button
                 onClick={() => setActiveTab('instagram')}
-                className={`flex-1 flex items-center justify-center space-x-1 sm:space-x-2 px-3 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl font-semibold transition-all duration-300 text-sm sm:text-base ${
+                className={`flex-1 flex items-center justify-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl font-semibold transition-all duration-300 text-sm sm:text-base ${
                   activeTab === 'instagram'
-                    ? 'bg-gradient-to-r from-accent-600 to-accent-800 text-white shadow-lg transform scale-105'
+                    ? 'bg-gradient-to-r from-accent-600 to-accent-800 text-white shadow-md transform scale-105'
                     : 'text-gray-600 hover:text-gray-800 hover:bg-white/50'
                 }`}
               >
@@ -399,10 +399,10 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
             </div>
 
                         {/* Category Filters */}
-                        <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl sm:rounded-2xl p-3 sm:p-4 mb-4 sm:mb-6">
-                          <div className="text-center mb-3 sm:mb-4">
+                        <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg sm:rounded-xl p-2 sm:p-3 mb-3 sm:mb-4 border border-gray-200">
+                          <div className="text-center mb-2 sm:mb-3">
                             <label className="text-xs sm:text-sm font-medium text-gray-700">
-                              <Filter className="w-3 sm:w-4 h-3 sm:h-4 inline mr-2" />
+                              <Filter className="w-3 sm:w-4 h-3 sm:h-4 inline mr-1" />
                               Filtrar por categoría
               </label>
                           </div>
@@ -411,10 +411,10 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
                   <button
                     key={category.id}
                     onClick={() => setSelectedCategory(category.id)}
-                                className={`px-2 sm:px-3 py-1 sm:py-2 rounded-lg sm:rounded-xl text-xs font-medium transition-all duration-200 flex items-center space-x-1 ${
+                                className={`px-1.5 sm:px-2 py-1 sm:py-1.5 rounded-md sm:rounded-lg text-xs font-medium transition-all duration-200 flex items-center space-x-0.5 sm:space-x-1 border ${
                       selectedCategory === category.id
-                                    ? `${slide.color === 'primary' ? 'bg-primary-700' : 'bg-accent-700'} text-white shadow-lg transform scale-105`
-                                    : 'bg-white text-gray-700 hover:bg-gray-100 shadow-sm'
+                                    ? `${slide.color === 'primary' ? 'bg-primary-700 border-primary-800' : 'bg-accent-700 border-accent-800'} text-white shadow-md transform scale-105`
+                                    : 'bg-white text-gray-700 hover:bg-gray-100 border-gray-200 shadow-sm'
                     }`}
                   >
                     {category.icon}
@@ -425,11 +425,11 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
         </div>
 
         {/* Photo Grid */}
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-4 max-w-6xl mx-auto">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 sm:gap-3 max-w-6xl mx-auto">
                           {filteredPhotos.slice(0, 12).map((photo, photoIndex) => (
             <div
               key={photo.id}
-                              className="photo-card group relative cursor-pointer overflow-hidden rounded-lg sm:rounded-xl aspect-square shadow-md hover:shadow-xl transition-all duration-300"
+                              className="photo-card group relative cursor-pointer overflow-hidden rounded-md sm:rounded-lg aspect-square shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-gray-200"
                               onClick={() => openLightbox(photoIndex)}
             >
               {/* Photo placeholder with gradient */}
@@ -437,26 +437,26 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
                                 slide.color === 'primary' 
                                   ? 'bg-gradient-to-br from-primary-200 via-primary-300 to-primary-400' 
                                   : 'bg-gradient-to-br from-accent-200 via-accent-300 to-accent-400'
-                              } group-hover:scale-110 transition-transform duration-500`} />
+                              } group-hover:scale-105 transition-transform duration-300`} />
               
               {/* Overlay */}
-                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
                                 <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100">
-                                  <div className="w-8 sm:w-12 h-8 sm:h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
+                                  <div className="w-6 sm:w-10 h-6 sm:h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20">
                     {photo.type === 'video' ? (
-                                      <Play className="w-4 sm:w-6 h-4 sm:h-6 text-white" />
+                                      <Play className="w-3 sm:w-5 h-3 sm:h-5 text-white" />
                     ) : (
-                                      <ZoomIn className="w-4 sm:w-6 h-4 sm:h-6 text-white" />
+                                      <ZoomIn className="w-3 sm:w-5 h-3 sm:h-5 text-white" />
                     )}
                   </div>
                 </div>
               </div>
 
               {/* Photo Info */}
-                              <div className="absolute bottom-0 left-0 right-0 p-1 sm:p-2 bg-gradient-to-t from-black/70 to-transparent">
+                              <div className="absolute bottom-0 left-0 right-0 p-1 sm:p-2 bg-gradient-to-t from-black/60 to-transparent">
                 <div className="text-white">
-                                  <h4 className="font-medium text-xs mb-1 line-clamp-1">{photo.title}</h4>
-                                  <span className={`inline-block px-1 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs ${getCategoryColor(photo.category)} bg-opacity-80`}>
+                                  <h4 className="font-medium text-xs mb-0.5 line-clamp-1">{photo.title}</h4>
+                                  <span className={`inline-block px-1 sm:px-2 py-0.5 rounded-md text-xs ${getCategoryColor(photo.category)} bg-opacity-80`}>
                     {categories.find(c => c.id === photo.category)?.label || photo.category}
                   </span>
                 </div>
@@ -543,9 +543,9 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
                         </div>
 
                         {/* Posts Grid */}
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto">
                           {slide.posts.map((post, postIndex) => (
-                            <div key={postIndex} className={`bg-white rounded-3xl p-6 shadow-xl border ${
+                            <div key={postIndex} className={`bg-white rounded-lg sm:rounded-2xl p-3 sm:p-5 shadow-md border ${
                               slide.color === 'blue' ? 'border-primary-100' :
                               slide.color === 'emerald' ? 'border-success-100' :
                               'border-accent-100'

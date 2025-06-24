@@ -1,11 +1,20 @@
-import React from 'react';
-import { Calendar, MapPin, Clock } from 'lucide-react';
+import React, { useState } from 'react';
+import { Calendar, MapPin, Clock, CreditCard, CheckCircle } from 'lucide-react';
 import { useCountdown } from '../../hooks/useCountdown';
 import { mockForumEvent } from '../../data/mockData';
 import { useLanguage } from '../../contexts/LanguageContext';
+import PaymentButton from '../payment/PaymentButton';
 
 const RegistrationSection: React.FC = () => {
   const { t } = useLanguage();
+  const [paymentCompleted, setPaymentCompleted] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
+  const [paymentData, setPaymentData] = useState({
+    email: '',
+    name: '',
+    phone: ''
+  });
+
   const { timeLeft, isExpired, formatTime } = useCountdown({
     targetDate: mockForumEvent.startDate,
     onComplete: () => {
@@ -21,7 +30,19 @@ const RegistrationSection: React.FC = () => {
   ];
 
   const handleRegisterClick = () => {
-    window.open('https://forms.gle/your-registration-form', '_blank');
+    setShowPayment(true);
+  };
+
+  const handlePaymentSuccess = (paymentResult: any) => {
+    console.log('Pago exitoso:', paymentResult);
+    setPaymentCompleted(true);
+    setShowPayment(false);
+    // Aquí puedes agregar lógica adicional como enviar email de confirmación
+  };
+
+  const handlePaymentError = (error: any) => {
+    console.error('Error en pago:', error);
+    // Aquí puedes mostrar un mensaje de error al usuario
   };
 
   return (
@@ -98,19 +119,58 @@ const RegistrationSection: React.FC = () => {
               </div>
             </div>
 
+            {/* Payment Success Message */}
+            {paymentCompleted && (
+              <div className="mb-6 p-4 bg-green-500/20 border border-green-500/30 rounded-xl">
+                <div className="flex items-center justify-center space-x-2 text-green-200">
+                  <CheckCircle className="w-5 h-5" />
+                  <span className="font-semibold">¡Registro completado exitosamente!</span>
+                </div>
+                <p className="text-green-300 text-sm mt-2 text-center">
+                  Recibirás un email de confirmación con todos los detalles del evento.
+                </p>
+              </div>
+            )}
+
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-6 sm:mb-8">
-              <button
-                onClick={handleRegisterClick}
-                className="w-full sm:w-auto bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-xl transition-all duration-300 hover:scale-105 shadow-lg"
-              >
-                {t('countdown.registration.button')}
-              </button>
-              
-              <button className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border border-white/30 hover:border-white/50 font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-xl transition-all duration-300">
-                {t('registration.cta.info')}
-              </button>
-            </div>
+            {!paymentCompleted && !showPayment && (
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-6 sm:mb-8">
+                <button
+                  onClick={handleRegisterClick}
+                  className="w-full sm:w-auto bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-xl transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
+                >
+                  <CreditCard className="w-5 h-5" />
+                  <span>Registrarse Ahora</span>
+                </button>
+                
+                <button className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border border-white/30 hover:border-white/50 font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-xl transition-all duration-300">
+                  {t('registration.cta.info')}
+                </button>
+              </div>
+            )}
+
+            {/* Payment Component */}
+            {showPayment && !paymentCompleted && (
+              <div className="mb-6">
+                <div className="mb-4">
+                  <h4 className="text-xl font-bold text-white mb-2">Finalizar Registro</h4>
+                  <p className="text-white/80">Completa tu pago para asegurar tu lugar en el foro</p>
+                </div>
+                <PaymentButton
+                  description="Registro - Foro de Jóvenes Políticos"
+                  customerEmail={paymentData.email}
+                  onSuccess={handlePaymentSuccess}
+                  onError={handlePaymentError}
+                  fullWidth
+                />
+                <button
+                  onClick={() => setShowPayment(false)}
+                  className="w-full mt-3 bg-white/10 hover:bg-white/20 text-white border border-white/30 hover:border-white/50 font-semibold px-6 py-3 text-base rounded-xl transition-all duration-300"
+                >
+                  Volver
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
