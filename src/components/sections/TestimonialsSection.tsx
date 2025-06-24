@@ -108,127 +108,160 @@ const TestimonialsSection: React.FC = () => {
         <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 px-4">
           <div className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white mb-4 sm:mb-6">
             <Quote className="w-3 sm:w-4 h-3 sm:h-4 mr-2" />
-            <span className="font-semibold text-xs sm:text-sm">{t('testimonials.badge')}</span>
+            <span className="font-semibold text-xs sm:text-sm">Testimonios & Organizaciones</span>
           </div>
           
           <h2 className="title-section text-white mb-4 sm:mb-6 animate-slide-up">
-            {t('testimonials.title')}{' '}
+            Conoce quiénes hacen{' '}
             <span className="text-accent-200 font-extrabold">
-              {t('testimonials.title.highlight')}
+              posible el Foro
             </span>
           </h2>
           
           <p className="text-lg sm:text-xl text-white/80 leading-relaxed">
-            {t('testimonials.description')}
+            Las organizaciones que impulsan el liderazgo juvenil y las historias de transformación 
+            de nuestros participantes que ahora lideran el cambio en sus países
           </p>
         </div>
 
-        {/* Main Testimonial Display */}
-        <div className="max-w-6xl mx-auto mb-8 sm:mb-12 px-4">
-          <Card 
-            variant="glass" 
-            size="lg" 
-            hover="none"
-            className="bg-white/10 backdrop-blur-lg border-white/20"
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8 items-center p-4 sm:p-6 lg:p-8">
-              {/* Profile Image */}
-              <div className="lg:col-span-2 text-center">
-                <div className="relative inline-block">
-                  <div className="w-36 sm:w-48 h-36 sm:h-48 mx-auto rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl">
-                    <img
-                      src={currentTestimonial.image}
-                      alt={currentTestimonial.participant}
-                      className="w-full h-full object-cover"
+        {/* Organizations Section */}
+        <div className="max-w-7xl mx-auto mb-12 sm:mb-16 px-4">
+          <div className="text-center mb-8 sm:mb-12">
+            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">
+              Organizaciones que hacen posible el foro
+            </h3>
+            <p className="text-white/80 text-base sm:text-lg max-w-3xl mx-auto">
+              Conoce a las agrupaciones comprometidas con el desarrollo del liderazgo político juvenil
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
+            {/* Instituto Prudencia - Primero */}
+            <Card 
+              variant="elevated" 
+              size="lg" 
+              hover="lift"
+              className="bg-gradient-to-br from-primary-900/95 to-primary-800/90 border border-primary-600/40 group shadow-xl hover:shadow-2xl transition-all duration-500"
+            >
+              <div className="p-6 sm:p-8 text-center relative overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-700/20 via-transparent to-primary-800/30 group-hover:from-primary-600/30 group-hover:to-primary-700/40 transition-all duration-500"></div>
+                
+                {/* Logo */}
+                <div className="mb-6 sm:mb-8 relative z-10">
+                  <div className="w-24 sm:w-32 h-24 sm:h-32 mx-auto bg-primary-800/60 rounded-2xl flex items-center justify-center p-4 sm:p-6 border border-primary-600/50 group-hover:border-primary-500/70 group-hover:bg-primary-700/70 transition-all duration-500 group-hover:scale-105">
+                    <img 
+                      src="/Logo_IP.png" 
+                      alt="Instituto Prudencia Logo" 
+                      className="w-full h-full object-contain filter brightness-110"
                     />
                   </div>
-                  <div className="absolute -bottom-2 sm:-bottom-3 -right-2 sm:-right-3 w-10 sm:w-12 h-10 sm:h-12 bg-accent-500 rounded-full flex items-center justify-center shadow-lg">
-                    <Quote className="w-4 sm:w-6 h-4 sm:h-6 text-white" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="lg:col-span-3 text-center lg:text-left">
-                {/* Stars */}
-                <div className="flex justify-center lg:justify-start mb-4 sm:mb-6">
-                  {renderStars(currentTestimonial.rating)}
                 </div>
 
-                {/* Quote */}
-                <blockquote className="text-lg sm:text-xl lg:text-2xl text-white leading-relaxed mb-6 sm:mb-8 font-light">
-                  "{currentTestimonial.content}"
-                </blockquote>
-
-                {/* Author Info */}
-                <div className="space-y-2 sm:space-y-3">
-                  <h4 className="text-xl sm:text-2xl font-bold text-white">
-                    {currentTestimonial.participant}
+                {/* Content */}
+                <div className="relative z-10">
+                  <h4 className="text-xl sm:text-2xl font-bold text-primary-50 mb-3 sm:mb-4 group-hover:text-white transition-colors duration-300">
+                    Instituto Prudencia
                   </h4>
                   
-                  <p className="text-accent-200 font-semibold text-sm sm:text-base">
-                    {currentTestimonial.position}
+                  <p className="text-primary-100/90 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
+                    Think tank especializado en análisis político y desarrollo de políticas públicas 
+                    para América Latina. Se enfoca en investigación aplicada, formación de líderes 
+                    y promoción del diálogo democrático entre diferentes sectores de la sociedad civil 
+                    y política regional.
                   </p>
-                  
-                  <div className="flex items-center justify-center lg:justify-start space-x-2 text-white/70 text-xs sm:text-sm">
-                    <MapPin className="w-3 sm:w-4 h-3 sm:h-4" />
-                    <span>{currentTestimonial.country}</span>
-                    <span>•</span>
-                    <span>Promoción {currentTestimonial.year}</span>
+
+                  {/* Stats */}
+                  <div className="grid grid-cols-2 gap-4 mb-6">
+                    <div className="text-center bg-primary-800/50 rounded-lg py-3 px-2 border border-primary-600/40">
+                      <div className="text-2xl sm:text-3xl font-bold text-primary-200 mb-1">10+</div>
+                      <div className="text-primary-300 text-xs sm:text-sm font-medium">Años de trayectoria</div>
+                    </div>
+                    <div className="text-center bg-primary-800/50 rounded-lg py-3 px-2 border border-primary-600/40">
+                      <div className="text-2xl sm:text-3xl font-bold text-primary-200 mb-1">50+</div>
+                      <div className="text-primary-300 text-xs sm:text-sm font-medium">Investigaciones</div>
+                    </div>
+                  </div>
+
+                  {/* Mission */}
+                  <div className="text-left bg-primary-800/40 rounded-xl p-4 sm:p-6 border border-primary-600/30">
+                    <h5 className="font-semibold text-primary-100 mb-2 sm:mb-3 text-sm sm:text-base flex items-center">
+                      <div className="w-2 h-2 bg-primary-400 rounded-full mr-2"></div>
+                      Visión
+                    </h5>
+                    <p className="text-primary-200 text-xs sm:text-sm leading-relaxed">
+                      Ser el referente en análisis político y desarrollo institucional en América Latina, 
+                      contribuyendo a la consolidación democrática a través de la investigación rigurosa 
+                      y la formación de nuevos líderes políticos.
+                    </p>
                   </div>
                 </div>
               </div>
-            </div>
-          </Card>
-        </div>
+            </Card>
 
-        {/* Navigation Controls */}
-        <div className="flex items-center justify-center space-x-4 sm:space-x-6 mb-8 sm:mb-12 px-4">
-          <Button
-            variant="ghost"
-            size="md"
-            onClick={prevTestimonial}
-            className="text-white hover:bg-white/10 border border-white/20 text-sm sm:text-base px-4 sm:px-6 py-2 sm:py-3"
-            icon={<ChevronLeft className="w-4 h-4" />}
-          >
-            Anterior
-          </Button>
-          
-          {/* Indicators */}
-          <div className="flex space-x-1 sm:space-x-2">
-            {enhancedTestimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentIndex 
-                    ? 'bg-accent-500 w-8' 
-                    : 'bg-white/30 hover:bg-white/50'
-                }`}
-              />
-            ))}
+            {/* Una Voz Diferente - Segundo */}
+            <Card 
+              variant="elevated" 
+              size="lg" 
+              hover="lift"
+              className="bg-gradient-to-br from-accent-900/95 to-accent-800/90 border border-accent-600/40 group shadow-xl hover:shadow-2xl transition-all duration-500"
+            >
+              <div className="p-6 sm:p-8 text-center relative overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 bg-gradient-to-br from-accent-700/20 via-transparent to-accent-800/30 group-hover:from-accent-600/30 group-hover:to-accent-700/40 transition-all duration-500"></div>
+                
+                {/* Logo */}
+                <div className="mb-6 sm:mb-8 relative z-10">
+                  <div className="w-24 sm:w-32 h-24 sm:h-32 mx-auto bg-accent-800/60 rounded-2xl flex items-center justify-center p-4 sm:p-6 border border-accent-600/50 group-hover:border-accent-500/70 group-hover:bg-accent-700/70 transition-all duration-500 group-hover:scale-105">
+                    <img 
+                      src="/Logo_UVD.png" 
+                      alt="Una Voz Diferente Logo" 
+                      className="w-full h-full object-contain filter brightness-110"
+                    />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="relative z-10">
+                  <h4 className="text-xl sm:text-2xl font-bold text-accent-50 mb-3 sm:mb-4 group-hover:text-white transition-colors duration-300">
+                    Una Voz Diferente
+                  </h4>
+                  
+                  <p className="text-accent-100/90 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
+                    Organización dedicada a empoderar a jóvenes líderes políticos de América Latina, 
+                    promoviendo espacios de diálogo, formación y networking para construir un futuro 
+                    más democrático e inclusivo. Fundada con la visión de ser la voz de las nuevas 
+                    generaciones en la política regional.
+                  </p>
+
+                  {/* Stats */}
+                  <div className="grid grid-cols-2 gap-4 mb-6">
+                    <div className="text-center bg-accent-800/50 rounded-lg py-3 px-2 border border-accent-600/40">
+                      <div className="text-2xl sm:text-3xl font-bold text-accent-200 mb-1">5+</div>
+                      <div className="text-accent-300 text-xs sm:text-sm font-medium">Años de experiencia</div>
+                    </div>
+                    <div className="text-center bg-accent-800/50 rounded-lg py-3 px-2 border border-accent-600/40">
+                      <div className="text-2xl sm:text-3xl font-bold text-accent-200 mb-1">15+</div>
+                      <div className="text-accent-300 text-xs sm:text-sm font-medium">Países alcanzados</div>
+                    </div>
+                  </div>
+
+                  {/* Mission */}
+                  <div className="text-left bg-accent-800/40 rounded-xl p-4 sm:p-6 border border-accent-600/30">
+                    <h5 className="font-semibold text-accent-100 mb-2 sm:mb-3 text-sm sm:text-base flex items-center">
+                      <div className="w-2 h-2 bg-accent-400 rounded-full mr-2"></div>
+                      Misión
+                    </h5>
+                    <p className="text-accent-200 text-xs sm:text-sm leading-relaxed">
+                      Fortalecer el liderazgo político juvenil en América Latina a través de programas 
+                      de formación, intercambio cultural y construcción de redes colaborativas que 
+                      impulsen el cambio social positivo.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Card>
           </div>
-          
-          <Button
-            variant="ghost"
-            size="md"
-            onClick={nextTestimonial}
-            className="text-white hover:bg-white/10 border border-white/20 text-sm sm:text-base px-4 sm:px-6 py-2 sm:py-3"
-            icon={<ChevronRight className="w-4 h-4" />}
-            iconPosition="right"
-          >
-            Siguiente
-          </Button>
-        </div>
-
-        {/* Auto-play Toggle */}
-        <div className="text-center">
-          <button
-            onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-            className="text-white/70 hover:text-white transition-colors text-sm"
-          >
-            {isAutoPlaying ? 'Pausar rotación automática' : 'Activar rotación automática'}
-          </button>
         </div>
       </div>
     </section>

@@ -82,19 +82,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 sm:w-96 h-48 sm:h-96 bg-primary-400/5 rounded-full blur-3xl"></div>
       </div>
 
-      {/* Floating Elements - Hidden on small screens */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden lg:block">
-        <div className="absolute top-1/4 left-1/4 animate-pulse-slow">
-          <Users className="w-8 h-8 text-teal-200/50" />
-        </div>
-        <div className="absolute top-1/3 right-1/4 animate-pulse-slow animation-delay-150">
-          <Globe className="w-6 h-6 text-cyan-200/45" />
-        </div>
-        <div className="absolute bottom-1/3 left-1/3 animate-pulse-slow animation-delay-300">
-          <Lightbulb className="w-7 h-7 text-primary-200/45" />
-        </div>
-      </div>
-
       {/* Main Content */}
       <div className="container-custom relative z-10 text-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
