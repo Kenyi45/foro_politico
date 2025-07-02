@@ -15,18 +15,12 @@ import Header from './components/layout/Header';
 // Section Components
 import HeroSection from './components/sections/HeroSection';
 import FeaturesSection from './components/sections/FeaturesSection';
-import TeamSection from './components/sections/TeamSection';
 import TestimonialsSection from './components/sections/TestimonialsSection';
 import GallerySection from './components/sections/GallerySection';
 import RegistrationSection from './components/sections/RegistrationSection';
-import ThematicAxesSection from './components/sections/ThematicAxesSection';
 
 // Common Components
-import Button from './components/common/Button';
 import Card, { CardHeader, CardTitle, CardContent, CardDescription } from './components/common/Card';
-
-// Icons
-import { Calendar, Award, Users } from 'lucide-react';
 
 // Language Context
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
