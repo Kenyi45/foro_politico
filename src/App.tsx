@@ -15,7 +15,7 @@ import Header from './components/layout/Header';
 // Section Components
 import HeroSection from './components/sections/HeroSection';
 import FeaturesSection from './components/sections/FeaturesSection';
-import TestimonialsSection from './components/sections/TestimonialsSection';
+import OrganizationsSection from './components/sections/TestimonialsSection';
 import GallerySection from './components/sections/GallerySection';
 import RegistrationSection from './components/sections/RegistrationSection';
 
@@ -162,8 +162,8 @@ function AppContent() {
           </div>
         </section>
 
-        {/* Testimonials Section */}
-        <TestimonialsSection />
+        {/* Organizations Section */}
+        <OrganizationsSection />
 
         {/* Team Section */}
 
@@ -285,7 +285,7 @@ function AppContent() {
               <ul className="space-y-3">
                 <li><a href="#inicio" className="text-neutral-400 hover:text-white transition-colors">{t('footer.quicklinks.home')}</a></li>
                 <li><a href="#sobre" className="text-neutral-400 hover:text-white transition-colors">{t('footer.quicklinks.about')}</a></li>
-                <li><a href="#testimonios" className="text-neutral-400 hover:text-white transition-colors">{t('footer.quicklinks.testimonials')}</a></li>
+                <li><a href="#organizacion" className="text-neutral-400 hover:text-white transition-colors">{t('footer.quicklinks.testimonials')}</a></li>
                 <li><a href="#eventos" className="text-neutral-400 hover:text-white transition-colors">{t('footer.quicklinks.events')}</a></li>
                 <li><a href="#registro" className="text-neutral-400 hover:text-white transition-colors">{t('footer.quicklinks.register')}</a></li>
               </ul>

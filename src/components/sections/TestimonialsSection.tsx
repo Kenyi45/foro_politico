@@ -1,97 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, Quote, Star, MapPin } from 'lucide-react';
+import React from 'react';
+import { Quote } from 'lucide-react';
 import Card from '../common/Card';
-import Button from '../common/Button';
 
-const TestimonialsSection: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-
-  // Enhanced testimonials with more professional data
-  const enhancedTestimonials = [
-    {
-      id: '1',
-      participant: 'Andrea López Mendoza',
-      content: 'El Foro de Jóvenes Políticos transformó mi perspectiva sobre el liderazgo. Las conexiones internacionales que establecí han sido fundamentales para desarrollar políticas públicas innovadoras en mi ciudad.',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b302?w=400&h=400&fit=crop&crop=face',
-      country: 'Argentina',
-      position: 'Concejal Municipal de Buenos Aires',
-      rating: 5,
-      year: '2023'
-    },
-    {
-      id: '2',
-      participant: 'Miguel Rodríguez Santos',
-      content: 'Gracias al foro, pude validar mi proyecto de participación ciudadana digital con expertos internacionales. Hoy, CiudadanIA impacta a más de 50,000 usuarios en Latinoamérica.',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
-      country: 'España',
-      position: 'Fundador & CEO de CiudadanIA',
-      rating: 5,
-      year: '2022'
-    },
-    {
-      id: '3',
-      participant: 'Valentina Chen Wu',
-      content: 'La metodología del foro y la diversidad de perspectivas me permitieron diseñar un programa de liderazgo juvenil que ahora se implementa en 15 universidades chilenas.',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
-      country: 'Chile',
-      position: 'Directora de Políticas Juveniles, Universidad de Chile',
-      rating: 5,
-      year: '2023'
-    },
-    {
-      id: '4',
-      participant: 'Kwame Asante Johnson',
-      content: 'El networking y los talleres especializados del foro me conectaron con organizaciones que ahora financian mis iniciativas de transparencia gubernamental en Ghana.',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
-      country: 'Ghana',
-      position: 'Director Ejecutivo, Transparency Ghana Youth',
-      rating: 5,
-      year: '2022'
-    },
-    {
-      id: '5',
-      participant: 'Elena Volkov Petrov',
-      content: 'El programa de mentoría del foro fue clave para refinar mi propuesta de participación digital. Ahora lidero la transformación digital del parlamento juvenil europeo.',
-      image: 'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=400&h=400&fit=crop&crop=face',
-      country: 'Estonia',
-      position: 'Coordinadora Digital, Parlamento Juvenil Europeo',
-      rating: 5,
-      year: '2023'
-    }
-  ];
-
-  const nextTestimonial = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % enhancedTestimonials.length);
-  }, [enhancedTestimonials.length]);
-
-  const prevTestimonial = useCallback(() => {
-    setCurrentIndex((prev) => (prev - 1 + enhancedTestimonials.length) % enhancedTestimonials.length);
-  }, [enhancedTestimonials.length]);
-
-  // Auto-play functionality
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-
-    const interval = setInterval(nextTestimonial, 5000);
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, nextTestimonial]);
-
-  const currentTestimonial = enhancedTestimonials[currentIndex];
-
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <Star
-        key={i}
-        className={`w-5 h-5 ${
-          i < rating ? 'text-gold-500 fill-current' : 'text-neutral-300'
-        }`}
-      />
-    ));
-  };
+const OrganizationsSection: React.FC = () => {
 
   return (
-    <section id="testimonios" className="section-padding bg-gradient-to-br from-primary-900 via-primary-800 to-neutral-900 relative overflow-hidden">
+    <section id="organizacion" className="section-padding bg-gradient-to-br from-primary-900 via-primary-800 to-neutral-900 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-64 h-64 bg-accent-500/10 rounded-full blur-3xl"></div>
@@ -104,19 +18,19 @@ const TestimonialsSection: React.FC = () => {
         <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 px-4">
           <div className="inline-flex items-center px-4 sm:px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white mb-6 sm:mb-8">
             <Quote className="w-4 sm:w-5 h-4 sm:h-5 mr-3" />
-            <span className="font-semibold text-sm sm:text-base">Organizaciones</span>
+            <span className="font-semibold text-sm sm:text-base">Organización</span>
           </div>
           
           <h2 className="title-section text-white mb-6 sm:mb-8 animate-slide-up">
-            Conoce quiénes hacen{' '}
+            Conoce las organizaciones que hacen{' '}
             <span className="text-accent-300 font-extrabold">
               posible el Foro
             </span>
           </h2>
           
           <p className="text-lg sm:text-xl text-white/90 leading-relaxed font-medium">
-            Las organizaciones que impulsan el liderazgo juvenil y las historias de transformación 
-            de nuestros participantes que ahora lideran el cambio en sus países
+            Las agrupaciones comprometidas con el desarrollo del liderazgo político juvenil 
+            en América Latina
           </p>
         </div>
 
@@ -255,4 +169,4 @@ const TestimonialsSection: React.FC = () => {
   );
 };
 
-export default TestimonialsSection; 
+export default OrganizationsSection; 
