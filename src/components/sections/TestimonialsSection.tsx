@@ -107,12 +107,17 @@ const TestimonialsSection: React.FC = () => {
             <span className="font-semibold text-sm sm:text-base">Organizaciones</span>
           </div>
           
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-6">
-              Organizaciones que hacen posible el foro
-            </h3>
-            <p className="text-white/90 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed font-medium">
-              Conoce a las agrupaciones comprometidas con el desarrollo del liderazgo político juvenil
-            </p>
+          <h2 className="title-section text-white mb-6 sm:mb-8 animate-slide-up">
+            Conoce quiénes hacen{' '}
+            <span className="text-accent-300 font-extrabold">
+              posible el Foro
+            </span>
+          </h2>
+          
+          <p className="text-lg sm:text-xl text-white/90 leading-relaxed font-medium">
+            Las organizaciones que impulsan el liderazgo juvenil y las historias de transformación 
+            de nuestros participantes que ahora lideran el cambio en sus países
+          </p>
         </div>
 
         {/* Organizations Section */}
