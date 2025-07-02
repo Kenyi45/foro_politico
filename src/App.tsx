@@ -172,7 +172,6 @@ function AppContent() {
         <TestimonialsSection />
 
         {/* Team Section */}
-        <TeamSection />
 
         {/* Gallery Section */}
         <GallerySection />
