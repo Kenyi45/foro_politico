@@ -1,13 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, Quote, Star, MapPin } from 'lucide-react';
-import { useForumStore } from '../../stores/useForumStore';
 import Card from '../common/Card';
 import Button from '../common/Button';
-import { useLanguage } from '../../contexts/LanguageContext';
 
 const TestimonialsSection: React.FC = () => {
-  const { testimonials } = useForumStore();
-  const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
