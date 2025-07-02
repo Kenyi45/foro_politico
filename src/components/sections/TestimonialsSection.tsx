@@ -290,8 +290,8 @@ const TestimonialsSection: React.FC = () => {
                       <div className="text-primary-600 text-xs sm:text-sm lg:text-base font-semibold">Años de trayectoria</div>
                     </div>
                     <div className="text-center bg-gradient-to-br from-primary-50 to-primary-100/70 rounded-xl py-4 px-3 border border-primary-200/60 shadow-md">
-                      <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary-700 mb-1 sm:mb-2">50+</div>
-                      <div className="text-primary-600 text-xs sm:text-sm lg:text-base font-semibold">Investigaciones</div>
+                      <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary-700 mb-1 sm:mb-2">5+</div>
+                      <div className="text-primary-600 text-xs sm:text-sm lg:text-base font-semibold">Países</div>
                     </div>
                   </div>
 
