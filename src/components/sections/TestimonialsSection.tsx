@@ -104,149 +104,19 @@ const TestimonialsSection: React.FC = () => {
         <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 px-4">
           <div className="inline-flex items-center px-4 sm:px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white mb-6 sm:mb-8">
             <Quote className="w-4 sm:w-5 h-4 sm:h-5 mr-3" />
-            <span className="font-semibold text-sm sm:text-base">Testimonios & Organizaciones</span>
+            <span className="font-semibold text-sm sm:text-base">Organizaciones</span>
           </div>
           
-          <h2 className="title-section text-white mb-6 sm:mb-8 animate-slide-up">
-            Conoce quiénes hacen{' '}
-            <span className="text-accent-300 font-extrabold">
-              posible el Foro
-            </span>
-          </h2>
-          
-          <p className="text-lg sm:text-xl text-white/90 leading-relaxed font-medium">
-            Las organizaciones que impulsan el liderazgo juvenil y las historias de transformación 
-            de nuestros participantes que ahora lideran el cambio en sus países
-          </p>
-        </div>
-
-        {/* Testimonials Carousel */}
-        <div className="max-w-6xl mx-auto mb-16 sm:mb-20 px-4">
-          <div className="text-center mb-8 sm:mb-12">
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-6">
-              Historias de transformación
-            </h3>
-            <p className="text-white/90 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed font-medium">
-              Descubre cómo el foro ha impactado la vida de jóvenes líderes de todo el mundo
-            </p>
-          </div>
-
-          {/* Testimonial Card */}
-          <div className="relative max-w-4xl mx-auto">
-            <Card 
-              variant="elevated" 
-              size="lg" 
-              className="bg-white/95 backdrop-blur-sm border border-white/20 shadow-2xl overflow-hidden"
-            >
-              <div className="p-6 sm:p-8 lg:p-12">
-                <div className="flex flex-col lg:flex-row items-center lg:items-start gap-6 lg:gap-8">
-                  {/* Photo */}
-                  <div className="flex-shrink-0">
-                    <div className="relative">
-                      <img 
-                        src={currentTestimonial.image}
-                        alt={currentTestimonial.participant}
-                        className="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 object-cover rounded-2xl shadow-lg"
-                      />
-                      <div className="absolute -top-2 -right-2 w-8 h-8 sm:w-10 sm:h-10 bg-accent-500 rounded-full flex items-center justify-center shadow-lg">
-                        <Quote className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1 text-center lg:text-left">
-                    {/* Rating */}
-                    <div className="flex justify-center lg:justify-start items-center gap-1 mb-4">
-                      {renderStars(currentTestimonial.rating)}
-                    </div>
-
-                    {/* Quote */}
-                    <blockquote className="text-neutral-700 text-base sm:text-lg lg:text-xl leading-relaxed mb-6 font-medium italic">
-                      "{currentTestimonial.content}"
-                    </blockquote>
-
-                    {/* Author Info */}
-                    <div className="space-y-2">
-                      <h4 className="text-xl sm:text-2xl font-bold text-neutral-900">
-                        {currentTestimonial.participant}
-                      </h4>
-                      <p className="text-neutral-600 font-semibold text-sm sm:text-base">
-                        {currentTestimonial.position}
-                      </p>
-                      <div className="flex items-center justify-center lg:justify-start gap-2 text-neutral-500 text-sm">
-                        <MapPin className="w-4 h-4" />
-                        <span>{currentTestimonial.country}</span>
-                        <span>•</span>
-                        <span>Foro {currentTestimonial.year}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Card>
-
-            {/* Navigation */}
-            <div className="flex items-center justify-between mt-6 sm:mt-8">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={prevTestimonial}
-                className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
-              >
-                <ChevronLeft className="w-4 h-4 mr-2" />
-                Anterior
-              </Button>
-
-              {/* Dots */}
-              <div className="flex gap-2">
-                {enhancedTestimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentIndex(index)}
-                    className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
-                      index === currentIndex 
-                        ? 'bg-accent-400 scale-125' 
-                        : 'bg-white/40 hover:bg-white/60'
-                    }`}
-                  />
-                ))}
-              </div>
-
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={nextTestimonial}
-                className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
-              >
-                Siguiente
-                <ChevronRight className="w-4 h-4 ml-2" />
-              </Button>
-            </div>
-
-            {/* Auto-play toggle */}
-            <div className="text-center mt-4">
-              <button
-                onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-                className="text-white/70 hover:text-white text-sm transition-colors duration-300 font-medium"
-              >
-                {isAutoPlaying ? 'Pausar' : 'Reproducir'} automático
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Organizations Section */}
-        <div className="max-w-7xl mx-auto mb-12 sm:mb-16 px-4">
-          <div className="text-center mb-8 sm:mb-12">
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-6">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-6">
               Organizaciones que hacen posible el foro
             </h3>
             <p className="text-white/90 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed font-medium">
               Conoce a las agrupaciones comprometidas con el desarrollo del liderazgo político juvenil
             </p>
-          </div>
+        </div>
 
+        {/* Organizations Section */}
+        <div className="max-w-7xl mx-auto mb-12 sm:mb-16 px-4">
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
             {/* Instituto Prudencia - Primero */}
             <Card 
