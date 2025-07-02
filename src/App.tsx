@@ -292,7 +292,6 @@ function AppContent() {
                 <li><a href="#inicio" className="text-neutral-400 hover:text-white transition-colors">{t('footer.quicklinks.home')}</a></li>
                 <li><a href="#sobre" className="text-neutral-400 hover:text-white transition-colors">{t('footer.quicklinks.about')}</a></li>
                 <li><a href="#eventos" className="text-neutral-400 hover:text-white transition-colors">{t('footer.quicklinks.events')}</a></li>
-                <li><a href="#equipo" className="text-neutral-400 hover:text-white transition-colors">{t('footer.quicklinks.team')}</a></li>
                 <li><a href="#registro" className="text-neutral-400 hover:text-white transition-colors">{t('footer.quicklinks.register')}</a></li>
               </ul>
             </div>

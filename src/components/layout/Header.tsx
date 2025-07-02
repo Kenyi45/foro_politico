@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { NavigationItem } from '../../types/index';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -13,14 +13,13 @@ const Header: React.FC<HeaderProps> = ({ isScrolled = false }) => {
   const [activeSection, setActiveSection] = useState('inicio');
   const { t } = useLanguage();
 
-  const navigationItems: NavigationItem[] = [
+  const navigationItems: NavigationItem[] = useMemo(() => [
     { label: t('nav.inicio'), href: '#inicio' },
     { label: t('nav.caracteristicas'), href: '#caracteristicas' },
     { label: t('nav.sobre'), href: '#sobre' },
-    { label: t('nav.equipo'), href: '#equipo' },
     { label: t('nav.galeria'), href: '#galeria' },
     { label: t('nav.eventos'), href: '#eventos' }
-  ];
+  ], [t]);
 
   useEffect(() => {
     const handleScroll = () => {
