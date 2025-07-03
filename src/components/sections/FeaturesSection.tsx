@@ -93,12 +93,12 @@ const FeaturesSection: React.FC = () => {
             return (
               <div
                 key={feature.id}
-                className={`group card p-6 sm:p-8 text-center hover:shadow-2xl transition-all duration-500 animate-slide-up`}
+                className={`group card p-6 sm:p-8 text-center hover:shadow-2xl transition-all duration-500 animate-slide-up h-full flex flex-col`}
                 style={{ animationDelay: `${index * 150}ms` }}
               >
                 {/* Icon Container */}
                 <div className={`
-                  w-16 sm:w-20 h-16 sm:h-20 mx-auto mb-4 sm:mb-6 rounded-full flex items-center justify-center
+                  w-18 sm:w-22 h-18 sm:h-22 mx-auto mb-6 sm:mb-8 rounded-full flex items-center justify-center
                   ${colorClasses.bg} ${colorClasses.border} border-2
                   group-hover:scale-110 transition-transform duration-300
                 `}>
@@ -108,12 +108,14 @@ const FeaturesSection: React.FC = () => {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 group-hover:text-primary-600 transition-colors">
-                  {feature.title}
-                </h3>
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  {feature.description}
-                </p>
+                <div className="flex-1 flex flex-col">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-5 group-hover:text-primary-600 transition-colors leading-tight">
+                    {feature.title}
+                  </h3>
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed text-center flex-1">
+                    {feature.description}
+                  </p>
+                </div>
               </div>
             );
           })}

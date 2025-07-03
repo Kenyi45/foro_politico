@@ -99,10 +99,10 @@ const Header: React.FC<HeaderProps> = ({ isScrolled = false }) => {
               <h1 className={`font-primary font-bold text-lg leading-tight tracking-tight transition-colors duration-300 ${
                 scrolled ? 'text-neutral-900' : 'text-white drop-shadow-sm'
               }`}>
-                Foro de Jóvenes<br />
+                Foro Panamericano de<br />
                 <span className={`transition-colors duration-300 ${
                   scrolled ? 'text-accent-600' : 'text-accent-300'
-                }`}>Políticos</span>
+                }`}>Jóvenes Políticos</span>
               </h1>
             </div>
           </div>

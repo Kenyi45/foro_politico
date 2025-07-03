@@ -2,6 +2,38 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight, Users, Globe, Lightbulb } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
+// Hook para animación de contador
+const useCountUp = (end: number, duration: number = 2000, delay: number = 0) => {
+  const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!hasStarted) {
+        setHasStarted(true);
+        const increment = end / (duration / 16); // 60fps
+        let current = 0;
+        
+        const counter = setInterval(() => {
+          current += increment;
+          if (current >= end) {
+            setCount(end);
+            clearInterval(counter);
+          } else {
+            setCount(Math.floor(current));
+          }
+        }, 16);
+
+        return () => clearInterval(counter);
+      }
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [end, duration, delay, hasStarted]);
+
+  return count;
+};
+
 interface HeroSectionProps {
   onRegisterClick?: () => void;
   onLearnMoreClick?: () => void;
@@ -13,6 +45,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 }) => {
   const { t } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
+  
+  // Contadores animados con diferentes delays
+  const guestsCount = useCountUp(300, 2500, 1000);
+  const countriesCount = useCountUp(23, 2000, 1200);
+  const daysCount = useCountUp(3, 1500, 1400);
 
   // Imágenes del slider
   const backgroundImages = [
@@ -112,11 +149,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
 
           {/* Organizers Section */}
-          <div className="mb-6 sm:mb-8 animate-slide-up animation-delay-150">
-            <p className="text-white/80 text-sm sm:text-base mb-4 font-medium">
+          <div className="mb-8 sm:mb-10 animate-slide-up animation-delay-150">
+            <p className="text-white/80 text-sm sm:text-base mb-6 font-medium text-center">
               Un evento hecho posible por:
             </p>
-            <div className="flex items-center justify-center space-x-8 sm:space-x-12 md:space-x-16">
+            <div className="flex items-center justify-center space-x-8 sm:space-x-12 md:space-x-16 px-4">
               {/* Universidad Vida y Desarrollo Logo */}
               <div className="flex items-center justify-center">
                 <img 
@@ -127,7 +164,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               </div>
               
               {/* Separator */}
-              <div className="w-px h-8 sm:h-12 bg-white/30"></div>
+              <div className="w-px h-10 sm:h-14 bg-white/30"></div>
               
               {/* Interamericana Partners Logo */}
               <div className="flex items-center justify-center">
@@ -159,18 +196,24 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
 
           {/* Stats Preview */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-2xl mx-auto animate-fade-in animation-delay-500">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10 max-w-3xl mx-auto animate-fade-in animation-delay-500 px-4">
             <div className="text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1 sm:mb-2">250+</div>
-              <div className="text-xs sm:text-sm md:text-base font-medium text-white/80 uppercase tracking-wide">{t('hero.stats.guests')}</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-3 transition-all duration-300 leading-none">
+                {guestsCount}
+              </div>
+              <div className="text-xs sm:text-sm md:text-base font-medium text-white/80 uppercase tracking-wide leading-relaxed">{t('hero.stats.guests')}</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1 sm:mb-2">23</div>
-              <div className="text-xs sm:text-sm md:text-base font-medium text-white/80 uppercase tracking-wide">{t('hero.stats.countries')}</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-3 transition-all duration-300 leading-none">
+                {countriesCount}
+              </div>
+              <div className="text-xs sm:text-sm md:text-base font-medium text-white/80 uppercase tracking-wide leading-relaxed">{t('hero.stats.countries')}</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1 sm:mb-2">3</div>
-              <div className="text-xs sm:text-sm md:text-base font-medium text-white/80 uppercase tracking-wide">{t('hero.stats.days')}</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-3 transition-all duration-300 leading-none">
+                {daysCount}
+              </div>
+              <div className="text-xs sm:text-sm md:text-base font-medium text-white/80 uppercase tracking-wide leading-relaxed">{t('hero.stats.days')}</div>
             </div>
           </div>
         </div>

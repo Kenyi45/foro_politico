@@ -103,56 +103,56 @@ function AppContent() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-                <div>
-                  <h3 className="title-card text-neutral-900 mb-6">{t('about.mission.title')}</h3>
-                  <p className="text-institutional text-neutral-600 mb-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-16">
+                <div className="space-y-6">
+                  <h3 className="title-card text-neutral-900 mb-6 leading-tight">{t('about.mission.title')}</h3>
+                  <p className="text-institutional text-neutral-600 mb-8 leading-relaxed">
                     {t('about.mission.description')}
                   </p>
-                  <div className="space-y-4">
-                    <div className="flex items-start space-x-3">
-                      <div className="w-2 h-2 bg-accent-500 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-institutional text-neutral-600">{t('about.mission.point1')}</p>
+                  <div className="space-y-5">
+                    <div className="flex items-start space-x-4">
+                      <div className="w-2 h-2 bg-accent-500 rounded-full mt-2.5 flex-shrink-0"></div>
+                      <p className="text-institutional text-neutral-600 leading-relaxed">{t('about.mission.point1')}</p>
                     </div>
-                    <div className="flex items-start space-x-3">
-                      <div className="w-2 h-2 bg-accent-500 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-institutional text-neutral-600">{t('about.mission.point2')}</p>
+                    <div className="flex items-start space-x-4">
+                      <div className="w-2 h-2 bg-accent-500 rounded-full mt-2.5 flex-shrink-0"></div>
+                      <p className="text-institutional text-neutral-600 leading-relaxed">{t('about.mission.point2')}</p>
                     </div>
-                    <div className="flex items-start space-x-3">
-                      <div className="w-2 h-2 bg-accent-500 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-institutional text-neutral-600">{t('about.mission.point3')}</p>
+                    <div className="flex items-start space-x-4">
+                      <div className="w-2 h-2 bg-accent-500 rounded-full mt-2.5 flex-shrink-0"></div>
+                      <p className="text-institutional text-neutral-600 leading-relaxed">{t('about.mission.point3')}</p>
                     </div>
                   </div>
                 </div>
                 
-                <Card variant="elevated" className="p-8">
-                  <h4 className="title-card text-neutral-900 mb-4">{t('about.values.title')}</h4>
-                  <div className="space-y-4">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center">
-                        <span className="text-primary-600 font-bold">D</span>
+                <Card variant="elevated" className="p-8 h-fit">
+                  <h4 className="title-card text-neutral-900 mb-6 leading-tight">{t('about.values.title')}</h4>
+                  <div className="space-y-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <span className="text-primary-600 font-bold text-lg">D</span>
                       </div>
-                      <div>
-                        <h5 className="font-semibold text-neutral-900">{t('about.values.democracy')}</h5>
-                        <p className="text-sm text-neutral-600">{t('about.values.democracy.desc')}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-accent-100 rounded-lg flex items-center justify-center">
-                        <span className="text-accent-600 font-bold">I</span>
-                      </div>
-                      <div>
-                        <h5 className="font-semibold text-neutral-900">{t('about.values.inclusion')}</h5>
-                        <p className="text-sm text-neutral-600">{t('about.values.inclusion.desc')}</p>
+                      <div className="flex-1">
+                        <h5 className="font-semibold text-neutral-900 mb-2 leading-tight">{t('about.values.democracy')}</h5>
+                        <p className="text-sm text-neutral-600 leading-relaxed">{t('about.values.democracy.desc')}</p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-gold-100 rounded-lg flex items-center justify-center">
-                        <span className="text-gold-600 font-bold">T</span>
+                    <div className="flex items-start space-x-4">
+                      <div className="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <span className="text-accent-600 font-bold text-lg">I</span>
                       </div>
-                      <div>
-                        <h5 className="font-semibold text-neutral-900">{t('about.values.transparency')}</h5>
-                        <p className="text-sm text-neutral-600">{t('about.values.transparency.desc')}</p>
+                      <div className="flex-1">
+                        <h5 className="font-semibold text-neutral-900 mb-2 leading-tight">{t('about.values.inclusion')}</h5>
+                        <p className="text-sm text-neutral-600 leading-relaxed">{t('about.values.inclusion.desc')}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-4">
+                      <div className="w-12 h-12 bg-gold-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <span className="text-gold-600 font-bold text-lg">T</span>
+                      </div>
+                      <div className="flex-1">
+                        <h5 className="font-semibold text-neutral-900 mb-2 leading-tight">{t('about.values.transparency')}</h5>
+                        <p className="text-sm text-neutral-600 leading-relaxed">{t('about.values.transparency.desc')}</p>
                       </div>
                     </div>
                   </div>
@@ -190,45 +190,45 @@ function AppContent() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card variant="elevated" hover="lift">
-                <CardHeader>
-                  <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-4">
-                    <span className="text-primary-600 font-bold text-xl">🎤</span>
+              <Card variant="elevated" hover="lift" className="h-full">
+                <CardHeader className="text-center">
+                  <div className="w-16 h-16 bg-primary-100 rounded-xl flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-primary-600 font-bold text-2xl">🎤</span>
                   </div>
-                  <CardTitle>Conferencias Magistrales</CardTitle>
+                  <CardTitle className="leading-tight">Conferencias Magistrales</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <CardDescription>
+                <CardContent className="text-center">
+                  <CardDescription className="leading-relaxed">
                     Charlas inspiradoras con líderes mundiales, ex-presidentes y figuras 
                     destacadas de la política internacional.
                   </CardDescription>
                 </CardContent>
               </Card>
 
-              <Card variant="elevated" hover="lift">
-                <CardHeader>
-                  <div className="w-12 h-12 bg-accent-100 rounded-xl flex items-center justify-center mb-4">
-                    <span className="text-accent-600 font-bold text-xl">🛠️</span>
+              <Card variant="elevated" hover="lift" className="h-full">
+                <CardHeader className="text-center">
+                  <div className="w-16 h-16 bg-accent-100 rounded-xl flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-accent-600 font-bold text-2xl">🛠️</span>
                   </div>
-                  <CardTitle>Talleres Prácticos</CardTitle>
+                  <CardTitle className="leading-tight">Talleres Prácticos</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <CardDescription>
+                <CardContent className="text-center">
+                  <CardDescription className="leading-relaxed">
                     Sesiones interactivas de desarrollo de habilidades en liderazgo, 
                     comunicación política y gestión de campañas.
                   </CardDescription>
                 </CardContent>
               </Card>
 
-              <Card variant="elevated" hover="lift">
-                <CardHeader>
-                  <div className="w-12 h-12 bg-gold-100 rounded-xl flex items-center justify-center mb-4">
-                    <span className="text-gold-600 font-bold text-xl">🤝</span>
+              <Card variant="elevated" hover="lift" className="h-full">
+                <CardHeader className="text-center">
+                  <div className="w-16 h-16 bg-gold-100 rounded-xl flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-gold-600 font-bold text-2xl">🤝</span>
                   </div>
-                  <CardTitle>Networking</CardTitle>
+                  <CardTitle className="leading-tight">Networking</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <CardDescription>
+                <CardContent className="text-center">
+                  <CardDescription className="leading-relaxed">
                     Oportunidades exclusivas de conexión con jóvenes líderes, mentores 
                     y organizaciones internacionales.
                   </CardDescription>
@@ -248,14 +248,14 @@ function AppContent() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             {/* Logo and Description */}
             <div className="md:col-span-2">
-              <div className="flex items-center mb-6">
+              <div className="flex items-center mb-8">
                 <img 
                   src="/Logo_FORO.png" 
                   alt="Foro de Jóvenes Políticos" 
                   className="h-20 sm:h-32 md:h-44 lg:h-36 xl:h-52 2xl:h-50 w-auto object-contain"
                 />
               </div>
-              <p className="text-institutional text-neutral-400 mb-6 max-w-md">
+              <p className="text-institutional text-neutral-400 mb-8 max-w-md leading-relaxed">
                 {t('footer.description')}
               </p>
               <div className="flex space-x-4">
@@ -282,34 +282,34 @@ function AppContent() {
 
             {/* Quick Links */}
             <div>
-              <h4 className="text-lg font-semibold mb-4">{t('footer.quicklinks.title')}</h4>
-              <ul className="space-y-3">
-                <li><a href="#inicio" className="text-neutral-400 hover:text-white transition-colors">{t('footer.quicklinks.home')}</a></li>
-                <li><a href="#sobre" className="text-neutral-400 hover:text-white transition-colors">{t('footer.quicklinks.about')}</a></li>
-                <li><a href="#organizacion" className="text-neutral-400 hover:text-white transition-colors">{t('footer.quicklinks.testimonials')}</a></li>
-                <li><a href="#eventos" className="text-neutral-400 hover:text-white transition-colors">{t('footer.quicklinks.events')}</a></li>
-                <li><a href="#registro" className="text-neutral-400 hover:text-white transition-colors">{t('footer.quicklinks.register')}</a></li>
+              <h4 className="text-lg font-semibold mb-6 leading-tight">{t('footer.quicklinks.title')}</h4>
+              <ul className="space-y-4">
+                <li><a href="#inicio" className="text-neutral-400 hover:text-white transition-colors leading-relaxed">{t('footer.quicklinks.home')}</a></li>
+                <li><a href="#sobre" className="text-neutral-400 hover:text-white transition-colors leading-relaxed">{t('footer.quicklinks.about')}</a></li>
+                <li><a href="#organizacion" className="text-neutral-400 hover:text-white transition-colors leading-relaxed">{t('footer.quicklinks.testimonials')}</a></li>
+                <li><a href="#eventos" className="text-neutral-400 hover:text-white transition-colors leading-relaxed">{t('footer.quicklinks.events')}</a></li>
+                <li><a href="#registro" className="text-neutral-400 hover:text-white transition-colors leading-relaxed">{t('footer.quicklinks.register')}</a></li>
               </ul>
             </div>
 
             {/* Contact Info */}
             <div>
-              <h4 className="text-lg font-semibold mb-4">{t('footer.contact.title')}</h4>
-              <ul className="space-y-3 text-neutral-400">
-                <li>📧 foropanamericano.jp@gmail.com</li>
-                <li>📱 +54 9 11 2481-9302</li>
+              <h4 className="text-lg font-semibold mb-6 leading-tight">{t('footer.contact.title')}</h4>
+              <ul className="space-y-4 text-neutral-400">
+                <li className="leading-relaxed">📧 foropanamericano.jp@gmail.com</li>
+                <li className="leading-relaxed">📱 +54 9 11 2481-9302</li>
               </ul>
             </div>
           </div>
 
           <div className="border-t border-neutral-800 pt-8 flex flex-col md:flex-row items-center justify-between">
-            <p className="text-neutral-500 text-sm">
+            <p className="text-neutral-500 text-sm leading-relaxed text-center md:text-left">
               {t('footer.copyright')}
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <button className="text-neutral-500 hover:text-white text-sm transition-colors">{t('footer.privacy')}</button>
-              <button className="text-neutral-500 hover:text-white text-sm transition-colors">{t('footer.terms')}</button>
-              <button className="text-neutral-500 hover:text-white text-sm transition-colors">{t('footer.cookies')}</button>
+              <button className="text-neutral-500 hover:text-white text-sm transition-colors leading-relaxed">{t('footer.privacy')}</button>
+              <button className="text-neutral-500 hover:text-white text-sm transition-colors leading-relaxed">{t('footer.terms')}</button>
+              <button className="text-neutral-500 hover:text-white text-sm transition-colors leading-relaxed">{t('footer.cookies')}</button>
             </div>
           </div>
         </div>
