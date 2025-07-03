@@ -50,12 +50,12 @@ const translations: Record<string, string> = {
   'about.mission.point2': 'Combatir la influencia del socialismo y la cultura woke.',
   'about.mission.point3': 'Fortalecer el liderazgo juvenil conservador en América.',
   'about.values.title': 'Nuestros Valores',
-  'about.values.democracy': 'Democracia',
-  'about.values.democracy.desc': 'Creemos en la participación democrática',
-  'about.values.inclusion': 'Inclusión',
-  'about.values.inclusion.desc': 'Valoramos la diversidad de perspectivas',
-  'about.values.transparency': 'Transparencia',
-  'about.values.transparency.desc': 'Promovemos la apertura y honestidad',
+  'about.values.democracy': 'Republicanismo',
+  'about.values.democracy.desc': 'Sin división de poderes, las libertades corren peligro.',
+  'about.values.inclusion': 'Derechos Humanos',
+  'about.values.inclusion.desc': 'Defendemos sin concesiones el valor sagrado de la  dignidad humana.',
+  'about.values.transparency': 'Libre Mercado',
+  'about.values.transparency.desc': 'Contra todas las formas de estatismo.',
 
   // Features Section
   'features.badge': 'Nuestras Fortalezas',

@@ -66,10 +66,11 @@ const OrganizationsSection: React.FC = () => {
                   </h4>
                   
                   <p className="text-neutral-700 text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8 max-w-2xl mx-auto font-medium">
-                    Think tank especializado en análisis político y desarrollo de políticas públicas 
-                    para América Latina. Se enfoca en investigación aplicada, formación de líderes 
-                    y promoción del diálogo democrático entre diferentes sectores de la sociedad civil 
-                    y política regional.
+                  Think tank fundador y principal organizador del Foro. Está especializado en la formación 
+                  de dirigentes, en la articulación internacional, y en el desarrollo de políticas públicas 
+                  con perspectiva occidental y conservadora. Se enfoca en la organización de eventos y programas 
+                  que permitan combatir al socialismo y al progresismo, a la vez que busca incidir en los ambientes 
+                  de toma de decisión para que América recupere su grandeza.
                   </p>
                 </div>
               </div>
@@ -104,10 +105,10 @@ const OrganizationsSection: React.FC = () => {
                   </h4>
                   
                   <p className="text-neutral-700 text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8 max-w-2xl mx-auto font-medium">
-                    Organización dedicada a empoderar a jóvenes líderes políticos de América Latina, 
-                    promoviendo espacios de diálogo, formación y networking para construir un futuro 
-                    más democrático e inclusivo. Fundada con la visión de ser la voz de las nuevas 
-                    generaciones en la política regional.
+                  Una Voz Diferente (UVD) es una organización juvenil peruana sin fines de lucro, registrada ante APCI, especializada en la 
+                  formación de dirigentes y desarrollo de políticas públicas con perspectiva cristiana y conservadora. Se enfoca en organizar 
+                  eventos y programas para promover el liderazgo responsable e incidir en la toma de decisiones, defendiendo los valores de 
+                  Vida, Familia, Libertad y Verdad.
                   </p>
                 </div>
               </div>

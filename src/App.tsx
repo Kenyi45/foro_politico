@@ -130,7 +130,7 @@ function AppContent() {
                   <div className="space-y-6">
                     <div className="flex items-start space-x-4">
                       <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <span className="text-primary-600 font-bold text-lg">D</span>
+                        <span className="text-primary-600 font-bold text-lg">R</span>
                       </div>
                       <div className="flex-1">
                         <h5 className="font-semibold text-neutral-900 mb-2 leading-tight">{t('about.values.democracy')}</h5>
@@ -139,7 +139,7 @@ function AppContent() {
                     </div>
                     <div className="flex items-start space-x-4">
                       <div className="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <span className="text-accent-600 font-bold text-lg">I</span>
+                        <span className="text-accent-600 font-bold text-lg">D</span>
                       </div>
                       <div className="flex-1">
                         <h5 className="font-semibold text-neutral-900 mb-2 leading-tight">{t('about.values.inclusion')}</h5>
@@ -148,7 +148,7 @@ function AppContent() {
                     </div>
                     <div className="flex items-start space-x-4">
                       <div className="w-12 h-12 bg-gold-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <span className="text-gold-600 font-bold text-lg">T</span>
+                        <span className="text-gold-600 font-bold text-lg">L</span>
                       </div>
                       <div className="flex-1">
                         <h5 className="font-semibold text-neutral-900 mb-2 leading-tight">{t('about.values.transparency')}</h5>
@@ -245,7 +245,7 @@ function AppContent() {
       {/* Footer - Enhanced */}
       <footer className="bg-neutral-900 text-white section-padding">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-12">
             {/* Logo and Description */}
             <div className="md:col-span-2">
               <div className="flex items-center mb-8">
@@ -293,7 +293,7 @@ function AppContent() {
             </div>
 
             {/* Contact Info */}
-            <div>
+            <div className="md:col-span-2">
               <h4 className="text-lg font-semibold mb-6 leading-tight">{t('footer.contact.title')}</h4>
               <ul className="space-y-4 text-neutral-400">
                 <li className="leading-relaxed">📧 foropanamericano.jp@gmail.com</li>
