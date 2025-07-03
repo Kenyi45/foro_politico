@@ -96,14 +96,26 @@ const Header: React.FC<HeaderProps> = ({ isScrolled = false }) => {
                 }}
               />
             </div>
-            <div className="hidden sm:block">
-              <h1 className={`font-primary font-bold text-lg leading-tight tracking-tight transition-colors duration-300 ${
+            <div className={`transition-all duration-300 ${
+              scrolled 
+                ? 'opacity-100 scale-100' 
+                : 'opacity-0 scale-75 sm:opacity-100 sm:scale-100'
+            }`}>
+              <h1 className={`font-primary font-bold text-sm sm:text-lg leading-tight tracking-tight transition-colors duration-300 ${
                 scrolled ? 'text-neutral-900' : 'text-white drop-shadow-sm'
               }`}>
-                Foro Panamericano de<br />
+                <span className="hidden xs:inline">Foro Panamericano de</span>
+                <span className="xs:hidden">Foro Panamericano de</span>
+                <br className="hidden xs:block" />
                 <span className={`transition-colors duration-300 ${
                   scrolled ? 'text-accent-600' : 'text-accent-300'
-                }`}>Jóvenes Políticos</span>
+                }`}>
+                  <span className="hidden xs:inline">Jóvenes Políticos</span>
+                  <span className="xs:hidden">
+                    <br />
+                    Jóvenes Políticos
+                  </span>
+                </span>
               </h1>
             </div>
           </div>
