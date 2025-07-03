@@ -43,7 +43,7 @@ const translations: Record<string, string> = {
   'about.badge': 'Nuestra Historia',
   'about.title': 'Sobre el',
   'about.title.highlight': 'III Foro Panamericano',
-  'about.description': 'El Foro Panamericano de Jóvenes Políticos es una plataforma continental dedicada a la defensa de la libertad frente al socialismo y la cultura woke. Reúne a líderes emergentes de América comprometidos con los valores democráticos tradicionales y la preservación de las libertades fundamentales. En su tercera edición, se realizará en Lima, Perú, esperando entre 200 a 300 participantes de todo el continente.',
+  'about.description': 'El Foro Panamericano de Jóvenes Políticos es una plataforma continental dedicada a la defensa de la libertad frente al socialismo y la cultura woke. Reúne a líderes emergentes de América comprometidos con los valores democráticos tradicionales y la preservación de las libertades fundamentales. En su tercera edición, se realizará en Lima, Perú, esperando 300 jovenes politicos de todo el continente.',
   'about.mission.title': 'Misión: Defendiendo la Libertad',
   'about.mission.description': 'Formar una nueva generación de líderes políticos panamericanos comprometidos con la defensa de la libertad frente al socialismo y la cultura woke, fortaleciendo los valores democráticos tradicionales en América.',
   'about.mission.point1': 'Defender la libertad y los valores democráticos tradicionales',

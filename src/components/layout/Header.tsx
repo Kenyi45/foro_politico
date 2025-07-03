@@ -75,7 +75,11 @@ const Header: React.FC<HeaderProps> = ({ isScrolled = false }) => {
         <div className="flex items-center justify-between py-4 lg:py-6">
           {/* Logo mejorado */}
           <div className="flex items-center space-x-4">
-            <div className="relative w-14 h-14">
+            <div className={`relative w-14 h-14 transition-all duration-300 ${
+              scrolled 
+                ? 'opacity-100 scale-100' 
+                : 'opacity-0 scale-75 sm:opacity-100 sm:scale-100'
+            }`}>
               <img 
                 src="/Logo.png" 
                 alt="Foro de Jóvenes Políticos" 
