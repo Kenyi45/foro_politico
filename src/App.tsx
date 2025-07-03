@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForumStore } from './stores/useForumStore';
 import {
   mockForumEvent,
@@ -25,6 +25,9 @@ import Card, { CardHeader, CardTitle, CardContent, CardDescription } from './com
 // Language Context
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 
+// Icons
+import { Play, X } from 'lucide-react';
+
 function AppContent() {
   const {
     setNextEvent,
@@ -36,6 +39,7 @@ function AppContent() {
   } = useForumStore();
 
   const { t } = useLanguage();
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
   // Initialize data on component mount
   useEffect(() => {
@@ -63,6 +67,25 @@ function AppContent() {
     console.log('Learn more button clicked');
     // Scroll to about section
   };
+
+  // Close video modal with Escape key
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsVideoModalOpen(false);
+      }
+    };
+
+    if (isVideoModalOpen) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isVideoModalOpen]);
 
   return (
     <div className="min-h-screen bg-white custom-scrollbar">
@@ -162,6 +185,61 @@ function AppContent() {
           </div>
         </section>
 
+        {/* Video Presentation Section */}
+        <section id="video" className="section-padding bg-gradient-to-br from-primary-50 to-accent-50">
+          <div className="container-custom">
+            <div className="max-w-4xl mx-auto text-center">
+              <div className="mb-12">
+                <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary-100 text-primary-700 mb-6">
+                  <span className="w-2 h-2 bg-primary-600 rounded-full mr-2"></span>
+                  <span className="badge-text">Lanzamiento Oficial</span>
+                </div>
+                
+                <h2 className="title-section text-neutral-900 mb-6 animate-slide-up">
+                  Conoce el{' '}
+                  <span className="text-primary-700 font-extrabold">Lanzamiento</span>
+                </h2>
+                
+                <p className="subtitle-section text-neutral-600 max-w-3xl mx-auto mb-8">
+                  Descubre la presentación oficial del III Foro Panamericano de Jóvenes Políticos 
+                  y conoce todos los detalles de este evento histórico.
+                </p>
+              </div>
+
+              {/* Video Thumbnail */}
+              <div className="relative group cursor-pointer" onClick={() => setIsVideoModalOpen(true)}>
+                <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                  {/* Thumbnail Image - Replace with your actual thumbnail */}
+                  <div className="w-full h-64 sm:h-80 md:h-96 bg-gradient-to-br from-primary-600 to-accent-600 flex items-center justify-center">
+                    <div className="text-center text-white">
+                      <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
+                        <Play className="w-8 h-8 ml-1" />
+                      </div>
+                      <h3 className="text-xl font-semibold mb-2">Video de Lanzamiento</h3>
+                      <p className="text-white/80">Haz clic para reproducir</p>
+                    </div>
+                  </div>
+                  
+                  {/* Play Button Overlay */}
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/90 group-hover:bg-white rounded-full flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-lg">
+                      <Play className="w-6 h-6 sm:w-8 sm:h-8 text-primary-600 ml-1" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Video Description */}
+              <div className="mt-8 text-center">
+                <p className="text-neutral-600 leading-relaxed max-w-2xl mx-auto">
+                  En este video podrás conocer los objetivos, participantes y la visión 
+                  del III Foro Panamericano de Jóvenes Políticos que se realizará en 2025.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Organizations Section */}
         <OrganizationsSection />
 
@@ -241,6 +319,40 @@ function AppContent() {
         {/* Registration Section - Combined with Countdown */}
         <RegistrationSection />
       </main>
+
+      {/* Video Modal */}
+      {isVideoModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+          <div className="relative w-full max-w-4xl mx-auto">
+            {/* Close Button */}
+            <button
+              onClick={() => setIsVideoModalOpen(false)}
+              className="absolute -top-12 right-0 z-10 w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-colors backdrop-blur-sm"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            
+            {/* Video Container */}
+            <div className="relative w-full aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl">
+              {/* Replace this iframe with your actual video URL */}
+              <iframe
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+                title="Video de Lanzamiento - III Foro Panamericano de Jóvenes Políticos"
+                className="w-full h-full"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+            
+            {/* Video Info */}
+            <div className="mt-4 text-center text-white">
+              <h3 className="text-xl font-semibold mb-2">III Foro Panamericano de Jóvenes Políticos</h3>
+              <p className="text-white/80">Video de lanzamiento oficial</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Footer - Enhanced */}
       <footer className="bg-neutral-900 text-white section-padding">

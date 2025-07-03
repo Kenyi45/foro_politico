@@ -110,11 +110,11 @@ const FeaturesSection: React.FC = () => {
                 {/* Content */}
                 <div className="flex-1 flex flex-col">
                   <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-5 group-hover:text-primary-600 transition-colors leading-tight">
-                    {feature.title}
-                  </h3>
+                  {feature.title}
+                </h3>
                   <p className="text-sm sm:text-base text-gray-600 leading-relaxed text-center flex-1">
-                    {feature.description}
-                  </p>
+                  {feature.description}
+                </p>
                 </div>
               </div>
             );
