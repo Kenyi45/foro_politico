@@ -63,13 +63,13 @@ const translations: Record<string, string> = {
   'features.title.highlight': 'únicos',
   'features.description': 'Nuestro foro se distingue por crear un ambiente donde la juventud puede desarrollar todo su potencial político y social ocupándose de los temas más urgentes del siglo XXI promoviendo una agenda occidental.',
   'features.leadership.title': 'Liderazgo Joven',
-  'features.leadership.desc': 'Desarrollamos las habilidades de liderazgo necesarias para los desafíos del siglo XXI',
+  'features.leadership.desc': 'Desarrollamos las habilidades de liderazgo necesarias para los desafíos del siglo XXI.',
   'features.dialogue.title': 'Diálogo Democrático',
-  'features.dialogue.desc': 'Fomentamos el debate constructivo y el intercambio de ideas entre diferentes perspectivas',
+  'features.dialogue.desc': 'Fomentamos el debate constructivo y el intercambio de ideas entre diferentes perspectivas.',
   'features.networks.title': 'Redes Internacionales',
   'features.networks.desc': 'Conectamos jóvenes líderes de América y Europa para tener impacto regional y global frentes  a los desafíos del wokismo.',
   'features.impact.title': 'Impacto Local',
-  'features.impact.desc': 'Transformamos las ideas en acciones concretas que benefician a nuestras comunidades',
+  'features.impact.desc': 'Transformamos las ideas en acciones concretas que benefician a nuestras comunidades.',
   'features.cta': '¿Listo para formar parte de esta experiencia?',
 
   // Team Section
