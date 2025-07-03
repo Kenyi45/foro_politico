@@ -71,31 +71,6 @@ const OrganizationsSection: React.FC = () => {
                     y promoción del diálogo democrático entre diferentes sectores de la sociedad civil 
                     y política regional.
                   </p>
-
-                  {/* Stats */}
-                  <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
-                    <div className="text-center bg-gradient-to-br from-primary-50 to-primary-100/70 rounded-xl py-4 px-3 border border-primary-200/60 shadow-md">
-                      <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary-700 mb-1 sm:mb-2">10+</div>
-                      <div className="text-primary-600 text-xs sm:text-sm lg:text-base font-semibold">Años de trayectoria</div>
-                    </div>
-                    <div className="text-center bg-gradient-to-br from-primary-50 to-primary-100/70 rounded-xl py-4 px-3 border border-primary-200/60 shadow-md">
-                      <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary-700 mb-1 sm:mb-2">5+</div>
-                      <div className="text-primary-600 text-xs sm:text-sm lg:text-base font-semibold">Países</div>
-                    </div>
-                  </div>
-
-                  {/* Mission */}
-                  <div className="text-left bg-gradient-to-br from-primary-50/80 to-primary-100/60 rounded-xl p-4 sm:p-6 lg:p-8 border border-primary-200/50 shadow-md">
-                    <h5 className="font-bold text-primary-800 mb-3 sm:mb-4 text-sm sm:text-base lg:text-lg flex items-center">
-                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-primary-600 rounded-full mr-3 shadow-sm"></div>
-                      Visión
-                    </h5>
-                    <p className="text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed font-medium">
-                      Ser el referente en análisis político y desarrollo institucional en América Latina, 
-                      contribuyendo a la consolidación democrática a través de la investigación rigurosa 
-                      y la formación de nuevos líderes políticos.
-                    </p>
-                  </div>
                 </div>
               </div>
             </Card>
@@ -134,31 +109,6 @@ const OrganizationsSection: React.FC = () => {
                     más democrático e inclusivo. Fundada con la visión de ser la voz de las nuevas 
                     generaciones en la política regional.
                   </p>
-
-                  {/* Stats */}
-                  <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
-                    <div className="text-center bg-gradient-to-br from-accent-50 to-accent-100/70 rounded-xl py-4 px-3 border border-accent-200/60 shadow-md">
-                      <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-accent-700 mb-1 sm:mb-2">5+</div>
-                      <div className="text-accent-600 text-xs sm:text-sm lg:text-base font-semibold">Años de experiencia</div>
-                    </div>
-                    <div className="text-center bg-gradient-to-br from-accent-50 to-accent-100/70 rounded-xl py-4 px-3 border border-accent-200/60 shadow-md">
-                      <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-accent-700 mb-1 sm:mb-2">15+</div>
-                      <div className="text-accent-600 text-xs sm:text-sm lg:text-base font-semibold">Países alcanzados</div>
-                    </div>
-                  </div>
-
-                  {/* Mission */}
-                  <div className="text-left bg-gradient-to-br from-accent-50/80 to-accent-100/60 rounded-xl p-4 sm:p-6 lg:p-8 border border-accent-200/50 shadow-md">
-                    <h5 className="font-bold text-accent-800 mb-3 sm:mb-4 text-sm sm:text-base lg:text-lg flex items-center">
-                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-accent-600 rounded-full mr-3 shadow-sm"></div>
-                      Misión
-                    </h5>
-                    <p className="text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed font-medium">
-                      Fortalecer el liderazgo político juvenil en América Latina a través de programas 
-                      de formación, intercambio cultural y construcción de redes colaborativas que 
-                      impulsen el cambio social positivo.
-                    </p>
-                  </div>
                 </div>
               </div>
             </Card>
