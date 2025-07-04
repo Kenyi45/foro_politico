@@ -14,7 +14,8 @@ import {
   Instagram,
   Heart,
   MessageCircle,
-  ExternalLink
+  ExternalLink,
+  Image
 } from 'lucide-react';
 import { galleryPhotos } from '../../data/mockData';
 import { GalleryPhoto } from '../../types/index';
@@ -27,7 +28,7 @@ interface GallerySectionProps {
 }
 
 const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
-  const [activeTab, setActiveTab] = useState<'fotos' | 'instagram'>('instagram');
+  const [activeTab, setActiveTab] = useState<'fotos' | 'instagram' | 'imagenes'>('instagram');
   const [selectedEvent, setSelectedEvent] = useState<string>('all');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -36,6 +37,17 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentPhotoSlide, setCurrentPhotoSlide] = useState(0);
   const { t } = useLanguage();
+
+  // Datos de las imágenes locales
+  const localImages = Array.from({ length: 23 }, (_, i) => ({
+    id: `image${i + 1}`,
+    src: `/fotos/image${i + 1}.webp`,
+    title: `Imagen ${i + 1}`,
+    description: `Descripción de la imagen ${i + 1}`,
+    category: 'evento',
+    date: new Date(2024, 11, 15), // Fecha del evento
+    type: 'image' as const
+  }));
 
   // Componente mejorado para embeds de Instagram
   const InstagramEmbed: React.FC<{ url: string; maxWidth?: number; height?: number }> = ({ 
@@ -241,11 +253,19 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
   };
 
   const nextImage = () => {
+    if (activeTab === 'imagenes') {
+      setCurrentImageIndex((prev) => (prev + 1) % localImages.length);
+    } else {
     setCurrentImageIndex((prev) => (prev + 1) % filteredPhotos.length);
+    }
   };
 
   const prevImage = () => {
+    if (activeTab === 'imagenes') {
+      setCurrentImageIndex((prev) => (prev - 1 + localImages.length) % localImages.length);
+    } else {
     setCurrentImageIndex((prev) => (prev - 1 + filteredPhotos.length) % filteredPhotos.length);
+    }
   };
 
   const formatDate = (date: Date) => {
@@ -299,7 +319,6 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
           {/* Tab Navigation */}
           <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-1.5 sm:p-2">
             <div className="flex space-x-1 sm:space-x-2 max-w-md mx-auto">
-              {/* Tab "fotos" ocultado temporalmente */}
               <button
                 onClick={() => setActiveTab('instagram')}
                 className={`flex-1 flex items-center justify-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl font-semibold transition-all duration-300 text-sm sm:text-base ${
@@ -311,11 +330,80 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
                 <Instagram className="w-4 sm:w-5 h-4 sm:h-5" />
                 <span>Instagram</span>
               </button>
+              <button
+                onClick={() => setActiveTab('imagenes')}
+                className={`flex-1 flex items-center justify-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl font-semibold transition-all duration-300 text-sm sm:text-base ${
+                  activeTab === 'imagenes'
+                    ? 'bg-gradient-to-r from-primary-600 to-primary-800 text-white shadow-md transform scale-105'
+                    : 'text-gray-600 hover:text-gray-800 hover:bg-white/50'
+                }`}
+              >
+                <Image className="w-4 sm:w-5 h-4 sm:h-5" />
+                <span>Imágenes</span>
+              </button>
               </div>
             </div>
 
           {/* Tab Content */}
           <div className="p-4 sm:p-8">
+            {activeTab === 'imagenes' && (
+              <div className="animate-fade-in">
+                {/* Images Header */}
+                <div className="text-center mb-8">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-600 to-primary-800 rounded-3xl mb-4 shadow-2xl">
+                    <Image className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-gray-900 mb-3">Galería de Imágenes</h3>
+                  <p className="text-lg text-gray-600 mb-6">Explora los mejores momentos del evento</p>
+                  <div className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 rounded-full border border-primary-200">
+                    <span className="w-2 h-2 bg-primary-600 rounded-full animate-pulse"></span>
+                    <span className="text-primary-800 font-medium text-sm">23 imágenes disponibles</span>
+                  </div>
+                </div>
+
+                {/* Images Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 max-w-6xl mx-auto">
+                  {localImages.map((image, index) => (
+                    <div
+                      key={image.id}
+                      className="image-card group relative cursor-pointer overflow-hidden rounded-lg sm:rounded-xl aspect-square shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-primary-300"
+                      onClick={() => {
+                        setCurrentImageIndex(index);
+                        setIsLightboxOpen(true);
+                      }}
+                    >
+                      {/* Image */}
+                      <img
+                        src={image.src}
+                        alt={image.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                      
+                      {/* Overlay */}
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                        <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100">
+                          <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20">
+                            <ZoomIn className="w-5 h-5 text-white" />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Image Info */}
+                      <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 bg-gradient-to-t from-black/60 to-transparent">
+                        <div className="text-white">
+                          <h4 className="font-medium text-sm mb-1 line-clamp-1">{image.title}</h4>
+                          <span className="inline-block px-2 py-1 rounded-md text-xs bg-primary-600/80 text-white">
+                            Evento
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {activeTab === 'fotos' && (
               <div className="animate-fade-in">
                 {/* Photo Gallery Header */}
@@ -583,28 +671,13 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
                     ))}
                   </div>
                 </div>
-
-                {/* Call to Action */}
-                {/* <div className="text-center mt-12 pt-8 border-t border-gray-200">
-                  <div className="bg-gradient-to-br from-accent-50 to-accent-100 rounded-2xl p-8 max-w-2xl mx-auto">
-                    <h4 className="text-xl font-bold text-gray-900 mb-3">¿Te perdiste algo?</h4>
-                    <p className="text-gray-600 mb-6">Síguenos en Instagram para no perderte ningún momento</p>
-                    <button
-                      onClick={() => window.open('https://www.instagram.com/foro_politicos/?hl=es-la', '_blank')}
-                      className="inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-accent-600 to-accent-800 text-white rounded-2xl hover:from-accent-700 hover:to-accent-900 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105"
-                    >
-                      <Instagram className="w-6 h-6" />
-                      <span className="text-lg font-bold">Seguir @foro_politicos</span>
-                    </button>
-                  </div>
-                </div> */}
               </div>
             )}
           </div>
         </div>
 
         {/* Lightbox */}
-        {isLightboxOpen && filteredPhotos.length > 0 && (
+        {isLightboxOpen && (
           <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
             <div className="relative max-w-4xl max-h-full">
               {/* Close Button */}
@@ -615,8 +688,8 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
                 <X className="w-6 h-6" />
               </button>
 
-              {/* Instagram Post Button */}
-              {filteredPhotos[currentImageIndex]?.isInstagramPost && (
+              {/* Instagram Post Button - Only show for Instagram posts */}
+              {activeTab !== 'imagenes' && filteredPhotos[currentImageIndex]?.isInstagramPost && (
                 <button
                   onClick={() => handleInstagramClick(filteredPhotos[currentImageIndex])}
                   className="absolute top-4 right-16 w-10 h-10 bg-gradient-to-br from-accent-600 to-accent-800 rounded-full flex items-center justify-center text-white hover:from-accent-700 hover:to-accent-900 transition-all z-10"
@@ -625,8 +698,9 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
                 </button>
               )}
 
-              {/* Navigation Arrows - Only show if more than one photo and current is not Instagram */}
-              {!filteredPhotos[currentImageIndex]?.isInstagramPost && (
+              {/* Navigation Arrows */}
+              {((activeTab === 'imagenes' && localImages.length > 1) || 
+                (activeTab !== 'imagenes' && filteredPhotos.length > 1 && !filteredPhotos[currentImageIndex]?.isInstagramPost)) && (
                 <>
               <button
                 onClick={prevImage}
@@ -644,7 +718,27 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
                 </>
               )}
 
-              {/* Image */}
+              {/* Content */}
+              {activeTab === 'imagenes' ? (
+                /* Local Images Display */
+                <div className="bg-white rounded-lg max-h-[80vh] max-w-[80vw] overflow-hidden">
+                  <img
+                    src={localImages[currentImageIndex]?.src}
+                    alt={localImages[currentImageIndex]?.title}
+                    className="w-full h-full object-contain"
+                  />
+                  
+                  {/* Image Info Overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                    <div className="text-white">
+                      <h3 className="text-xl font-bold mb-2">{localImages[currentImageIndex]?.title}</h3>
+                      <p className="text-base opacity-90 mb-2">{formatDate(localImages[currentImageIndex]?.date)}</p>
+                      <p className="text-sm opacity-75">{localImages[currentImageIndex]?.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                /* Instagram/Filtered Photos Display */
               <div className={`${
                 filteredPhotos[currentImageIndex]?.isInstagramPost 
                   ? 'bg-gradient-to-br from-accent-300 via-accent-400 to-gold-300' 
@@ -691,10 +785,11 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
                 </div>
                 )}
               </div>
+              )}
 
               {/* Image Counter */}
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 text-white text-sm">
-                {currentImageIndex + 1} / {filteredPhotos.length}
+                {currentImageIndex + 1} / {activeTab === 'imagenes' ? localImages.length : filteredPhotos.length}
               </div>
             </div>
           </div>

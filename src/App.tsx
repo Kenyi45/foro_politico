@@ -38,8 +38,23 @@ function AppContent() {
     setThematicAxes
   } = useForumStore();
 
-  const { t } = useLanguage();
+  const { t, currentLanguage } = useLanguage();
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+
+  // Get video source based on current language
+  const getVideoSource = () => {
+    switch (currentLanguage) {
+      case 'en':
+        return '/videos/video_ingles.webm';
+      case 'pt':
+        return '/videos/video_portugues.webm';
+      case 'es':
+      default:
+        return '/Video.webm';
+    }
+  };
+
+  const videoSource = getVideoSource();
 
   // Initialize data on component mount
   useEffect(() => {
@@ -211,13 +226,13 @@ function AppContent() {
                   {/* Video Preview - Vertical Format */}
                   <div className="w-full max-w-md mx-auto aspect-[9/16] bg-gradient-to-br from-primary-600 to-accent-600 relative">
                     <video
-                      src="/Video.webm"
+                      src={videoSource}
                       className="w-full h-full object-cover"
                       muted
                       loop
                       playsInline
                     >
-                      <source src="/Video.webm" type="video/webm" />
+                      <source src={videoSource} type="video/webm" />
                     </video>
                     
                     {/* Play Button Overlay */}
@@ -345,14 +360,14 @@ function AppContent() {
             <div className="relative w-full aspect-[9/16] bg-black rounded-2xl overflow-hidden shadow-2xl">
               {/* Local Video */}
               <video
-                src="/Video.webm"
+                src={videoSource}
                 title={`${t('video.launch.thumbnail.title')} - ${t('video.title')}`}
                 className="w-full h-full object-cover"
                 controls
                 autoPlay
                 playsInline
               >
-                <source src="/Video.webm" type="video/webm" />
+                <source src={videoSource} type="video/webm" />
                 {t('video.subtitle')}
               </video>
             </div>
