@@ -3,21 +3,13 @@ import { Calendar, CreditCard, CheckCircle, X, User, Mail, Phone, MapPin as MapP
 import { useCountdown } from '../../hooks/useCountdown';
 import { mockForumEvent } from '../../data/mockData';
 import { useLanguage } from '../../contexts/LanguageContext';
-import PaymentButton from '../payment/PaymentButton';
 
 const RegistrationSection: React.FC = () => {
-  const { t, currentLanguage } = useLanguage();
-  const [paymentCompleted, setPaymentCompleted] = useState(false);
-  const [showPayment, setShowPayment] = useState(false);
+  const { t } = useLanguage();
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   const [showPaymentNotification, setShowPaymentNotification] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formError, setFormError] = useState('');
-  const [paymentData, setPaymentData] = useState({
-    email: '',
-    name: '',
-    phone: ''
-  });
 
   // Form state
   const [formData, setFormData] = useState({
@@ -65,32 +57,22 @@ const RegistrationSection: React.FC = () => {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Validar campos requeridos
     const requiredFields = ['email', 'nombre', 'fechaNacimiento', 'nacionalidad', 'genero', 'documento', 'ocupacion', 'organizacion', 'telefono', 'direccion', 'participacionElecciones', 'curriculum'];
     const missingFields = requiredFields.filter(field => !formData[field as keyof typeof formData]);
-    
     if (missingFields.length > 0) {
       setFormError('Por favor, completa todos los campos requeridos marcados con *');
       return;
     }
-
     try {
-      // Preparar datos para Google Forms
       const googleFormData = new FormData();
-      
-      // Mapeo de campos según el formulario original
       googleFormData.append('entry.1876653177', formData.email);
       googleFormData.append('entry.1150976519', formData.nombre);
-      
-      // Fecha de nacimiento
       if (formData.fechaNacimiento) {
         const fecha = new Date(formData.fechaNacimiento);
         googleFormData.append('entry.950607096_year', fecha.getFullYear().toString());
         googleFormData.append('entry.950607096_month', (fecha.getMonth() + 1).toString());
         googleFormData.append('entry.950607096_day', fecha.getDate().toString());
       }
-      
       googleFormData.append('entry.989222933', formData.nacionalidad);
       googleFormData.append('entry.555315055', formData.genero);
       googleFormData.append('entry.1929049539', formData.documento);
@@ -98,23 +80,17 @@ const RegistrationSection: React.FC = () => {
       googleFormData.append('entry.29825689', formData.organizacion);
       googleFormData.append('entry.969671877', formData.telefono);
       googleFormData.append('entry.376236169', formData.direccion);
-      
       // Campos adicionales (reemplaza los entry.X por los correctos de tu Google Form)
-      googleFormData.append('entry.1234567890', formData.comoSeEntero); // ¿Cómo se enteró del evento?
-      googleFormData.append('entry.2345678901', formData.participacionElecciones); // ¿Ha participado en ediciones anteriores?
-      googleFormData.append('entry.3456789012', formData.añoElecciones); // ¿En qué año?
-      googleFormData.append('entry.4567890123', formData.curriculum); // Breve descripción del Curriculum
-      
-      // URL del Google Form
+      googleFormData.append('entry.1234567890', formData.comoSeEntero);
+      googleFormData.append('entry.2345678901', formData.participacionElecciones);
+      googleFormData.append('entry.3456789012', formData.añoElecciones);
+      googleFormData.append('entry.4567890123', formData.curriculum);
       const googleFormURL = 'https://docs.google.com/forms/d/e/1FAIpQLSe-3uEhXs7UrNJsv_BPBMPnd3sNk2PipWG_rgNBnDaa_r55NA/formResponse';
-      
-      // Enviar formulario
       await fetch(googleFormURL, {
         method: 'POST',
         body: googleFormData,
         mode: 'no-cors'
       });
-      
       setFormSubmitted(true);
       setFormError('');
       setFormData({
@@ -122,25 +98,12 @@ const RegistrationSection: React.FC = () => {
         documento: '', ocupacion: '', organizacion: '', telefono: '', direccion: '',
         comoSeEntero: '', participacionElecciones: '', añoElecciones: '', curriculum: ''
       });
-      
-      // Cerrar el modal de registro y mostrar el aviso de pago
       setShowRegistrationForm(false);
       setShowPaymentNotification(true);
-      
     } catch (error) {
       console.error('Error al enviar formulario:', error);
       setFormError('Ha ocurrido un error al enviar el formulario. Por favor, intenta nuevamente.');
     }
-  };
-
-  const handlePaymentSuccess = (paymentResult: any) => {
-    console.log('Pago exitoso:', paymentResult);
-    setPaymentCompleted(true);
-    setShowPayment(false);
-  };
-
-  const handlePaymentError = (error: any) => {
-    console.error('Error en pago:', error);
   };
 
   return (
@@ -219,7 +182,7 @@ const RegistrationSection: React.FC = () => {
               </div>
 
               {/* Payment Success Message */}
-              {paymentCompleted && (
+              {formSubmitted && (
                 <div className="mb-6 p-4 bg-green-500/20 border border-green-500/30 rounded-xl">
                   <div className="flex items-center justify-center space-x-2 text-green-200">
                     <CheckCircle className="w-5 h-5" />
@@ -232,7 +195,7 @@ const RegistrationSection: React.FC = () => {
               )}
 
               {/* CTA Buttons */}
-              {!paymentCompleted && !showPayment && (
+              {!formSubmitted && (
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-6 sm:mb-8">
                   <button
                     onClick={handleRegisterClick}
@@ -244,29 +207,6 @@ const RegistrationSection: React.FC = () => {
                   
                   <button className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border border-white/30 hover:border-white/50 font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-xl transition-all duration-300">
                     {t('registration.cta.info')}
-                  </button>
-                </div>
-              )}
-
-              {/* Payment Component */}
-              {showPayment && !paymentCompleted && (
-                <div className="mb-6">
-                  <div className="mb-4">
-                    <h4 className="text-xl font-bold text-white mb-2">{t('registration.finalize.title')}</h4>
-                    <p className="text-white/80">{t('registration.finalize.description')}</p>
-                  </div>
-                  <PaymentButton
-                    description="Registro - Foro de Jóvenes Políticos"
-                    customerEmail={paymentData.email}
-                    onSuccess={handlePaymentSuccess}
-                    onError={handlePaymentError}
-                    fullWidth
-                  />
-                  <button
-                    onClick={() => setShowPayment(false)}
-                    className="w-full mt-3 bg-white/10 hover:bg-white/20 text-white border border-white/30 hover:border-white/50 font-semibold px-6 py-3 text-base rounded-xl transition-all duration-300"
-                  >
-                    {t('registration.back')}
                   </button>
                 </div>
               )}
