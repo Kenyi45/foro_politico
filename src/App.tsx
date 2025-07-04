@@ -211,13 +211,13 @@ function AppContent() {
                   {/* Video Preview - Vertical Format */}
                   <div className="w-full max-w-md mx-auto aspect-[9/16] bg-gradient-to-br from-primary-600 to-accent-600 relative">
                     <video
-                      src="/Video.mp4"
+                      src="/Video.webm"
                       className="w-full h-full object-cover"
                       muted
                       loop
                       playsInline
                     >
-                      <source src="/Video.mp4" type="video/mp4" />
+                      <source src="/Video.webm" type="video/webm" />
                     </video>
                     
                     {/* Play Button Overlay */}
@@ -345,14 +345,14 @@ function AppContent() {
             <div className="relative w-full aspect-[9/16] bg-black rounded-2xl overflow-hidden shadow-2xl">
               {/* Local Video */}
               <video
-                src="/Video.mp4"
+                src="/Video.webm"
                 title={`${t('video.launch.thumbnail.title')} - ${t('video.title')}`}
                 className="w-full h-full object-cover"
                 controls
                 autoPlay
                 playsInline
               >
-                <source src="/Video.mp4" type="video/mp4" />
+                <source src="/Video.webm" type="video/webm" />
                 {t('video.subtitle')}
               </video>
             </div>

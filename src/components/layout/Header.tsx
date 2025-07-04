@@ -208,7 +208,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled = false }) => {
         <div
           className={`lg:hidden transition-all duration-500 ease-out overflow-hidden ${
             isMobileMenuOpen
-              ? 'max-h-[500px] opacity-100 pb-6'
+              ? 'max-h-[600px] opacity-100 pb-6'
               : 'max-h-0 opacity-0'
           }`}
         >
@@ -252,7 +252,9 @@ const Header: React.FC<HeaderProps> = ({ isScrolled = false }) => {
               <div className="pt-4 border-t border-neutral-200/50">
                 <div className="flex items-center justify-between px-4 py-3">
                   <span className="text-sm font-medium text-neutral-700">Idioma / Language</span>
-                  <LanguageSelector isScrolled={true} isMobile={true} />
+                  <div className="bg-red-100 p-2 rounded">
+                    <LanguageSelector isScrolled={true} isMobile={true} />
+                  </div>
                 </div>
               </div>
             </div>
