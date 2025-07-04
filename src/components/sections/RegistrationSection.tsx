@@ -6,7 +6,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import PaymentButton from '../payment/PaymentButton';
 
 const RegistrationSection: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, currentLanguage } = useLanguage();
   const [paymentCompleted, setPaymentCompleted] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
   const [paymentData, setPaymentData] = useState({
@@ -18,7 +18,7 @@ const RegistrationSection: React.FC = () => {
   const { timeLeft, isExpired, formatTime } = useCountdown({
     targetDate: mockForumEvent.startDate,
     onComplete: () => {
-      console.log('¡El evento ha comenzado!');
+      console.log(t('countdown.title.started'));
     }
   });
 
@@ -76,7 +76,7 @@ const RegistrationSection: React.FC = () => {
           </h2>
           
           <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto mb-6 sm:mb-8 px-4">
-            {mockForumEvent.title}
+            {t('event.title')}
           </p>
         </div>
 
@@ -124,10 +124,10 @@ const RegistrationSection: React.FC = () => {
               <div className="mb-6 p-4 bg-green-500/20 border border-green-500/30 rounded-xl">
                 <div className="flex items-center justify-center space-x-2 text-green-200">
                   <CheckCircle className="w-5 h-5" />
-                  <span className="font-semibold">¡Registro completado exitosamente!</span>
+                  <span className="font-semibold">{t('registration.success.title')}</span>
                 </div>
                 <p className="text-green-300 text-sm mt-2 text-center">
-                  Recibirás un email de confirmación con todos los detalles del evento.
+                  {t('registration.success.message')}
                 </p>
               </div>
             )}
@@ -140,7 +140,7 @@ const RegistrationSection: React.FC = () => {
                   className="w-full sm:w-auto bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-xl transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
                 >
                   <CreditCard className="w-5 h-5" />
-                  <span>Registrarse Ahora</span>
+                  <span>{t('registration.cta.register')}</span>
                 </button>
                 
                 <button className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border border-white/30 hover:border-white/50 font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-xl transition-all duration-300">
@@ -153,8 +153,8 @@ const RegistrationSection: React.FC = () => {
             {showPayment && !paymentCompleted && (
               <div className="mb-6">
                 <div className="mb-4">
-                  <h4 className="text-xl font-bold text-white mb-2">Finalizar Registro</h4>
-                  <p className="text-white/80">Completa tu pago para asegurar tu lugar en el foro</p>
+                  <h4 className="text-xl font-bold text-white mb-2">{t('registration.finalize.title')}</h4>
+                  <p className="text-white/80">{t('registration.finalize.description')}</p>
                 </div>
                 <PaymentButton
                   description="Registro - Foro de Jóvenes Políticos"
@@ -167,7 +167,7 @@ const RegistrationSection: React.FC = () => {
                   onClick={() => setShowPayment(false)}
                   className="w-full mt-3 bg-white/10 hover:bg-white/20 text-white border border-white/30 hover:border-white/50 font-semibold px-6 py-3 text-base rounded-xl transition-all duration-300"
                 >
-                  Volver
+                  {t('registration.back')}
                 </button>
               </div>
             )}

@@ -5,11 +5,11 @@ import { mockForumEvent } from '../../data/mockData';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 const CountdownSection: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, currentLanguage } = useLanguage();
   const { timeLeft, isExpired, formatTime } = useCountdown({
     targetDate: mockForumEvent.startDate,
     onComplete: () => {
-      console.log('¡El evento ha comenzado!');
+      console.log(t('countdown.title.started'));
     }
   });
 
@@ -44,7 +44,7 @@ const CountdownSection: React.FC = () => {
           </h2>
           
           <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto">
-            {mockForumEvent.title}
+            {t('event.title')}
           </p>
         </div>
 
@@ -81,14 +81,18 @@ const CountdownSection: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="text-white font-semibold mb-2 text-sm sm:text-base">{t('countdown.location.title')}</h3>
-                  <p className="text-white/80 mb-1 text-sm sm:text-base">{mockForumEvent.location}</p>
+                  <p className="text-white/80 mb-1 text-sm sm:text-base">{t('event.location')}</p>
                   <p className="text-white/60 text-xs sm:text-sm">
-                    {mockForumEvent.startDate.toLocaleDateString('es-ES', {
-                      weekday: 'long',
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
+                    {mockForumEvent.startDate.toLocaleDateString(
+                      currentLanguage === 'es' ? 'es-ES' : 
+                      currentLanguage === 'pt' ? 'pt-BR' : 'en-US', 
+                      {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      }
+                    )}
                   </p>
                 </div>
               </div>

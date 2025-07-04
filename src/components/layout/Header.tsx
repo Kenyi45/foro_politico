@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { NavigationItem } from '../../types/index';
 import { useLanguage } from '../../contexts/LanguageContext';
+import LanguageSelector from '../common/LanguageSelector';
 
 interface HeaderProps {
   isScrolled?: boolean;
@@ -72,6 +73,11 @@ const Header: React.FC<HeaderProps> = ({ isScrolled = false }) => {
           : 'bg-transparent backdrop-blur-none'
       }`}
     >
+      {/* Language Selector - Positioned outside navbar container */}
+      <div className="absolute top-4 right-4 z-10">
+        <LanguageSelector isScrolled={scrolled} />
+      </div>
+
       <nav className="container-custom">
         <div className="flex items-center justify-between py-4 lg:py-6">
           {/* Logo mejorado */}

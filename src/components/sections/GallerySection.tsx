@@ -71,7 +71,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
               className="inline-flex items-center space-x-1 text-xs text-gray-600 hover:text-accent-700 transition-colors bg-white/80 backdrop-blur-sm rounded-md px-2 py-1"
             >
               <ExternalLink className="w-3 h-3" />
-              <span>Ver en Instagram</span>
+              <span>{t('gallery.instagram.view')}</span>
             </a>
           </div>
         </div>
@@ -83,60 +83,60 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
   const instagramSlides = [
     {
       id: 1,
-      day: 'Día 1',
-      date: 'Viernes, 19 de Julio 2024',
+      day: t('gallery.instagram.day1'),
+      date: t('gallery.instagram.date.day1'),
       color: 'blue',
       posts: [
         {
           type: 'video',
-          title: 'Video Resumen',
-          description: 'Destacados del primer día',
+          title: t('gallery.instagram.video.summary'),
+          description: t('gallery.instagram.video.day1'),
           url: 'https://www.instagram.com/p/C9TAruWRTtB/'
         },
         {
           type: 'photos',
-          title: 'Galería de Fotos',
-          description: '8 fotos • Momentos clave',
+          title: t('gallery.instagram.photos.gallery'),
+          description: t('gallery.instagram.photos.day1'),
           url: 'https://www.instagram.com/p/C9Q3y3fMRgv/'
         }
       ]
     },
     {
       id: 2,
-      day: 'Día 2',
-      date: 'Sábado, 20 de Julio 2024',
+      day: t('gallery.instagram.day2'),
+      date: t('gallery.instagram.date.day2'),
       color: 'emerald',
       posts: [
         {
           type: 'video',
-          title: 'Video Resumen',
-          description: 'Lo mejor del segundo día',
+          title: t('gallery.instagram.video.summary'),
+          description: t('gallery.instagram.video.day2'),
           url: 'https://www.instagram.com/p/C9VznBhsTqI/'
         },
         {
           type: 'photos',
-          title: 'Galería de Fotos',
-          description: '7 fotos • Debates intensos',
+          title: t('gallery.instagram.photos.gallery'),
+          description: t('gallery.instagram.photos.day2'),
           url: 'https://www.instagram.com/p/C9Tu1s8Mai1/'
         }
       ]
     },
     {
       id: 3,
-      day: 'Día 3',
-      date: 'Domingo, 21 de Julio 2024',
+      day: t('gallery.instagram.day3'),
+      date: t('gallery.instagram.date.day3'),
       color: 'purple',
       posts: [
         {
           type: 'video',
-          title: 'Video Resumen',
-          description: 'Gran cierre del evento',
+          title: t('gallery.instagram.video.summary'),
+          description: t('gallery.instagram.video.day3'),
           url: 'https://www.instagram.com/p/C9aq7rlhoEm/'
         },
         {
           type: 'photos',
-          title: 'Galería de Fotos',
-          description: '9 fotos • Momentos finales',
+          title: t('gallery.instagram.photos.gallery'),
+          description: t('gallery.instagram.photos.day3'),
           url: 'https://www.instagram.com/p/C9WC95ps5BZ/'
         }
       ]
@@ -159,29 +159,29 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
   const photoSlides = [
     {
       id: 'buenos-aires-2023',
-      title: 'Buenos Aires 2023',
-      subtitle: '1ra Edición',
-      date: 'Primera edición del foro',
-      description: 'Nuestra primera edición reunió a 180 jóvenes líderes de 15 países',
+      title: t('gallery.photos.buenos.aires.2023'),
+      subtitle: t('gallery.edition.first'),
+      date: t('gallery.edition.first.date'),
+      description: t('gallery.edition.first.description'),
       color: 'primary',
       stats: [
-        { number: '180', label: 'Participantes' },
-        { number: '15', label: 'Países' },
-        { number: '25', label: 'Conferencias' }
+        { number: '180', label: t('gallery.stats.participants') },
+        { number: '15', label: t('gallery.stats.countries') },
+        { number: '25', label: t('gallery.stats.conferences') }
       ],
       categories: ['all', 'ceremonies', 'panel', 'workshops', 'networking', 'social', 'speakers']
     },
     {
       id: 'buenos-aires-2024',
-      title: 'Buenos Aires 2024',
-      subtitle: '2da Edición',
-      date: 'Segunda edición expandida',
-      description: 'La segunda edición expandió nuestro alcance con 220 participantes',
+      title: t('gallery.photos.buenos.aires.2024'),
+      subtitle: t('gallery.edition.second'),
+      date: t('gallery.edition.second.date'),
+      description: t('gallery.edition.second.description'),
       color: 'accent',
       stats: [
-        { number: '220', label: 'Participantes' },
-        { number: '18', label: 'Países' },
-        { number: '32', label: 'Conferencias' }
+        { number: '220', label: t('gallery.stats.participants') },
+        { number: '18', label: t('gallery.stats.countries') },
+        { number: '32', label: t('gallery.stats.conferences') }
       ],
       categories: ['all', 'ceremonies', 'panel', 'workshops', 'networking', 'social', 'speakers']
     }
@@ -323,11 +323,11 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
                   <div className="inline-flex items-center justify-center w-12 sm:w-16 h-12 sm:h-16 bg-gradient-to-br from-primary-600 to-primary-800 rounded-2xl sm:rounded-3xl mb-3 sm:mb-4 shadow-2xl">
                     <Camera className="w-6 sm:w-8 h-6 sm:h-8 text-white" />
             </div>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">Galería del Evento</h3>
-                  <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">Explora los momentos más importantes de cada edición</p>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">{t('gallery.photos.event.gallery')}</h3>
+                  <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">{t('gallery.explore.moments')}</p>
                   <div className="inline-flex items-center space-x-2 px-3 sm:px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 rounded-full border border-primary-200">
                     <span className="w-2 h-2 bg-primary-600 rounded-full animate-pulse"></span>
-                    <span className="text-primary-800 font-medium text-xs sm:text-sm">Fotos profesionales del evento</span>
+                    <span className="text-primary-800 font-medium text-xs sm:text-sm">{t('gallery.photos.professional.photos')}</span>
               </div>
         </div>
 
@@ -403,7 +403,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
                           <div className="text-center mb-2 sm:mb-3">
                             <label className="text-xs sm:text-sm font-medium text-gray-700">
                               <Filter className="w-3 sm:w-4 h-3 sm:h-4 inline mr-1" />
-                              Filtrar por categoría
+                              {t('gallery.photos.filter.category')}
               </label>
                           </div>
                           <div className="flex flex-wrap justify-center gap-1 sm:gap-2">
@@ -478,11 +478,11 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-accent-600 to-accent-800 rounded-3xl mb-4 shadow-2xl">
                     <Instagram className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-3xl font-bold text-gray-900 mb-3">Momentos destacados</h3>
-                  <p className="text-lg text-gray-600 mb-6">Buenos Aires 2024 • Julio 19-21</p>
+                  <h3 className="text-3xl font-bold text-gray-900 mb-3">{t('gallery.instagram.highlights')}</h3>
+                  <p className="text-lg text-gray-600 mb-6">{t('gallery.instagram.highlights.subtitle')}</p>
                   <div className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-success-50 to-success-100 rounded-full border border-success-200">
                     <span className="w-2 h-2 bg-success-600 rounded-full animate-pulse"></span>
-                    <span className="text-success-800 font-medium text-sm">Contenido en tiempo real</span>
+                    <span className="text-success-800 font-medium text-sm">{t('gallery.instagram.realtime.content')}</span>
                   </div>
                 </div>
 

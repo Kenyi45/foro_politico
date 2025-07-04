@@ -43,7 +43,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   onRegisterClick,
   onLearnMoreClick
 }) => {
-  const { t } = useLanguage();
+  const { t, currentLanguage } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
   
   // Contadores animados con diferentes delays
@@ -141,7 +141,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               <h3 className="w-full text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-white leading-tight tracking-presidential font-semibold text-center">
                 <span className="block">"{t('hero.slogan')}{' '}</span>
                 <span className="block">
-                  <span className="text-accent-300">{t('hero.slogan.socialism')}</span> {t('hero.slogan.and')}{' '}
+                  {currentLanguage === 'pt' && t('hero.slogan.o')}{' '}<span className="text-accent-300">{t('hero.slogan.socialism')}</span> {t('hero.slogan.and')}{' '}
                   <span className="text-gold-200">{t('hero.slogan.woke')}</span>"
                 </span>
               </h3>
@@ -151,14 +151,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           {/* Organizers Section */}
           <div className="mb-8 sm:mb-10 animate-slide-up animation-delay-150">
             <p className="text-white/80 text-sm sm:text-base mb-6 font-medium text-center">
-              Un evento hecho posible por:
+              {t('hero.organizers.title')}
             </p>
             <div className="flex items-center justify-center space-x-8 sm:space-x-12 md:space-x-16 px-4">
               {/* Universidad Vida y Desarrollo Logo */}
               <div className="flex items-center justify-center">
                 <img 
                   src="/Logo_IP.png" 
-                  alt="Universidad Vida y Desarrollo" 
+                  alt={t('hero.organizers.uvd')} 
                   className="h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain logo-glow"
                 />
               </div>
@@ -170,7 +170,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               <div className="flex items-center justify-center">
                 <img 
                   src="/Logo_UVD.png"
-                  alt="Interamericana Partners" 
+                  alt={t('hero.organizers.ip')} 
                   className="h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain logo-glow"
                 />
               </div>

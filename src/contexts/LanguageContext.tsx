@@ -1,13 +1,17 @@
-import React, { createContext, useContext, ReactNode } from 'react';
+import React, { createContext, useContext, ReactNode, useState } from 'react';
 
 interface LanguageContextType {
   t: (key: string) => string;
+  currentLanguage: string;
+  setLanguage: (lang: string) => void;
+  availableLanguages: string[];
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-// Traducciones en español únicamente
-const translations: Record<string, string> = {
+// Traducciones en múltiples idiomas
+const translations: Record<string, Record<string, string>> = {
+  es: {
   // Navbar
   'nav.inicio': 'Inicio',
   'nav.caracteristicas': 'Características',
@@ -38,12 +42,15 @@ const translations: Record<string, string> = {
   'hero.stats.guests': 'Invitados Esperados',
   'hero.stats.countries': 'Países de America y Europa',
   'hero.stats.days': 'Días de Actividades',
+    'hero.organizers.title': 'Un evento hecho posible por:',
+    'hero.organizers.uvd': 'Universidad Vida y Desarrollo',
+    'hero.organizers.ip': 'Interamericana Partners',
 
   // About Section
   'about.badge': 'Nuestra Historia',
   'about.title': 'Sobre el',
   'about.title.highlight': 'III Foro Panamericano',
-  'about.description': 'El Foro Panamericano de Jóvenes Políticos es una plataforma continental del Instituto Prudencia dedicada a la defensa de la libertad frente al socialismo y la cultura woke. Reúne a líderes emergentes de América comprometidos con la defensa de  los valores occidentales que han hecho grande a Europa y América. En 2023 y 2024, durante sus anteriores ediciones, el Foro convocó a más de 500 dirigentes en la ciudad de Buenos Aires. Este año se celebrará en Lima, Perú, esperando contar con la participación de 300 jóvenes politicos de todo el continente.',
+    'about.description': 'El Foro Panamericano de Jóvenes Políticos es una plataforma continental del Instituto Prudencia dedicada a la defensa de la libertad frente al socialismo y la cultura woke. Reúne a líderes emergentes de América comprometidos con la defensa de los valores occidentales que han hecho grande a Europa y América. En 2023 y 2024, durante sus anteriores ediciones, el Foro convocó a más de 500 dirigentes en la ciudad de Buenos Aires. Este año se celebrará en Lima, Perú, esperando contar con la participación de 300 jóvenes politicos de todo el continente.',
   'about.mission.title': 'Misión: Defendiendo la Libertad',
   'about.mission.description': 'Formar una nueva generación de líderes políticos panamericanos comprometidos con la defensa de la libertad frente al socialismo y la cultura woke, fortaleciendo los valores democráticos tradicionales en América.',
   'about.mission.point1': 'Defender la libertad y los valores democráticos tradicionales.',
@@ -53,7 +60,7 @@ const translations: Record<string, string> = {
   'about.values.democracy': 'Republicanismo',
   'about.values.democracy.desc': 'Sin división de poderes, las libertades corren peligro.',
   'about.values.inclusion': 'Derechos Humanos',
-  'about.values.inclusion.desc': 'Defendemos sin concesiones el valor sagrado de la  dignidad humana.',
+    'about.values.inclusion.desc': 'Defendemos sin concesiones el valor sagrado de la dignidad humana.',
   'about.values.transparency': 'Libre Mercado',
   'about.values.transparency.desc': 'Contra todas las formas de estatismo.',
 
@@ -67,10 +74,27 @@ const translations: Record<string, string> = {
   'features.dialogue.title': 'Diálogo Democrático',
   'features.dialogue.desc': 'Fomentamos el debate constructivo y el intercambio de ideas entre diferentes perspectivas.',
   'features.networks.title': 'Redes Internacionales',
-  'features.networks.desc': 'Conectamos jóvenes líderes de América y Europa para tener impacto regional y global frentes  a los desafíos del wokismo.',
+    'features.networks.desc': 'Conectamos jóvenes líderes de América y Europa para tener impacto regional y global frente a los desafíos del wokismo.',
   'features.impact.title': 'Impacto Local',
   'features.impact.desc': 'Transformamos las ideas en acciones concretas que benefician a nuestras comunidades.',
   'features.cta': '¿Listo para formar parte de esta experiencia?',
+
+    // Countdown Section
+    'countdown.badge': 'Próximo Evento',
+    'countdown.title.started': '¡El Foro ya comenzó!',
+    'countdown.title.remaining': 'Faltan solo...',
+    'countdown.time.days': 'Días',
+    'countdown.time.hours': 'Horas',
+    'countdown.time.minutes': 'Minutos',
+    'countdown.time.seconds': 'Segundos',
+    'countdown.location.title': 'Ubicación y Fecha',
+    'countdown.duration.title': 'Duración del Evento',
+    'countdown.duration.intensive': '3 días intensivos',
+    'countdown.duration.activities': 'Conferencias, talleres y networking',
+    'countdown.registration.open': 'Inscripciones Abiertas',
+    'countdown.registration.registered': 'Registrados',
+    'countdown.registration.available': 'Cupos disponibles',
+    'countdown.registration.button': 'Asegurar mi lugar',
 
   // Team Section
   'team.badge': 'Nuestros Panelistas',
@@ -109,24 +133,81 @@ const translations: Record<string, string> = {
   'gallery.instagram.view': 'Ver en Instagram',
   'gallery.instagram.likes': 'Me gusta',
   'gallery.instagram.comments': 'Comentarios',
+    'gallery.day': 'Día',
+    'gallery.edition.first': '1ra Edición',
+    'gallery.edition.second': '2da Edición',
+    'gallery.edition.first.date': 'Primera edición del foro',
+    'gallery.edition.first.description': 'Nuestra primera edición reunió a 180 jóvenes líderes de 15 países',
+    'gallery.edition.second.date': 'Segunda edición expandida',
+    'gallery.edition.second.description': 'La segunda edición expandió nuestro alcance con 220 participantes',
+    'gallery.stats.participants': 'Participantes',
+    'gallery.stats.countries': 'Países',
+    'gallery.stats.conferences': 'Conferencias',
+    'gallery.explore.moments': 'Explora los momentos más importantes de cada edición',
+    'gallery.instagram.highlights': 'Momentos destacados',
+    'gallery.instagram.highlights.subtitle': 'Buenos Aires 2024 • Julio 19-21',
+    'gallery.instagram.realtime.content': 'Contenido en tiempo real',
+    'gallery.instagram.video.summary': 'Video Resumen',
+    'gallery.instagram.video.day1': 'Destacados del primer día',
+    'gallery.instagram.video.day2': 'Lo mejor del segundo día',
+    'gallery.instagram.video.day3': 'Gran cierre del evento',
+    'gallery.instagram.photos.gallery': 'Galería de Fotos',
+    'gallery.instagram.photos.day1': '8 fotos • Momentos clave',
+    'gallery.instagram.photos.day2': '7 fotos • Debates intensos',
+    'gallery.instagram.photos.day3': '9 fotos • Momentos finales',
+    'gallery.instagram.day1': 'Día 1',
+    'gallery.instagram.day2': 'Día 2',
+    'gallery.instagram.day3': 'Día 3',
+    'gallery.instagram.date.day1': 'Viernes, 19 de Julio 2024',
+    'gallery.instagram.date.day2': 'Sábado, 20 de Julio 2024',
+    'gallery.instagram.date.day3': 'Domingo, 21 de Julio 2024',
+    'gallery.photos.event.gallery': 'Galería del Evento',
+    'gallery.photos.professional.photos': 'Fotos profesionales del evento',
+    'gallery.photos.filter.category': 'Filtrar por categoría',
+    'gallery.photos.buenos.aires.2023': 'Buenos Aires 2023',
+    'gallery.photos.buenos.aires.2024': 'Buenos Aires 2024',
+
+    // Video Section
+    'video.launch.badge': 'Lanzamiento Oficial',
+    'video.launch.title': 'Conoce el',
+    'video.launch.title.highlight': 'Lanzamiento',
+    'video.launch.description': 'Descubre la presentación oficial del III Foro Panamericano de Jóvenes Políticos y conoce todos los detalles de este evento histórico.',
+    'video.launch.thumbnail.title': 'Video de Lanzamiento',
+    'video.launch.thumbnail.click': 'Haz clic para reproducir',
+    'video.launch.details': 'En este video podrás conocer los objetivos, participantes y la visión del III Foro Panamericano de Jóvenes Políticos que se realizará en 2025.',
+
+    // Organization Section
+    'organization.badge': 'Organización',
+    'organization.title': 'Conoce las organizaciones que hacen',
+    'organization.title.highlight': 'posible el Foro',
+    'organization.description': 'Las agrupaciones comprometidas con el desarrollo del liderazgo político juvenil en América Latina',
+    'organization.ip.title': 'Instituto Prudencia',
+    'organization.ip.description': 'Think tank fundador y principal organizador del Foro. Está especializado en la formación de dirigentes, en la articulación internacional, y en el desarrollo de políticas públicas con perspectiva occidental y conservadora. Se enfoca en la organización de eventos y programas que permitan combatir al socialismo y al progresismo, a la vez que busca incidir en los ambientes de toma de decisión para que América recupere su grandeza.',
+    'organization.uvd.title': 'Una Voz Diferente',
+    'organization.uvd.description': 'Una Voz Diferente (UVD) es una organización juvenil peruana sin fines de lucro, registrada ante APCI, especializada en la formación de dirigentes y desarrollo de políticas públicas con perspectiva cristiana y conservadora. Se enfoca en organizar eventos y programas para promover el liderazgo responsable e incidir en la toma de decisiones, defendiendo los valores de Vida, Familia, Libertad y Verdad.',
 
   // Events Section
   'events.badge': 'Programa Completo',
   'events.title': 'Eventos y',
   'events.title.highlight': 'Actividades',
   'events.description': 'Próximamente: Lista completa de paneles, talleres, conferencias magistrales y actividades de networking programadas para el foro.',
+    'events.conferences.title': 'Conferencias Magistrales',
+    'events.conferences.description': 'Charlas inspiradoras con líderes mundiales, ex-presidentes y figuras destacadas de la política internacional.',
+    'events.workshops.title': 'Talleres Prácticos',
+    'events.workshops.description': 'Sesiones interactivas de desarrollo de habilidades en liderazgo, comunicación política y gestión de campañas.',
+    'events.networking.title': 'Networking',
+    'events.networking.description': 'Oportunidades exclusivas para conectar con jóvenes líderes, mentores y organizaciones internacionales.',
 
   // Registration Section
+    'registration.success.title': '¡Registro completado exitosamente!',
+    'registration.success.message': 'Recibirás un correo de confirmación con todos los detalles del evento.',
+    'registration.finalize.title': 'Finalizar Registro',
+    'registration.finalize.description': 'Completa tu pago para asegurar tu lugar en el foro',
+    'registration.back': 'Volver',
   'registration.badge': '¡Inscripciones Abiertas para Lima 2025!',
-  'registration.title': '¡Únete al',
-  'registration.title.highlight': 'Cambio',
   'registration.description': 'Sé parte de la próxima generación de líderes políticos que están transformando América. Tu voz importa, tu participación marca la diferencia en el futuro de nuestro continente.',
   'registration.cta.register': '🚀 Registrarse Ahora',
   'registration.cta.info': '📋 Más Información',
-  'registration.secure': 'Proceso seguro',
-  'registration.immediate': 'Confirmación inmediata',
-  'registration.support': 'Soporte 24/7',
-  'registration.email.text': '¿Dudas? Escríbenos a',
 
   // Testimonials Section - Historias de Transformación
   'testimonials.badge': 'Testimonios de Impacto',
@@ -145,6 +226,23 @@ const translations: Record<string, string> = {
   'thematic.cta.title': '¿Tienes una propuesta innovadora?',
   'thematic.cta.description': 'Invitamos a los participantes a presentar sus proyectos e ideas dentro de estos ejes temáticos para ser considerados en nuestras sesiones especiales.',
   'thematic.cta.button': 'Proponer tu proyecto',
+    'thematic.back': 'Volver a Ejes Temáticos',
+    'thematic.stats.sessions': 'Sesiones',
+    'thematic.stats.experts': 'Expertos',
+    'thematic.stats.resources': 'Recursos',
+    'thematic.tabs.overview': 'Visión General',
+    'thematic.tabs.sessions': 'Sesiones',
+    'thematic.tabs.speakers': 'Ponentes',
+    'thematic.tabs.resources': 'Recursos',
+    'thematic.tabs.schedule': 'Cronograma',
+    'thematic.detail.description': 'Descripción Detallada',
+    'thematic.detail.objectives': 'Objetivos Principales',
+    'thematic.detail.articles': 'Artículos Relacionados',
+    'thematic.detail.read': 'Leer',
+    'thematic.detail.expertise': 'Áreas de Expertise',
+    'thematic.detail.access': 'Acceder',
+    'thematic.detail.minutes': 'min',
+    'thematic.detail.people': 'personas',
 
   // Thematic Axes Content
   'thematic.governance.title': 'Gobernanza y Transparencia',
@@ -160,22 +258,9 @@ const translations: Record<string, string> = {
   'thematic.education.title': 'Educación Cívica',
   'thematic.education.desc': 'Formación ciudadana y participación electoral',
 
-  // Countdown Section - Faltan solo...
-  'countdown.badge': 'Próximo Evento',
-  'countdown.title.started': '¡El Foro ya comenzó!',
-  'countdown.title.remaining': 'Faltan solo...',
-  'countdown.time.days': 'Días',
-  'countdown.time.hours': 'Horas',
-  'countdown.time.minutes': 'Minutos',
-  'countdown.time.seconds': 'Segundos',
-  'countdown.location.title': 'Ubicación y Fecha',
-  'countdown.duration.title': 'Duración del Evento',
-  'countdown.duration.intensive': '3 días intensivos',
-  'countdown.duration.activities': 'Conferencias, talleres y networking',
-  'countdown.registration.open': 'Inscripciones Abiertas',
-  'countdown.registration.registered': 'Registrados',
-  'countdown.registration.available': 'Cupos disponibles',
-  'countdown.registration.button': 'Asegurar mi lugar',
+    // Event Data
+    'event.title': 'III Foro Panamericano de Jóvenes Políticos',
+    'event.location': 'Lima, Perú',
 
   // Footer Section
   'footer.description': 'Construyendo el futuro de la política desde la perspectiva de las nuevas generaciones. Formando líderes comprometidos con la democracia y el cambio social.',
@@ -192,15 +277,504 @@ const translations: Record<string, string> = {
   'footer.privacy': 'Privacidad',
   'footer.terms': 'Términos',
   'footer.cookies': 'Cookies',
+
+    // Video Modal
+    'video.title': 'III Foro Panamericano de Jóvenes Políticos',
+    'video.subtitle': 'Video de lanzamiento oficial',
+  },
+  
+  en: {
+    // Navbar
+    'nav.inicio': 'Home',
+    'nav.caracteristicas': 'Features',
+    'nav.sobre': 'About',
+    'nav.ejes': 'Thematic Axes',
+    'nav.equipo': 'Panelists',
+    'nav.testimonios': 'Organization',
+    'nav.galeria': 'Gallery',
+    'nav.eventos': 'Events',
+    'nav.registro': 'Register Now',
+    
+    // Hero Section
+    'hero.badge': 'III Panamerican Edition • October 2-4, 2025 • Lima, Peru',
+    'hero.title': 'America that',
+    'hero.title.highlight': 'Defends',
+    'hero.title.end': 'Freedom',
+    'hero.slogan': 'DEFENDING FREEDOM AGAINST',
+    'hero.slogan.socialism': 'SOCIALISM',
+    'hero.slogan.and': 'AND',
+    'hero.slogan.woke': 'WOKE CULTURE',
+    'hero.subtitle.part1': 'A continental meeting to',
+    'hero.subtitle.defend': 'defend',
+    'hero.subtitle.strengthen': 'strengthen',
+    'hero.subtitle.preserve': 'and preserve',
+    'hero.subtitle.part2': 'the values of freedom and democracy in America',
+    'hero.cta.participate': 'Join the Forum',
+    'hero.cta.learn': 'Learn More',
+    'hero.stats.guests': 'Expected Guests',
+    'hero.stats.countries': 'Countries from America and Europe',
+    'hero.stats.days': 'Days of Activities',
+    'hero.organizers.title': 'An event made possible by:',
+    'hero.organizers.uvd': 'Universidad Vida y Desarrollo',
+    'hero.organizers.ip': 'Interamericana Partners',
+
+    // About Section
+    'about.badge': 'Our Story',
+    'about.title': 'About the',
+    'about.title.highlight': 'III Panamerican Forum',
+    'about.description': 'The Panamerican Forum of Young Politicians is a continental platform of the Prudencia Institute dedicated to defending freedom against socialism and woke culture. It brings together emerging leaders from America committed to defending the Western values that have made Europe and America great. In 2023 and 2024, during its previous editions, the Forum convened more than 500 leaders in the city of Buenos Aires. This year it will be held in Lima, Peru, expecting the participation of 300 young politicians from across the continent.',
+    'about.mission.title': 'Mission: Defending Freedom',
+    'about.mission.description': 'To form a new generation of Panamerican political leaders committed to defending freedom against socialism and woke culture, strengthening traditional democratic values in America.',
+    'about.mission.point1': 'Defend freedom and traditional democratic values.',
+    'about.mission.point2': 'Combat the influence of socialism and woke culture.',
+    'about.mission.point3': 'Strengthen conservative youth leadership in America.',
+    'about.values.title': 'Our Values',
+    'about.values.democracy': 'Republicanism',
+    'about.values.democracy.desc': 'Without separation of powers, freedoms are at risk.',
+    'about.values.inclusion': 'Human Rights',
+    'about.values.inclusion.desc': 'We defend without concessions the sacred value of human dignity.',
+    'about.values.transparency': 'Free Market',
+    'about.values.transparency.desc': 'Against all forms of statism.',
+
+    // Features Section
+    'features.badge': 'Our Strengths',
+    'features.title': 'What makes us',
+    'features.title.highlight': 'unique',
+    'features.description': 'Our forum stands out for creating an environment where youth can develop their full political and social potential by addressing the most urgent issues of the 21st century, promoting a Western agenda.',
+    'features.leadership.title': 'Young Leadership',
+    'features.leadership.desc': 'We develop the leadership skills necessary for the challenges of the 21st century.',
+    'features.dialogue.title': 'Democratic Dialogue',
+    'features.dialogue.desc': 'We foster constructive debate and exchange of ideas between different perspectives.',
+    'features.networks.title': 'International Networks',
+    'features.networks.desc': 'We connect young leaders from America and Europe to have regional and global impact against the challenges of wokism.',
+    'features.impact.title': 'Local Impact',
+    'features.impact.desc': 'We transform ideas into concrete actions that benefit our communities.',
+    'features.cta': 'Ready to be part of this experience?',
+
+    // Countdown Section
+    'countdown.badge': 'Next Event',
+    'countdown.title.started': 'The Forum has already started!',
+    'countdown.title.remaining': 'Only...',
+    'countdown.time.days': 'Days',
+    'countdown.time.hours': 'Hours',
+    'countdown.time.minutes': 'Minutes',
+    'countdown.time.seconds': 'Seconds',
+    'countdown.location.title': 'Location and Date',
+    'countdown.duration.title': 'Event Duration',
+    'countdown.duration.intensive': '3 intensive days',
+    'countdown.duration.activities': 'Conferences, workshops and networking',
+    'countdown.registration.open': 'Registrations Open',
+    'countdown.registration.registered': 'Registered',
+    'countdown.registration.available': 'Available spots',
+    'countdown.registration.button': 'Secure my spot',
+
+    // Team Section
+    'team.badge': 'Our Panelists',
+    'team.title': 'Experienced Leaders',
+    'team.title.highlight': 'Forming Leaders',
+    'team.description': 'A multidisciplinary team of international experts committed to the development of youth political leadership',
+    'team.achievements': 'Outstanding Achievements',
+    'team.languages': 'Languages',
+    'team.social': 'Social Networks',
+    'team.advisor.title': 'International Advisory Council',
+    'team.advisor.description': 'Our team has the support of a prestigious advisory council made up of former presidents, ministers, academics and leaders of international organizations from 6 continents.',
+    'team.advisor.stats.advisors': 'Advisors',
+    'team.advisor.stats.countries': 'Countries',
+    'team.advisor.stats.experience': 'Years experience',
+    'team.advisor.stats.continents': 'Continents',
+
+    // Gallery Section
+    'gallery.badge': 'Our Gallery',
+    'gallery.title': 'Capturing',
+    'gallery.title.highlight': 'Moments',
+    'gallery.description': 'Relive the most memorable moments from our previous editions through photos and videos',
+    'gallery.filter.all.categories': 'All Categories',
+    'gallery.categories.ceremonies': 'Ceremonies',
+    'gallery.categories.panel': 'Panels',
+    'gallery.categories.workshops': 'Workshops',
+    'gallery.categories.networking': 'Networking',
+    'gallery.categories.social': 'Social Events',
+    'gallery.categories.speakers': 'Conferences',
+    'gallery.categories.instagram': 'Instagram',
+    'gallery.instagram.follow': 'Follow us on Instagram',
+    'gallery.instagram.realtime': 'The best moments in real time',
+    'gallery.instagram.follow.button': 'Follow',
+    'gallery.instagram.view': 'View on Instagram',
+    'gallery.instagram.likes': 'Likes',
+    'gallery.instagram.comments': 'Comments',
+    'gallery.day': 'Day',
+    'gallery.edition.first': '1st Edition',
+    'gallery.edition.second': '2nd Edition',
+    'gallery.edition.first.date': 'First forum edition',
+    'gallery.edition.first.description': 'Our first edition brought together 180 young leaders from 15 countries',
+    'gallery.edition.second.date': 'Second expanded edition',
+    'gallery.edition.second.description': 'The second edition expanded our reach with 220 participants',
+    'gallery.stats.participants': 'Participants',
+    'gallery.stats.countries': 'Countries',
+    'gallery.stats.conferences': 'Conferences',
+    'gallery.explore.moments': 'Explore the most important moments of each edition',
+    'gallery.instagram.highlights': 'Featured Moments',
+    'gallery.instagram.highlights.subtitle': 'Buenos Aires 2024 • July 19-21',
+    'gallery.instagram.realtime.content': 'Real-time content',
+    'gallery.instagram.video.summary': 'Video Summary',
+    'gallery.instagram.video.day1': 'Highlights from the first day',
+    'gallery.instagram.video.day2': 'The best of the second day',
+    'gallery.instagram.video.day3': 'Great event closing',
+    'gallery.instagram.photos.gallery': 'Photo Gallery',
+    'gallery.instagram.photos.day1': '8 photos • Key moments',
+    'gallery.instagram.photos.day2': '7 photos • Intense debates',
+    'gallery.instagram.photos.day3': '9 photos • Final moments',
+    'gallery.instagram.day1': 'Day 1',
+    'gallery.instagram.day2': 'Day 2',
+    'gallery.instagram.day3': 'Day 3',
+    'gallery.instagram.date.day1': 'Friday, July 19, 2024',
+    'gallery.instagram.date.day2': 'Saturday, July 20, 2024',
+    'gallery.instagram.date.day3': 'Sunday, July 21, 2024',
+    'gallery.photos.event.gallery': 'Event Gallery',
+    'gallery.photos.professional.photos': 'Professional event photos',
+    'gallery.photos.filter.category': 'Filter by category',
+    'gallery.photos.buenos.aires.2023': 'Buenos Aires 2023',
+    'gallery.photos.buenos.aires.2024': 'Buenos Aires 2024',
+
+    // Video Section
+    'video.launch.badge': 'Official Launch',
+    'video.launch.title': 'Discover the',
+    'video.launch.title.highlight': 'Launch',
+    'video.launch.description': 'Discover the official presentation of the III Panamerican Forum of Young Politicians and learn all the details of this historic event.',
+    'video.launch.thumbnail.title': 'Launch Video',
+    'video.launch.thumbnail.click': 'Click to play',
+    'video.launch.details': 'In this video you will learn about the objectives, participants and vision of the III Panamerican Forum of Young Politicians that will take place in 2025.',
+
+    // Organization Section
+    'organization.badge': 'Organization',
+    'organization.title': 'Meet the organizations that make',
+    'organization.title.highlight': 'the Forum possible',
+    'organization.description': 'The groups committed to the development of youth political leadership in Latin America',
+    'organization.ip.title': 'Prudencia Institute',
+    'organization.ip.description': 'Founding think tank and main organizer of the Forum. It specializes in leadership training, international articulation, and the development of public policies with a Western and conservative perspective. It focuses on organizing events and programs that allow combating socialism and progressivism, while seeking to influence decision-making environments so that America regains its greatness.',
+    'organization.uvd.title': 'A Different Voice',
+    'organization.uvd.description': 'A Different Voice (UVD) is a Peruvian youth non-profit organization, registered with APCI, specialized in leadership training and development of public policies with a Christian and conservative perspective. It focuses on organizing events and programs to promote responsible leadership and influence decision-making, defending the values of Life, Family, Freedom and Truth.',
+
+    // Event Data
+    'event.title': 'III Panamerican Forum of Young Politicians',
+    'event.location': 'Lima, Peru',
+
+    // Footer Section
+    'footer.description': 'Building the future of politics from the perspective of new generations. Training leaders committed to democracy and social change.',
+    'footer.quicklinks.title': 'Quick Links',
+    'footer.quicklinks.home': 'Home',
+    'footer.quicklinks.about': 'About the Forum',
+    'footer.quicklinks.testimonials': 'Organization',
+    'footer.quicklinks.events': 'Events',
+    'footer.quicklinks.team': 'Panelists',
+    'footer.quicklinks.register': 'Register',
+    'footer.contact.title': 'Contact',
+    'footer.contact.global': 'Global Network',
+    'footer.copyright': '© 2024 Forum of Young Politicians. All rights reserved.',
+    'footer.privacy': 'Privacy',
+    'footer.terms': 'Terms',
+    'footer.cookies': 'Cookies',
+
+    // Events Section
+    'events.badge': 'Full Program',
+    'events.title': 'Events and',
+    'events.title.highlight': 'Activities',
+    'events.description': 'Coming soon: Full list of panels, workshops, keynote conferences, and networking activities scheduled for the forum.',
+    'events.conferences.title': 'Keynote Conferences',
+    'events.conferences.description': 'Inspiring talks with world leaders, former presidents and prominent figures in international politics.',
+    'events.workshops.title': 'Practical Workshops',
+    'events.workshops.description': 'Interactive sessions for developing leadership skills, political communication and campaign management.',
+    'events.networking.title': 'Networking',
+    'events.networking.description': 'Exclusive opportunities to connect with young leaders, mentors and international organizations.',
+
+    // Video Modal
+    'video.title': 'III Panamerican Forum of Young Politicians',
+    'video.subtitle': 'Official launch video',
+
+    // Registration Section
+    'registration.success.title': 'Registration completed successfully!',
+    'registration.success.message': 'You will receive a confirmation email with all event details.',
+    'registration.finalize.title': 'Complete Registration',
+    'registration.finalize.description': 'Complete your payment to secure your place at the forum',
+    'registration.back': 'Back',
+    'registration.badge': 'Registrations Open for Lima 2025!',
+    'registration.description': 'Be part of the next generation of political leaders who are transforming America. Your voice matters, your participation makes a difference in the future of our continent.',
+    'registration.cta.register': '🚀 Register Now',
+    'registration.cta.info': '📋 More Information',
+
+    // Thematic Section
+    'thematic.back': 'Back to Thematic Axes',
+    'thematic.stats.sessions': 'Sessions',
+    'thematic.stats.experts': 'Experts',
+    'thematic.stats.resources': 'Resources',
+    'thematic.tabs.overview': 'Overview',
+    'thematic.tabs.sessions': 'Sessions',
+    'thematic.tabs.speakers': 'Speakers',
+    'thematic.tabs.resources': 'Resources',
+    'thematic.tabs.schedule': 'Schedule',
+    'thematic.detail.description': 'Detailed Description',
+    'thematic.detail.objectives': 'Main Objectives',
+    'thematic.detail.articles': 'Related Articles',
+    'thematic.detail.read': 'Read',
+    'thematic.detail.expertise': 'Areas of Expertise',
+    'thematic.detail.access': 'Access',
+    'thematic.detail.minutes': 'min',
+    'thematic.detail.people': 'people',
+  },
+  
+  pt: {
+    // Navbar
+    'nav.inicio': 'Início',
+    'nav.caracteristicas': 'Características',
+    'nav.sobre': 'Sobre o Fórum',
+    'nav.ejes': 'Eixos Temáticos',
+    'nav.equipo': 'Painelistas',
+    'nav.testimonios': 'Organização',
+    'nav.galeria': 'Galeria',
+    'nav.eventos': 'Eventos',
+    'nav.registro': 'Registre-se Agora',
+    
+    // Hero Section
+    'hero.badge': 'III Edição Pan-americana • 2-4 Outubro 2025 • Lima, Peru',
+    'hero.title': 'América que',
+    'hero.title.highlight': 'Defende',
+    'hero.title.end': 'a Liberdade',
+    'hero.slogan': 'DEFENDENDO A LIBERDADE CONTRA',
+    'hero.slogan.o': 'O',
+    'hero.slogan.socialism': 'SOCIALISMO',
+    'hero.slogan.and': 'E A',
+    'hero.slogan.woke': 'CULTURA WOKE',
+    'hero.subtitle.part1': 'Um encontro continental para',
+    'hero.subtitle.defend': 'defender',
+    'hero.subtitle.strengthen': 'fortalecer',
+    'hero.subtitle.preserve': 'e preservar',
+    'hero.subtitle.part2': 'os valores de liberdade e democracia na América',
+    'hero.cta.participate': 'Participe do Fórum',
+    'hero.cta.learn': 'Saiba Mais',
+    'hero.stats.guests': 'Convidados Esperados',
+    'hero.stats.countries': 'Países da América e Europa',
+    'hero.stats.days': 'Dias de Atividades',
+    'hero.organizers.title': 'Um evento realizado por:',
+    'hero.organizers.uvd': 'Universidad Vida y Desarrollo',
+    'hero.organizers.ip': 'Interamericana Partners',
+
+    // About Section
+    'about.badge': 'Nossa História',
+    'about.title': 'Sobre o',
+    'about.title.highlight': 'III Fórum Pan-americano',
+    'about.description': 'O Fórum Pan-americano de Jovens Políticos é uma plataforma continental do Instituto Prudência dedicada à defesa da liberdade contra o socialismo e a cultura woke. Reúne líderes emergentes da América comprometidos com a defesa dos valores ocidentais que fizeram a Europa e a América grandes. Em 2023 e 2024, durante suas edições anteriores, o Fórum convocou mais de 500 dirigentes na cidade de Buenos Aires. Este ano será realizado em Lima, Peru, esperando contar com a participação de 300 jovens políticos de todo o continente.',
+    'about.mission.title': 'Missão: Defendendo a Liberdade',
+    'about.mission.description': 'Formar uma nova geração de líderes políticos pan-americanos comprometidos com a defesa da liberdade contra o socialismo e a cultura woke, fortalecendo os valores democráticos tradicionais na América.',
+    'about.mission.point1': 'Defender a liberdade e os valores democráticos tradicionais.',
+    'about.mission.point2': 'Combater a influência do socialismo e da cultura woke.',
+    'about.mission.point3': 'Fortalecer a liderança juvenil conservadora na América.',
+    'about.values.title': 'Nossos Valores',
+    'about.values.democracy': 'Republicanismo',
+    'about.values.democracy.desc': 'Sem separação de poderes, as liberdades correm perigo.',
+    'about.values.inclusion': 'Direitos Humanos',
+    'about.values.inclusion.desc': 'Defendemos sem concessões o valor sagrado da dignidade humana.',
+    'about.values.transparency': 'Livre Mercado',
+    'about.values.transparency.desc': 'Contra todas as formas de estatismo.',
+
+    // Features Section
+    'features.badge': 'Nossas Forças',
+    'features.title': 'O que nos torna',
+    'features.title.highlight': 'únicos',
+    'features.description': 'Nosso fórum se destaca por criar um ambiente onde a juventude pode desenvolver todo seu potencial político e social, ocupando-se dos temas mais urgentes do século XXI, promovendo uma agenda ocidental.',
+    'features.leadership.title': 'Liderança Jovem',
+    'features.leadership.desc': 'Desenvolvemos as habilidades de liderança necessárias para os desafios do século XXI.',
+    'features.dialogue.title': 'Diálogo Democrático',
+    'features.dialogue.desc': 'Fomentamos o debate construtivo e a troca de ideias entre diferentes perspectivas.',
+    'features.networks.title': 'Redes Internacionais',
+    'features.networks.desc': 'Conectamos jovens líderes da América e Europa para ter impacto regional e global contra os desafios do wokismo.',
+    'features.impact.title': 'Impacto Local',
+    'features.impact.desc': 'Transformamos as ideias em ações concretas que beneficiam nossas comunidades.',
+    'features.cta': 'Pronto para fazer parte desta experiência?',
+
+    // Countdown Section
+    'countdown.badge': 'Próximo Evento',
+    'countdown.title.started': 'O Fórum já começou!',
+    'countdown.title.remaining': 'Faltam apenas...',
+    'countdown.time.days': 'Dias',
+    'countdown.time.hours': 'Horas',
+    'countdown.time.minutes': 'Minutos',
+    'countdown.time.seconds': 'Segundos',
+    'countdown.location.title': 'Localização e Data',
+    'countdown.duration.title': 'Duração do Evento',
+    'countdown.duration.intensive': '3 dias intensivos',
+    'countdown.duration.activities': 'Conferências, oficinas e networking',
+    'countdown.registration.open': 'Inscrições Abertas',
+    'countdown.registration.registered': 'Registrados',
+    'countdown.registration.available': 'Vagas disponíveis',
+    'countdown.registration.button': 'Garantir minha vaga',
+
+    // Team Section
+    'team.badge': 'Nuestros Panelistas',
+    'team.title': 'Líderes Experimentados',
+    'team.title.highlight': 'Formando Líderes',
+    'team.description': 'Un equipo multidisciplinario de expertos internacionales comprometidos con el desarrollo del liderazgo político juvenil',
+    'team.achievements': 'Logros Destacados',
+    'team.languages': 'Idiomas',
+    'team.social': 'Redes Sociales',
+    'team.advisor.title': 'Consejo Asesor Internacional',
+    'team.advisor.description': 'Nuestro equipo cuenta con el respaldo de un prestigioso consejo asesor integrado por ex-presidentes, ministros, académicos y líderes de organizaciones internacionales de 6 continentes.',
+    'team.advisor.stats.advisors': 'Asesores',
+    'team.advisor.stats.countries': 'Países',
+    'team.advisor.stats.experience': 'Años experiencia',
+    'team.advisor.stats.continents': 'Continentes',
+
+    // Gallery Section
+    'gallery.badge': 'Nossa Galeria',
+    'gallery.title': 'Capturando',
+    'gallery.title.highlight': 'Momentos',
+    'gallery.description': 'Reviva os momentos mais memoráveis de nossas edições anteriores através de fotos e vídeos',
+    'gallery.filter.all.categories': 'Todas as Categorias',
+    'gallery.categories.ceremonies': 'Cerimônias',
+    'gallery.categories.panel': 'Painéis',
+    'gallery.categories.workshops': 'Oficinas',
+    'gallery.categories.networking': 'Networking',
+    'gallery.categories.social': 'Eventos Sociais',
+    'gallery.categories.speakers': 'Conferências',
+    'gallery.categories.instagram': 'Instagram',
+    'gallery.instagram.follow': 'Siga-nos no Instagram',
+    'gallery.instagram.realtime': 'Os melhores momentos em tempo real',
+    'gallery.instagram.follow.button': 'Seguir',
+    'gallery.instagram.view': 'Ver no Instagram',
+    'gallery.instagram.likes': 'Curtidas',
+    'gallery.instagram.comments': 'Comentários',
+    'gallery.day': 'Dia',
+    'gallery.edition.first': '1ª Edição',
+    'gallery.edition.second': '2ª Edição',
+    'gallery.edition.first.date': 'Primeira edição do fórum',
+    'gallery.edition.first.description': 'Nossa primeira edição reuniu 180 jovens líderes de 15 países',
+    'gallery.edition.second.date': 'Segunda edição expandida',
+    'gallery.edition.second.description': 'A segunda edição expandiu nosso alcance com 220 participantes',
+    'gallery.stats.participants': 'Participantes',
+    'gallery.stats.countries': 'Países',
+    'gallery.stats.conferences': 'Conferências',
+    'gallery.explore.moments': 'Explore os momentos mais importantes de cada edição',
+    'gallery.instagram.highlights': 'Momentos Destacados',
+    'gallery.instagram.highlights.subtitle': 'Buenos Aires 2024 • 19-21 Julho',
+    'gallery.instagram.realtime.content': 'Conteúdo em tempo real',
+    'gallery.instagram.video.summary': 'Resumo em Vídeo',
+    'gallery.instagram.video.day1': 'Destaques do primeiro dia',
+    'gallery.instagram.video.day2': 'O melhor do segundo dia',
+    'gallery.instagram.video.day3': 'Grande encerramento do evento',
+    'gallery.instagram.photos.gallery': 'Galeria de Fotos',
+    'gallery.instagram.photos.day1': '8 fotos • Momentos-chave',
+    'gallery.instagram.photos.day2': '7 fotos • Debates intensos',
+    'gallery.instagram.photos.day3': '9 fotos • Momentos finais',
+    'gallery.instagram.day1': 'Dia 1',
+    'gallery.instagram.day2': 'Dia 2',
+    'gallery.instagram.day3': 'Dia 3',
+    'gallery.instagram.date.day1': 'Sexta-feira, 19 de Julho de 2024',
+    'gallery.instagram.date.day2': 'Sábado, 20 de Julho de 2024',
+    'gallery.instagram.date.day3': 'Domingo, 21 de Julho de 2024',
+    'gallery.photos.event.gallery': 'Galeria do Evento',
+    'gallery.photos.professional.photos': 'Fotos profissionais do evento',
+    'gallery.photos.filter.category': 'Filtrar por categoria',
+    'gallery.photos.buenos.aires.2023': 'Buenos Aires 2023',
+    'gallery.photos.buenos.aires.2024': 'Buenos Aires 2024',
+
+    // Video Section
+    'video.launch.badge': 'Lançamento Oficial',
+    'video.launch.title': 'Conheça o',
+    'video.launch.title.highlight': 'Lançamento',
+    'video.launch.description': 'Descubra a apresentação oficial do III Fórum Pan-americano de Jovens Políticos e conheça todos os detalhes deste evento histórico.',
+    'video.launch.thumbnail.title': 'Vídeo de Lançamento',
+    'video.launch.thumbnail.click': 'Clique para reproduzir',
+    'video.launch.details': 'Neste vídeo você conhecerá os objetivos, participantes e a visão do III Fórum Pan-americano de Jovens Políticos que será realizado em 2025.',
+
+    // Organization Section
+    'organization.badge': 'Organização',
+    'organization.title': 'Conheça as organizações que tornam',
+    'organization.title.highlight': 'o Fórum possível',
+    'organization.description': 'Os grupos comprometidos com o desenvolvimento da liderança política juvenil na América Latina',
+    'organization.ip.title': 'Instituto Prudência',
+    'organization.ip.description': 'Think tank fundador e principal organizador do Fórum. Especializa-se na formação de dirigentes, articulação internacional e desenvolvimento de políticas públicas com perspectiva ocidental e conservadora. Foca na organização de eventos e programas que permitam combater o socialismo e o progressismo, buscando influenciar os ambientes de tomada de decisão para que a América recupere sua grandeza.',
+    'organization.uvd.title': 'Uma Voz Diferente',
+    'organization.uvd.description': 'Uma Voz Diferente (UVD) é uma organização juvenil peruana sem fins lucrativos, registrada na APCI, especializada na formação de dirigentes e desenvolvimento de políticas públicas com perspectiva cristã e conservadora. Foca em organizar eventos e programas para promover a liderança responsável e influenciar a tomada de decisões, defendendo os valores de Vida, Família, Liberdade e Verdade.',
+
+    // Event Data
+    'event.title': 'III Fórum Pan-americano de Jovens Políticos',
+    'event.location': 'Lima, Peru',
+
+    // Registration Section
+    'registration.success.title': 'Registro concluído com sucesso!',
+    'registration.success.message': 'Você receberá um email de confirmação com todos os detalhes do evento.',
+    'registration.finalize.title': 'Finalizar Registro',
+    'registration.finalize.description': 'Complete seu pagamento para garantir sua vaga no fórum',
+    'registration.back': 'Voltar',
+    'registration.badge': 'Inscrições Abertas para Lima 2025!',
+    'registration.description': 'Seja parte da próxima geração de líderes políticos que estão transformando a América. Sua voz importa, sua participação faz a diferença no futuro do nosso continente.',
+    'registration.cta.register': '🚀 Registre-se Agora',
+    'registration.cta.info': '📋 Mais Informações',
+
+    // Thematic Section
+    'thematic.back': 'Back to Thematic Axes',
+    'thematic.stats.sessions': 'Sessions',
+    'thematic.stats.experts': 'Experts',
+    'thematic.stats.resources': 'Resources',
+    'thematic.tabs.overview': 'Overview',
+    'thematic.tabs.sessions': 'Sessions',
+    'thematic.tabs.speakers': 'Speakers',
+    'thematic.tabs.resources': 'Resources',
+    'thematic.tabs.schedule': 'Schedule',
+    'thematic.detail.description': 'Detailed Description',
+    'thematic.detail.objectives': 'Main Objectives',
+    'thematic.detail.articles': 'Related Articles',
+    'thematic.detail.read': 'Read',
+    'thematic.detail.expertise': 'Areas of Expertise',
+    'thematic.detail.access': 'Access',
+    'thematic.detail.minutes': 'min',
+    'thematic.detail.people': 'people',
+
+    // Events Section
+    'events.badge': 'Programa Completo',
+    'events.title': 'Eventos e',
+    'events.title.highlight': 'Atividades',
+    'events.description': 'Em breve: Lista completa de painéis, oficinas, conferências magistrais e atividades de networking programadas para o fórum.',
+    'events.conferences.title': 'Conferências Magistrais',
+    'events.conferences.description': 'Palestras inspiradoras com líderes mundiais, ex-presidentes e figuras destacadas da política internacional.',
+    'events.workshops.title': 'Oficinas Práticas',
+    'events.workshops.description': 'Sessões interativas de desenvolvimento de habilidades em liderança, comunicação política e gestão de campanhas.',
+    'events.networking.title': 'Networking',
+    'events.networking.description': 'Oportunidades exclusivas para conectar com jovens líderes, mentores e organizações internacionais.',
+  }
 };
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [currentLanguage, setCurrentLanguage] = useState('es');
+  
+  const availableLanguages = ['es', 'en', 'pt'];
+  
   const t = (key: string): string => {
-    return translations[key] || key;
+    return translations[currentLanguage]?.[key] || translations['es']?.[key] || key;
   };
 
+  const setLanguage = (lang: string) => {
+    if (availableLanguages.includes(lang)) {
+      setCurrentLanguage(lang);
+      // Guardar en localStorage para persistencia
+      localStorage.setItem('preferred-language', lang);
+    }
+  };
+
+  // Cargar idioma preferido al inicializar
+  React.useEffect(() => {
+    const savedLanguage = localStorage.getItem('preferred-language');
+    if (savedLanguage && availableLanguages.includes(savedLanguage)) {
+      setCurrentLanguage(savedLanguage);
+    }
+  }, []);
+
   return (
-    <LanguageContext.Provider value={{ t }}>
+    <LanguageContext.Provider value={{ 
+      t, 
+      currentLanguage, 
+      setLanguage, 
+      availableLanguages 
+    }}>
       {children}
     </LanguageContext.Provider>
   );

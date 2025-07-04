@@ -22,6 +22,7 @@ import {
 import { ThematicAxisDetail, ThematicSession } from '../../types/index';
 import Card, { CardContent, CardHeader, CardTitle, CardDescription } from '../common/Card';
 import Button from '../common/Button';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 interface ThematicAxisDetailViewProps {
   axis: ThematicAxisDetail;
@@ -29,6 +30,7 @@ interface ThematicAxisDetailViewProps {
 }
 
 const ThematicAxisDetailView: React.FC<ThematicAxisDetailViewProps> = ({ axis, onBack }) => {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState<'overview' | 'sessions' | 'speakers' | 'resources' | 'schedule'>('overview');
 
   const getSessionTypeIcon = (type: ThematicSession['type']) => {
@@ -91,11 +93,11 @@ const ThematicAxisDetailView: React.FC<ThematicAxisDetailViewProps> = ({ axis, o
   };
 
   const tabs = [
-    { id: 'overview', label: 'Visión General', icon: <Target className="w-4 h-4" /> },
-    { id: 'sessions', label: 'Sesiones', icon: <Calendar className="w-4 h-4" /> },
-    { id: 'speakers', label: 'Ponentes', icon: <Users className="w-4 h-4" /> },
-    { id: 'resources', label: 'Recursos', icon: <BookOpen className="w-4 h-4" /> },
-    { id: 'schedule', label: 'Cronograma', icon: <Clock className="w-4 h-4" /> }
+    { id: 'overview', label: t('thematic.tabs.overview'), icon: <Target className="w-4 h-4" /> },
+    { id: 'sessions', label: t('thematic.tabs.sessions'), icon: <Calendar className="w-4 h-4" /> },
+    { id: 'speakers', label: t('thematic.tabs.speakers'), icon: <Users className="w-4 h-4" /> },
+    { id: 'resources', label: t('thematic.tabs.resources'), icon: <BookOpen className="w-4 h-4" /> },
+    { id: 'schedule', label: t('thematic.tabs.schedule'), icon: <Clock className="w-4 h-4" /> }
   ] as const;
 
   return (
@@ -109,7 +111,7 @@ const ThematicAxisDetailView: React.FC<ThematicAxisDetailViewProps> = ({ axis, o
             className="text-white hover:bg-white/10 mb-6"
             icon={<ArrowLeft />}
           >
-            Volver a Ejes Temáticos
+            {t('thematic.back')}
           </Button>
           
           <div className="max-w-4xl">
@@ -126,15 +128,15 @@ const ThematicAxisDetailView: React.FC<ThematicAxisDetailViewProps> = ({ axis, o
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
               <div className="text-center">
                 <div className="text-3xl font-bold mb-1">{axis.sessions.length}</div>
-                <div className="text-white/80">Sesiones</div>
+                <div className="text-white/80">{t('thematic.stats.sessions')}</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold mb-1">{axis.speakers.length}</div>
-                <div className="text-white/80">Expertos</div>
+                <div className="text-white/80">{t('thematic.stats.experts')}</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold mb-1">{axis.resources.length}</div>
-                <div className="text-white/80">Recursos</div>
+                <div className="text-white/80">{t('thematic.stats.resources')}</div>
               </div>
             </div>
           </div>
@@ -170,7 +172,7 @@ const ThematicAxisDetailView: React.FC<ThematicAxisDetailViewProps> = ({ axis, o
             {/* Long Description */}
             <Card variant="elevated">
               <CardHeader>
-                <CardTitle>Descripción Detallada</CardTitle>
+                <CardTitle>{t('thematic.detail.description')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-institutional text-neutral-700 leading-relaxed">
@@ -182,7 +184,7 @@ const ThematicAxisDetailView: React.FC<ThematicAxisDetailViewProps> = ({ axis, o
             {/* Objectives */}
             <Card variant="elevated">
               <CardHeader>
-                <CardTitle>Objetivos Principales</CardTitle>
+                <CardTitle>{t('thematic.detail.objectives')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -201,7 +203,7 @@ const ThematicAxisDetailView: React.FC<ThematicAxisDetailViewProps> = ({ axis, o
             {/* Related Articles */}
             <Card variant="elevated">
               <CardHeader>
-                <CardTitle>Artículos Relacionados</CardTitle>
+                <CardTitle>{t('thematic.detail.articles')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -209,7 +211,7 @@ const ThematicAxisDetailView: React.FC<ThematicAxisDetailViewProps> = ({ axis, o
                     <div key={index} className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg">
                       <span className="text-neutral-700">{article}</span>
                       <Button variant="ghost" size="sm" icon={<ExternalLink />}>
-                        Leer
+                        {t('thematic.detail.read')}
                       </Button>
                     </div>
                   ))}
@@ -246,11 +248,11 @@ const ThematicAxisDetailView: React.FC<ThematicAxisDetailViewProps> = ({ axis, o
                   <div className="grid grid-cols-2 gap-4 text-sm text-neutral-600">
                     <div className="flex items-center space-x-2">
                       <Clock className="w-4 h-4" />
-                      <span>{session.duration} min</span>
+                      <span>{session.duration} {t('thematic.detail.minutes')}</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Users className="w-4 h-4" />
-                      <span>{session.capacity} personas</span>
+                      <span>{session.capacity} {t('thematic.detail.people')}</span>
                     </div>
                   </div>
                 </CardContent>
@@ -284,7 +286,7 @@ const ThematicAxisDetailView: React.FC<ThematicAxisDetailViewProps> = ({ axis, o
                   <p className="text-institutional text-neutral-700 mb-4">{speaker.bio}</p>
                   
                   <div className="mb-4">
-                    <h4 className="font-semibold text-neutral-900 mb-2">Áreas de Expertise</h4>
+                    <h4 className="font-semibold text-neutral-900 mb-2">{t('thematic.detail.expertise')}</h4>
                     <div className="flex flex-wrap gap-2">
                       {speaker.expertise.map((skill) => (
                         <span
@@ -343,7 +345,7 @@ const ThematicAxisDetailView: React.FC<ThematicAxisDetailViewProps> = ({ axis, o
                       icon={<ExternalLink />}
                       onClick={() => window.open(resource.url, '_blank')}
                     >
-                      Acceder
+                      {t('thematic.detail.access')}
                     </Button>
                   </div>
                 </CardContent>
@@ -378,7 +380,7 @@ const ThematicAxisDetailView: React.FC<ThematicAxisDetailViewProps> = ({ axis, o
                         {session && (
                           <div className="flex items-center space-x-2 text-neutral-600">
                             <Clock className="w-4 h-4" />
-                            <span className="text-sm">{session.duration} min</span>
+                            <span className="text-sm">{session.duration} {t('thematic.detail.minutes')}</span>
                           </div>
                         )}
                       </div>

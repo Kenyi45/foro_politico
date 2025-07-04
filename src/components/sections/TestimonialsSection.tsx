@@ -1,8 +1,10 @@
 import React from 'react';
 import { Quote } from 'lucide-react';
 import Card from '../common/Card';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 const OrganizationsSection: React.FC = () => {
+  const { t } = useLanguage();
 
   return (
     <section id="organizacion" className="section-padding bg-gradient-to-br from-primary-900 via-primary-800 to-neutral-900 relative overflow-hidden">
@@ -18,19 +20,18 @@ const OrganizationsSection: React.FC = () => {
         <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 px-4">
           <div className="inline-flex items-center px-4 sm:px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white mb-6 sm:mb-8">
             <Quote className="w-4 sm:w-5 h-4 sm:h-5 mr-3" />
-            <span className="font-semibold text-sm sm:text-base">Organización</span>
+            <span className="font-semibold text-sm sm:text-base">{t('organization.badge')}</span>
           </div>
           
           <h2 className="title-section text-white mb-6 sm:mb-8 animate-slide-up">
-            Conoce las organizaciones que hacen{' '}
+            {t('organization.title')}{' '}
             <span className="text-accent-300 font-extrabold">
-              posible el Foro
+              {t('organization.title.highlight')}
             </span>
           </h2>
           
           <p className="text-lg sm:text-xl text-white/90 leading-relaxed font-medium">
-            Las agrupaciones comprometidas con el desarrollo del liderazgo político juvenil 
-            en América Latina
+            {t('organization.description')}
           </p>
         </div>
 
@@ -62,15 +63,11 @@ const OrganizationsSection: React.FC = () => {
                 {/* Content */}
                 <div className="relative z-10">
                   <h4 className="text-xl sm:text-2xl lg:text-3xl font-bold text-neutral-900 mb-4 sm:mb-6 group-hover:text-primary-800 transition-colors duration-300">
-                    Instituto Prudencia
+                    {t('organization.ip.title')}
                   </h4>
                   
                   <p className="text-neutral-700 text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8 max-w-2xl mx-auto font-medium">
-                  Think tank fundador y principal organizador del Foro. Está especializado en la formación 
-                  de dirigentes, en la articulación internacional, y en el desarrollo de políticas públicas 
-                  con perspectiva occidental y conservadora. Se enfoca en la organización de eventos y programas 
-                  que permitan combatir al socialismo y al progresismo, a la vez que busca incidir en los ambientes 
-                  de toma de decisión para que América recupere su grandeza.
+                    {t('organization.ip.description')}
                   </p>
                 </div>
               </div>
@@ -101,14 +98,11 @@ const OrganizationsSection: React.FC = () => {
                 {/* Content */}
                 <div className="relative z-10">
                   <h4 className="text-xl sm:text-2xl lg:text-3xl font-bold text-neutral-900 mb-4 sm:mb-6 group-hover:text-accent-800 transition-colors duration-300">
-                    Una Voz Diferente
+                    {t('organization.uvd.title')}
                   </h4>
                   
                   <p className="text-neutral-700 text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8 max-w-2xl mx-auto font-medium">
-                  Una Voz Diferente (UVD) es una organización juvenil peruana sin fines de lucro, registrada ante APCI, especializada en la 
-                  formación de dirigentes y desarrollo de políticas públicas con perspectiva cristiana y conservadora. Se enfoca en organizar 
-                  eventos y programas para promover el liderazgo responsable e incidir en la toma de decisiones, defendiendo los valores de 
-                  Vida, Familia, Libertad y Verdad.
+                    {t('organization.uvd.description')}
                   </p>
                 </div>
               </div>

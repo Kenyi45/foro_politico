@@ -192,17 +192,16 @@ function AppContent() {
               <div className="mb-12">
                 <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary-100 text-primary-700 mb-6">
                   <span className="w-2 h-2 bg-primary-600 rounded-full mr-2"></span>
-                  <span className="badge-text">Lanzamiento Oficial</span>
+                  <span className="badge-text">{t('video.launch.badge')}</span>ndiente 
                 </div>
                 
                 <h2 className="title-section text-neutral-900 mb-6 animate-slide-up">
-                  Conoce el{' '}
-                  <span className="text-primary-700 font-extrabold">Lanzamiento</span>
+                  {t('video.launch.title')}{' '}
+                  <span className="text-primary-700 font-extrabold">{t('video.launch.title.highlight')}</span>
                 </h2>
                 
                 <p className="subtitle-section text-neutral-600 max-w-3xl mx-auto mb-8">
-                  Descubre la presentación oficial del III Foro Panamericano de Jóvenes Políticos 
-                  y conoce todos los detalles de este evento histórico.
+                  {t('video.launch.description')}
                 </p>
               </div>
 
@@ -211,13 +210,13 @@ function AppContent() {
                 <div className="relative overflow-hidden rounded-2xl shadow-2xl">
                   {/* Thumbnail Image - Replace with your actual thumbnail */}
                   <div className="w-full h-64 sm:h-80 md:h-96 bg-gradient-to-br from-primary-600 to-accent-600 flex items-center justify-center">
-                    <div className="text-center text-white">
-                      <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
-                        <Play className="w-8 h-8 ml-1" />
+                                          <div className="text-center text-white">
+                        <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
+                          <Play className="w-8 h-8 ml-1" />
+                        </div>
+                        <h3 className="text-xl font-semibold mb-2">{t('video.launch.thumbnail.title')}</h3>
+                        <p className="text-white/80">{t('video.launch.thumbnail.click')}</p>
                       </div>
-                      <h3 className="text-xl font-semibold mb-2">Video de Lanzamiento</h3>
-                      <p className="text-white/80">Haz clic para reproducir</p>
-                    </div>
                   </div>
                   
                   {/* Play Button Overlay */}
@@ -232,8 +231,7 @@ function AppContent() {
               {/* Video Description */}
               <div className="mt-8 text-center">
                 <p className="text-neutral-600 leading-relaxed max-w-2xl mx-auto">
-                  En este video podrás conocer los objetivos, participantes y la visión 
-                  del III Foro Panamericano de Jóvenes Políticos que se realizará en 2025.
+                  {t('video.launch.details')}
                 </p>
               </div>
             </div>
@@ -273,12 +271,11 @@ function AppContent() {
                   <div className="w-16 h-16 bg-primary-100 rounded-xl flex items-center justify-center mb-6 mx-auto">
                     <span className="text-primary-600 font-bold text-2xl">🎤</span>
                   </div>
-                  <CardTitle className="leading-tight">Conferencias Magistrales</CardTitle>
+                  <CardTitle className="leading-tight">{t('events.conferences.title')}</CardTitle>
                 </CardHeader>
                 <CardContent className="text-center">
                   <CardDescription className="leading-relaxed">
-                    Charlas inspiradoras con líderes mundiales, ex-presidentes y figuras 
-                    destacadas de la política internacional.
+                    {t('events.conferences.description')}
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -288,12 +285,11 @@ function AppContent() {
                   <div className="w-16 h-16 bg-accent-100 rounded-xl flex items-center justify-center mb-6 mx-auto">
                     <span className="text-accent-600 font-bold text-2xl">🛠️</span>
                   </div>
-                  <CardTitle className="leading-tight">Talleres Prácticos</CardTitle>
+                  <CardTitle className="leading-tight">{t('events.workshops.title')}</CardTitle>
                 </CardHeader>
                 <CardContent className="text-center">
                   <CardDescription className="leading-relaxed">
-                    Sesiones interactivas de desarrollo de habilidades en liderazgo, 
-                    comunicación política y gestión de campañas.
+                    {t('events.workshops.description')}
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -303,12 +299,11 @@ function AppContent() {
                   <div className="w-16 h-16 bg-gold-100 rounded-xl flex items-center justify-center mb-6 mx-auto">
                     <span className="text-gold-600 font-bold text-2xl">🤝</span>
                   </div>
-                  <CardTitle className="leading-tight">Networking</CardTitle>
+                  <CardTitle className="leading-tight">{t('events.networking.title')}</CardTitle>
                 </CardHeader>
                 <CardContent className="text-center">
                   <CardDescription className="leading-relaxed">
-                    Oportunidades exclusivas de conexión con jóvenes líderes, mentores 
-                    y organizaciones internacionales.
+                    {t('events.networking.description')}
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -337,7 +332,7 @@ function AppContent() {
               {/* Replace this iframe with your actual video URL */}
               <iframe
                 src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
-                title="Video de Lanzamiento - III Foro Panamericano de Jóvenes Políticos"
+                title={`${t('video.launch.thumbnail.title')} - ${t('video.title')}`}
                 className="w-full h-full"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -347,8 +342,8 @@ function AppContent() {
             
             {/* Video Info */}
             <div className="mt-4 text-center text-white">
-              <h3 className="text-xl font-semibold mb-2">III Foro Panamericano de Jóvenes Políticos</h3>
-              <p className="text-white/80">Video de lanzamiento oficial</p>
+              <h3 className="text-xl font-semibold mb-2">{t('video.title')}</h3>
+              <p className="text-white/80">{t('video.subtitle')}</p>
             </div>
           </div>
         </div>
@@ -363,7 +358,7 @@ function AppContent() {
               <div className="flex items-center mb-8">
                 <img 
                   src="/Logo_FORO.png" 
-                  alt="Foro de Jóvenes Políticos" 
+                  alt={t('video.title')} 
                   className="h-20 sm:h-32 md:h-44 lg:h-36 xl:h-52 2xl:h-50 w-auto object-contain"
                 />
               </div>
