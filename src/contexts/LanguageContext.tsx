@@ -9,6 +9,9 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+// Available languages constant
+const availableLanguages = ['es', 'en', 'pt'];
+
 // Traducciones en múltiples idiomas
 const translations: Record<string, Record<string, string>> = {
   es: {
@@ -745,8 +748,6 @@ const translations: Record<string, Record<string, string>> = {
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [currentLanguage, setCurrentLanguage] = useState('es');
-  
-  const availableLanguages = ['es', 'en', 'pt'];
   
   const t = (key: string): string => {
     return translations[currentLanguage]?.[key] || translations['es']?.[key] || key;
