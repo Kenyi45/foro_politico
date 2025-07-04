@@ -53,7 +53,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ isScrolled = false,
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className={`absolute ${isMobile ? 'top-full left-0' : 'top-full right-0'} mt-2 w-48 bg-white rounded-xl shadow-xl border border-neutral-100/50 backdrop-blur-xl z-50`}>
+        <div className={`absolute ${isMobile ? 'bottom-full left-0 mb-2' : 'top-full right-0 mt-2'} w-48 bg-white rounded-xl shadow-xl border border-neutral-100/50 backdrop-blur-xl z-50`}>
           <div className="py-2">
             {availableLanguages.map((lang) => {
               const langCode = lang as LanguageCode;
