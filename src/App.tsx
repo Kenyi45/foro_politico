@@ -208,21 +208,29 @@ function AppContent() {
               {/* Video Thumbnail */}
               <div className="relative group cursor-pointer" onClick={() => setIsVideoModalOpen(true)}>
                 <div className="relative overflow-hidden rounded-2xl shadow-2xl">
-                  {/* Thumbnail Image - Replace with your actual thumbnail */}
-                  <div className="w-full h-64 sm:h-80 md:h-96 bg-gradient-to-br from-primary-600 to-accent-600 flex items-center justify-center">
-                                          <div className="text-center text-white">
-                        <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
-                          <Play className="w-8 h-8 ml-1" />
-                        </div>
-                        <h3 className="text-xl font-semibold mb-2">{t('video.launch.thumbnail.title')}</h3>
-                        <p className="text-white/80">{t('video.launch.thumbnail.click')}</p>
+                  {/* Video Preview - Vertical Format */}
+                  <div className="w-full max-w-md mx-auto aspect-[9/16] bg-gradient-to-br from-primary-600 to-accent-600 relative">
+                    <video
+                      src="/Video.mp4"
+                      className="w-full h-full object-cover"
+                      muted
+                      loop
+                      playsInline
+                    >
+                      <source src="/Video.mp4" type="video/mp4" />
+                    </video>
+                    
+                    {/* Play Button Overlay */}
+                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/90 group-hover:bg-white rounded-full flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-lg">
+                        <Play className="w-6 h-6 sm:w-8 sm:h-8 text-primary-600 ml-1" />
                       </div>
-                  </div>
-                  
-                  {/* Play Button Overlay */}
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/90 group-hover:bg-white rounded-full flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-lg">
-                      <Play className="w-6 h-6 sm:w-8 sm:h-8 text-primary-600 ml-1" />
+                    </div>
+                    
+                    {/* Video Info Overlay */}
+                    <div className="absolute bottom-4 left-4 right-4 text-white">
+                      <h3 className="text-lg font-semibold mb-1">{t('video.launch.thumbnail.title')}</h3>
+                      <p className="text-white/80 text-sm">{t('video.launch.thumbnail.click')}</p>
                     </div>
                   </div>
                 </div>
@@ -317,8 +325,14 @@ function AppContent() {
 
       {/* Video Modal */}
       {isVideoModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="relative w-full max-w-4xl mx-auto">
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          onClick={() => setIsVideoModalOpen(false)}
+        >
+          <div 
+            className="relative w-full max-w-md mx-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* Close Button */}
             <button
               onClick={() => setIsVideoModalOpen(false)}
@@ -327,17 +341,20 @@ function AppContent() {
               <X className="w-5 h-5" />
             </button>
             
-            {/* Video Container */}
-            <div className="relative w-full aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl">
-              {/* Replace this iframe with your actual video URL */}
-              <iframe
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+            {/* Video Container - Vertical Format */}
+            <div className="relative w-full aspect-[9/16] bg-black rounded-2xl overflow-hidden shadow-2xl">
+              {/* Local Video */}
+              <video
+                src="/Video.mp4"
                 title={`${t('video.launch.thumbnail.title')} - ${t('video.title')}`}
-                className="w-full h-full"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+                className="w-full h-full object-cover"
+                controls
+                autoPlay
+                playsInline
+              >
+                <source src="/Video.mp4" type="video/mp4" />
+                {t('video.subtitle')}
+              </video>
             </div>
             
             {/* Video Info */}

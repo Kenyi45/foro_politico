@@ -74,7 +74,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled = false }) => {
       }`}
     >
       {/* Language Selector - Positioned outside navbar container */}
-      <div className="absolute top-4 right-4 z-10">
+      <div className="absolute top-4 right-4 z-10 hidden lg:block">
         <LanguageSelector isScrolled={scrolled} />
       </div>
 
@@ -246,6 +246,14 @@ const Header: React.FC<HeaderProps> = ({ isScrolled = false }) => {
                 >
                   {t('nav.registro')}
                 </button>
+              </div>
+              
+              {/* Language Selector for Mobile */}
+              <div className="pt-4 border-t border-neutral-200/50">
+                <div className="flex items-center justify-between px-4 py-3">
+                  <span className="text-sm font-medium text-neutral-700">Idioma / Language</span>
+                  <LanguageSelector isScrolled={true} isMobile={true} />
+                </div>
               </div>
             </div>
           </div>

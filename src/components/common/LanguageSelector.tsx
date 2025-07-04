@@ -4,12 +4,13 @@ import { useLanguage } from '../../contexts/LanguageContext';
 
 interface LanguageSelectorProps {
   isScrolled?: boolean;
+  isMobile?: boolean;
 }
 
 // Define the valid language codes
 type LanguageCode = 'es' | 'en' | 'pt';
 
-const LanguageSelector: React.FC<LanguageSelectorProps> = ({ isScrolled = false }) => {
+const LanguageSelector: React.FC<LanguageSelectorProps> = ({ isScrolled = false, isMobile = false }) => {
   const { currentLanguage, setLanguage, availableLanguages } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -38,7 +39,9 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ isScrolled = false 
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`flex items-center space-x-2 px-3 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
-          isScrolled
+          isMobile
+            ? 'text-neutral-700 hover:text-primary-600 hover:bg-neutral-50'
+            : isScrolled
             ? 'text-neutral-700 hover:text-primary-600 hover:bg-neutral-50'
             : 'text-white/90 hover:text-white hover:bg-white/10 backdrop-blur-sm'
         }`}
