@@ -44,7 +44,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
     title: ``,
     description: `Captura especial del Foro Panamericano de Jóvenes Políticos`,
     category: 'evento',
-    date: new Date(2024, 11, 15), // Fecha del evento
+    date: new Date(2024, 6, 19), // Fecha del evento
     type: 'image' as const
   }));
 
