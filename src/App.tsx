@@ -192,7 +192,7 @@ function AppContent() {
               <div className="mb-12">
                 <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary-100 text-primary-700 mb-6">
                   <span className="w-2 h-2 bg-primary-600 rounded-full mr-2"></span>
-                  <span className="badge-text">{t('video.launch.badge')}</span>ndiente 
+                  <span className="badge-text">{t('video.launch.badge')}</span> 
                 </div>
                 
                 <h2 className="title-section text-neutral-900 mb-6 animate-slide-up">
