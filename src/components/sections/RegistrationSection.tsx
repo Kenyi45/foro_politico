@@ -3,6 +3,7 @@ import { Calendar, CreditCard, CheckCircle, X } from 'lucide-react';
 import { useCountdown } from '../../hooks/useCountdown';
 import { mockForumEvent } from '../../data/mockData';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { trackRegistrationAttempt, trackButtonClick } from '../../utils/analytics';
 
 const RegistrationSection: React.FC = () => {
   const { t } = useLanguage();
@@ -25,6 +26,8 @@ const RegistrationSection: React.FC = () => {
   ];
 
   const handleRegisterClick = () => {
+    trackRegistrationAttempt('registration_section');
+    trackButtonClick('register_now', 'registration_section');
     setShowGoogleFormIframe(true);
     setGoogleFormIframeURL('https://docs.google.com/forms/d/e/1FAIpQLSe-3uEhXs7UrNJsv_BPBMPnd3sNk2PipWG_rgNBnDaa_r55NA/viewform?embedded=true');
   };

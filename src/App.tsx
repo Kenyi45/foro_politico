@@ -21,6 +21,7 @@ import RegistrationSection from './components/sections/RegistrationSection';
 
 // Common Components
 import Card, { CardHeader, CardTitle, CardContent, CardDescription } from './components/common/Card';
+import SEO from './components/common/SEO';
 
 // Language Context
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
@@ -104,6 +105,14 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-white custom-scrollbar">
+      {/* SEO Component */}
+      <SEO 
+        title="III Foro Panamericano de Jóvenes Políticos - Lima, Perú 2025"
+        description="¡Tu voz puede transformar América! Inscríbete al III Foro Panamericano de Jóvenes Políticos – Perú 2025. Evento internacional que reunirá a jóvenes líderes para debatir, proponer y construir soluciones políticas con impacto real."
+        keywords="foro panamericano, jóvenes políticos, lima perú 2025, política internacional, liderazgo juvenil, foro político, américa latina, jóvenes líderes"
+        type="event"
+      />
+      
       {/* Header */}
       <Header />
 
