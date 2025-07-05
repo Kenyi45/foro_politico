@@ -63,47 +63,117 @@ const RegistrationSection: React.FC = () => {
       setFormError('Por favor, completa todos los campos requeridos marcados con *');
       return;
     }
+    
     try {
-      const googleFormData = new FormData();
-      googleFormData.append('entry.1876053177', formData.email);
-      googleFormData.append('entry.1150976519', formData.nombre);
+      // Crear un objeto con todos los datos del formulario
+      const formDataObj: Record<string, string> = {
+        'entry.1876053177': formData.email,
+        'entry.1150976519': formData.nombre,
+        'entry.1359745950': formData.genero,
+        'entry.969671877': formData.documento,
+        'entry.989222933': formData.ocupacion,
+        'entry.555315055': formData.organizacion,
+        'entry.1929049539': formData.telefono,
+        'entry.1612702848': formData.direccion,
+        'entry.298256039': formData.comoSeEntero || '',
+        'entry.168457685': formData.participacionElecciones,
+        'entry.376236169': formData.curriculum
+      };
+
+      // Agregar fecha de nacimiento si existe
       if (formData.fechaNacimiento) {
         const fecha = new Date(formData.fechaNacimiento);
-        googleFormData.append('entry.950660790_year', fecha.getFullYear().toString());
-        googleFormData.append('entry.950660790_month', (fecha.getMonth() + 1).toString());
-        googleFormData.append('entry.950660790_day', fecha.getDate().toString());
+        formDataObj['entry.950660790_year'] = fecha.getFullYear().toString();
+        formDataObj['entry.950660790_month'] = (fecha.getMonth() + 1).toString();
+        formDataObj['entry.950660790_day'] = fecha.getDate().toString();
       }
-      // Note: Nacionalidad shares the same entry ID as email in the form
-      // This might be an issue with the Google Form configuration
-      googleFormData.append('entry.1876053177', formData.nacionalidad);
-      googleFormData.append('entry.1359745950', formData.genero);
-      googleFormData.append('entry.969671877', formData.documento);
-      googleFormData.append('entry.989222933', formData.ocupacion);
-      googleFormData.append('entry.555315055', formData.organizacion);
-      googleFormData.append('entry.1929049539', formData.telefono);
-      googleFormData.append('entry.1612702848', formData.direccion);
-      googleFormData.append('entry.298256039', formData.comoSeEntero);
-      googleFormData.append('entry.168457685', formData.participacionElecciones);
-      googleFormData.append('entry.1464855928', formData.añoElecciones);
-      googleFormData.append('entry.376236169', formData.curriculum);
+
+      // Agregar año de elecciones si participó anteriormente
+      if (formData.participacionElecciones === 'Sí' && formData.añoElecciones) {
+        (formDataObj as any)['entry.1464855928'] = formData.añoElecciones;
+      }
+
+      // Convertir a URLSearchParams para mejor compatibilidad
+      const params = new URLSearchParams();
+      Object.entries(formDataObj).forEach(([key, value]) => {
+        if (value) {
+          params.append(key, value);
+        }
+      });
+
       const googleFormURL = 'https://docs.google.com/forms/d/e/1FAIpQLSe-3uEhXs7UrNJsv_BPBMPnd3sNk2PipWG_rgNBnDaa_r55NA/formResponse';
-      await fetch(googleFormURL, {
-        method: 'POST',
-        body: googleFormData,
-        mode: 'no-cors'
-      });
-      setFormSubmitted(true);
-      setFormError('');
-      setFormData({
-        email: '', nombre: '', fechaNacimiento: '', nacionalidad: '', genero: '',
-        documento: '', ocupacion: '', organizacion: '', telefono: '', direccion: '',
-        comoSeEntero: '', participacionElecciones: '', añoElecciones: '', curriculum: ''
-      });
-      setShowRegistrationForm(false);
-      setShowPaymentNotification(true);
+      
+      console.log('Enviando datos a Google Forms:', formDataObj);
+      
+      // Intentar múltiples métodos de envío
+      let success = false;
+      
+      // Método 1: Usando fetch con FormData
+      try {
+        const formData = new FormData();
+        Object.entries(formDataObj).forEach(([key, value]) => {
+          if (value) formData.append(key, value);
+        });
+        
+        await fetch(googleFormURL, {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors'
+        });
+        success = true;
+        console.log('Formulario enviado exitosamente con FormData');
+      } catch (error) {
+        console.log('Error con FormData, intentando con URLSearchParams:', error);
+      }
+
+      // Método 2: Usando fetch con URLSearchParams
+      if (!success) {
+        try {
+          await fetch(googleFormURL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: params.toString(),
+            mode: 'no-cors'
+          });
+          success = true;
+          console.log('Formulario enviado exitosamente con URLSearchParams');
+        } catch (error) {
+          console.log('Error con URLSearchParams:', error);
+        }
+      }
+
+      // Método 3: Usando XMLHttpRequest como fallback
+      if (!success) {
+        try {
+          const xhr = new XMLHttpRequest();
+          xhr.open('POST', googleFormURL, true);
+          xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+          xhr.send(params.toString());
+          success = true;
+          console.log('Formulario enviado exitosamente con XMLHttpRequest');
+        } catch (error) {
+          console.log('Error con XMLHttpRequest:', error);
+        }
+      }
+
+      if (success) {
+        setFormSubmitted(true);
+        setFormError('');
+        setFormData({
+          email: '', nombre: '', fechaNacimiento: '', nacionalidad: '', genero: '',
+          documento: '', ocupacion: '', organizacion: '', telefono: '', direccion: '',
+          comoSeEntero: '', participacionElecciones: '', añoElecciones: '', curriculum: ''
+        });
+        setShowRegistrationForm(false);
+        setShowPaymentNotification(true);
+      } else {
+        throw new Error('No se pudo enviar el formulario con ningún método');
+      }
     } catch (error) {
       console.error('Error al enviar formulario:', error);
-      setFormError('Ha ocurrido un error al enviar el formulario. Por favor, intenta nuevamente.');
+      setFormError('Ha ocurrido un error al enviar el formulario. Por favor, intenta nuevamente o contacta al administrador.');
     }
   };
 
