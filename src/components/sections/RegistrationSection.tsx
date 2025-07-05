@@ -85,7 +85,7 @@ const RegistrationSection: React.FC = () => {
       googleFormData.append('entry.2345678901', formData.participacionElecciones);
       googleFormData.append('entry.3456789012', formData.añoElecciones);
       googleFormData.append('entry.4567890123', formData.curriculum);
-      const googleFormURL = 'https://docs.google.com/forms/d/e/1FAIpQLSe-3uEhXs7UrNJsv_BPBMPnd3sNk2PipWG_rgNBnDaa_r55NA/formResponse';
+      const googleFormURL = 'https://docs.google.com/forms/d/e/1FAIpQLSe-3uEhXs7UrNJsv_BPBMPnd3sNk2PipWG_rgNBnDaa_r55NA/viewform?fbclid=PAZXh0bgNhZW0CMTEAAaeiYXO1oTHUZGq5kwmQU6jZ28TffXyJ71DIA62qkPEwk0rqGngweBs3Q5MthQ_aem_aBR_mUW56Of8aMwpLcqRaw';
       await fetch(googleFormURL, {
         method: 'POST',
         body: googleFormData,
