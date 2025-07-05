@@ -66,19 +66,26 @@ const RegistrationSection: React.FC = () => {
     
     try {
       // Crear un objeto con todos los datos del formulario
+      // Basado en la estructura del Google Form: https://docs.google.com/forms/d/e/1FAIpQLSe-3uEhXs7UrNJsv_BPBMPnd3sNk2PipWG_rgNBnDaa_r55NA/viewform
       const formDataObj: Record<string, string> = {
-        'entry.1876053177': formData.email,
-        'entry.1150976519': formData.nombre,
-        'entry.1359745950': formData.genero,
-        'entry.969671877': formData.documento,
-        'entry.989222933': formData.ocupacion,
-        'entry.555315055': formData.organizacion,
-        'entry.1929049539': formData.telefono,
-        'entry.1612702848': formData.direccion,
-        'entry.298256039': formData.comoSeEntero || '',
-        'entry.168457685': formData.participacionElecciones,
-        'entry.376236169': formData.curriculum
+        'entry.1876053177': formData.email, // Email
+        'entry.1150976519': formData.nombre, // Nombre completo
+        'entry.1359745950': formData.genero, // Género
+        'entry.969671877': formData.documento, // Documento de identidad
+        'entry.989222933': formData.ocupacion, // Ocupación actual
+        'entry.555315055': formData.organizacion, // Organización o entidad
+        'entry.1929049539': formData.telefono, // Teléfono
+        'entry.1612702848': formData.direccion, // Dirección
+        'entry.298256039': formData.comoSeEntero || '', // Cómo te enteraste del evento
+        'entry.168457685': formData.participacionElecciones, // ¿Ha participado en ediciones anteriores?
+        'entry.376236169': formData.curriculum // Breve descripción del Currículum
       };
+
+      // Agregar nacionalidad (necesitamos encontrar el entry ID correcto)
+      // Por ahora usamos un placeholder - esto necesita ser corregido
+      if (formData.nacionalidad) {
+        (formDataObj as any)['entry.NACIONALIDAD_PLACEHOLDER'] = formData.nacionalidad;
+      }
 
       // Agregar fecha de nacimiento si existe
       if (formData.fechaNacimiento) {
@@ -103,7 +110,10 @@ const RegistrationSection: React.FC = () => {
 
       const googleFormURL = 'https://docs.google.com/forms/d/e/1FAIpQLSe-3uEhXs7UrNJsv_BPBMPnd3sNk2PipWG_rgNBnDaa_r55NA/formResponse';
       
-      console.log('Enviando datos a Google Forms:', formDataObj);
+      console.log('=== ENVÍO DE FORMULARIO A GOOGLE FORMS ===');
+      console.log('URL del formulario:', googleFormURL);
+      console.log('Datos a enviar:', formDataObj);
+      console.log('==========================================');
       
       // Intentar múltiples métodos de envío
       let success = false;
