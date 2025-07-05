@@ -65,27 +65,28 @@ const RegistrationSection: React.FC = () => {
     }
     try {
       const googleFormData = new FormData();
-      googleFormData.append('entry.1876653177', formData.email);
+      googleFormData.append('entry.1876053177', formData.email);
       googleFormData.append('entry.1150976519', formData.nombre);
       if (formData.fechaNacimiento) {
         const fecha = new Date(formData.fechaNacimiento);
-        googleFormData.append('entry.950607096_year', fecha.getFullYear().toString());
-        googleFormData.append('entry.950607096_month', (fecha.getMonth() + 1).toString());
-        googleFormData.append('entry.950607096_day', fecha.getDate().toString());
+        googleFormData.append('entry.950660790_year', fecha.getFullYear().toString());
+        googleFormData.append('entry.950660790_month', (fecha.getMonth() + 1).toString());
+        googleFormData.append('entry.950660790_day', fecha.getDate().toString());
       }
-      googleFormData.append('entry.989222933', formData.nacionalidad);
-      googleFormData.append('entry.555315055', formData.genero);
-      googleFormData.append('entry.1929049539', formData.documento);
-      googleFormData.append('entry.1612702848', formData.ocupacion);
-      googleFormData.append('entry.29825689', formData.organizacion);
-      googleFormData.append('entry.969671877', formData.telefono);
-      googleFormData.append('entry.376236169', formData.direccion);
-      // Campos adicionales (reemplaza los entry.X por los correctos de tu Google Form)
-      googleFormData.append('entry.1234567890', formData.comoSeEntero);
-      googleFormData.append('entry.2345678901', formData.participacionElecciones);
-      googleFormData.append('entry.3456789012', formData.añoElecciones);
-      googleFormData.append('entry.4567890123', formData.curriculum);
-      const googleFormURL = 'https://docs.google.com/forms/d/e/1FAIpQLSe-3uEhXs7UrNJsv_BPBMPnd3sNk2PipWG_rgNBnDaa_r55NA/viewform?fbclid=PAZXh0bgNhZW0CMTEAAaeiYXO1oTHUZGq5kwmQU6jZ28TffXyJ71DIA62qkPEwk0rqGngweBs3Q5MthQ_aem_aBR_mUW56Of8aMwpLcqRaw';
+      // Note: Nacionalidad shares the same entry ID as email in the form
+      // This might be an issue with the Google Form configuration
+      googleFormData.append('entry.1876053177', formData.nacionalidad);
+      googleFormData.append('entry.1359745950', formData.genero);
+      googleFormData.append('entry.969671877', formData.documento);
+      googleFormData.append('entry.989222933', formData.ocupacion);
+      googleFormData.append('entry.555315055', formData.organizacion);
+      googleFormData.append('entry.1929049539', formData.telefono);
+      googleFormData.append('entry.1612702848', formData.direccion);
+      googleFormData.append('entry.298256039', formData.comoSeEntero);
+      googleFormData.append('entry.168457685', formData.participacionElecciones);
+      googleFormData.append('entry.1464855928', formData.añoElecciones);
+      googleFormData.append('entry.376236169', formData.curriculum);
+      const googleFormURL = 'https://docs.google.com/forms/d/e/1FAIpQLSe-3uEhXs7UrNJsv_BPBMPnd3sNk2PipWG_rgNBnDaa_r55NA/formResponse';
       await fetch(googleFormURL, {
         method: 'POST',
         body: googleFormData,
