@@ -67,8 +67,8 @@ const RegistrationSection: React.FC = () => {
     try {
       // Crear un objeto con todos los datos del formulario
       // Basado en la estructura del Google Form: https://docs.google.com/forms/d/e/1FAIpQLSe-3uEhXs7UrNJsv_BPBMPnd3sNk2PipWG_rgNBnDaa_r55NA/viewform
+      // NOTA: Hay un problema en el formulario - Email y Nacionalidad comparten el mismo entry ID
       const formDataObj: Record<string, string> = {
-        'entry.1876053177': formData.email, // Email
         'entry.1150976519': formData.nombre, // Nombre completo
         'entry.1359745950': formData.genero, // Género
         'entry.969671877': formData.documento, // Documento de identidad
@@ -81,10 +81,12 @@ const RegistrationSection: React.FC = () => {
         'entry.376236169': formData.curriculum // Breve descripción del Currículum
       };
 
-      // Agregar nacionalidad (necesitamos encontrar el entry ID correcto)
-      // Por ahora usamos un placeholder - esto necesita ser corregido
-      if (formData.nacionalidad) {
-        (formDataObj as any)['entry.NACIONALIDAD_PLACEHOLDER'] = formData.nacionalidad;
+      // Manejar el conflicto entre Email y Nacionalidad (ambos usan entry.1876053177)
+      // Priorizamos el email ya que es más importante para el contacto
+      if (formData.email) {
+        formDataObj['entry.1876053177'] = formData.email;
+      } else if (formData.nacionalidad) {
+        formDataObj['entry.1876053177'] = formData.nacionalidad;
       }
 
       // Agregar fecha de nacimiento si existe
@@ -113,6 +115,7 @@ const RegistrationSection: React.FC = () => {
       console.log('=== ENVÍO DE FORMULARIO A GOOGLE FORMS ===');
       console.log('URL del formulario:', googleFormURL);
       console.log('Datos a enviar:', formDataObj);
+      console.log('⚠️  NOTA: Email y Nacionalidad comparten entry ID - priorizando email');
       console.log('==========================================');
       
       // Intentar múltiples métodos de envío
