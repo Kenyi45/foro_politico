@@ -1,35 +1,14 @@
 import React, { useState } from 'react';
-import { Calendar, CreditCard, CheckCircle, X, User, Mail, Phone, MapPin as MapPinIcon, FileText, Globe, Building, Calendar as CalendarIcon } from 'lucide-react';
+import { Calendar, CreditCard, CheckCircle, X } from 'lucide-react';
 import { useCountdown } from '../../hooks/useCountdown';
 import { mockForumEvent } from '../../data/mockData';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 const RegistrationSection: React.FC = () => {
   const { t } = useLanguage();
-  const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   const [showPaymentNotification, setShowPaymentNotification] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formError, setFormError] = useState('');
   const [showGoogleFormIframe, setShowGoogleFormIframe] = useState(false);
   const [googleFormIframeURL, setGoogleFormIframeURL] = useState('');
-
-  // Form state
-  const [formData, setFormData] = useState({
-    email: '',
-    nombre: '',
-    fechaNacimiento: '',
-    nacionalidad: '',
-    genero: '',
-    documento: '',
-    ocupacion: '',
-    organizacion: '',
-    telefono: '',
-    direccion: '',
-    comoSeEntero: '',
-    participacionElecciones: '',
-    añoElecciones: '',
-    curriculum: ''
-  });
 
   const { timeLeft, isExpired, formatTime } = useCountdown({
     targetDate: mockForumEvent.startDate,
@@ -46,129 +25,8 @@ const RegistrationSection: React.FC = () => {
   ];
 
   const handleRegisterClick = () => {
-    setShowRegistrationForm(true);
-  };
-
-  const handleFormInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const requiredFields = ['email', 'nombre', 'fechaNacimiento', 'nacionalidad', 'genero', 'documento', 'ocupacion', 'organizacion', 'telefono', 'direccion', 'participacionElecciones', 'curriculum'];
-    const missingFields = requiredFields.filter(field => !formData[field as keyof typeof formData]);
-    if (missingFields.length > 0) {
-      setFormError('Por favor, completa todos los campos requeridos marcados con *');
-      return;
-    }
-
-    try {
-      // Crear un objeto con todos los datos del formulario
-      // Basado en la estructura del Google Form: https://docs.google.com/forms/d/e/1FAIpQLSe-3uEhXs7UrNJsv_BPBMPnd3sNk2PipWG_rgNBnDaa_r55NA/viewform
-      // SOLUCIÓN: Concatenar nombre y email en entry.1150976519 con formato "nombre - email"
-      const nombreConEmail = formData.email ? `${formData.nombre} - ${formData.email}` : formData.nombre;
-
-      const formDataObj: Record<string, string> = {
-        'entry.1150976519': nombreConEmail, // Nombre completo + Email concatenados
-        'entry.1359745950': formData.genero, // Género
-        'entry.969671877': formData.documento, // Documento de identidad
-        'entry.989222933': formData.ocupacion, // Ocupación actual
-        'entry.555315055': formData.organizacion, // Organización o entidad
-        'entry.1929049539': formData.telefono, // Teléfono
-        'entry.1612702848': formData.direccion, // Dirección
-        'entry.298256039': formData.comoSeEntero || '', // Cómo te enteraste del evento
-        'entry.168457685': formData.participacionElecciones, // ¿Ha participado en ediciones anteriores?
-        'entry.376236169': formData.curriculum, // Breve descripción del Currículum
-        'entry.1876053177': formData.nacionalidad // Nacionalidad
-      };
-
-      // Agregar fecha de nacimiento si existe
-      if (formData.fechaNacimiento) {
-        const fecha = new Date(formData.fechaNacimiento);
-        formDataObj['entry.950660790_year'] = fecha.getFullYear().toString();
-        formDataObj['entry.950660790_month'] = (fecha.getMonth() + 1).toString();
-        formDataObj['entry.950660790_day'] = fecha.getDate().toString();
-      }
-
-      // Agregar año de elecciones si participó anteriormente
-      if (formData.participacionElecciones === 'Sí' && formData.añoElecciones) {
-        (formDataObj as any)['entry.1464855928'] = formData.añoElecciones;
-      }
-
-      // Convertir a URLSearchParams para mejor compatibilidad
-      const params = new URLSearchParams();
-      Object.entries(formDataObj).forEach(([key, value]) => {
-        if (value) {
-          params.append(key, value);
-        }
-      });
-
-      const googleFormURL = 'https://docs.google.com/forms/d/e/1FAIpQLSe-3uEhXs7UrNJsv_BPBMPnd3sNk2PipWG_rgNBnDaa_r55NA/formResponse';
-
-      console.log('=== ENVÍO DE FORMULARIO A GOOGLE FORMS ===');
-      console.log('URL del formulario:', googleFormURL);
-      console.log('Datos a enviar:', formDataObj);
-      console.log('✅ SOLUCIÓN IMPLEMENTADA: Email concatenado con nombre en entry.1150976519');
-      console.log('📧 Nombre + Email:', nombreConEmail);
-      console.log('==========================================');
-
-      // Usar iframe embebido de Google Forms (método más confiable)
-      console.log('=== ABRIENDO FORMULARIO DE GOOGLE EN IFRAME ===');
-      console.log('URL del formulario embebido:', 'https://docs.google.com/forms/d/e/1FAIpQLSe-3uEhXs7UrNJsv_BPBMPnd3sNk2PipWG_rgNBnDaa_r55NA/viewform?embedded=true');
-      console.log('Datos preparados para pre-llenar:', formDataObj);
-      console.log('==========================================');
-
-      // Crear URL con datos pre-llenados para el iframe
-      const prefillParams = new URLSearchParams();
-      Object.entries(formDataObj).forEach(([key, value]) => {
-        if (value) {
-          prefillParams.append(key, value);
-        }
-      });
-
-      const iframeURL = `https://docs.google.com/forms/d/e/1FAIpQLSe-3uEhXs7UrNJsv_BPBMPnd3sNk2PipWG_rgNBnDaa_r55NA/viewform?embedded=true&${prefillParams.toString()}`;
-
-      // Mostrar el iframe embebido
-      setShowGoogleFormIframe(true);
-      setGoogleFormIframeURL(iframeURL);
-
-      // Marcar como exitoso ya que el iframe se mostrará
-      const success = true;
-
-      if (success) {
-        setFormError('');
-        // No limpiar el formulario ni mostrar notificación de pago hasta que se complete el formulario de Google
-        // El iframe se mostrará con los datos pre-llenados
-      } else {
-        // Si todos los métodos fallan, ofrecer abrir el formulario de Google directamente
-        const shouldOpenGoogleForm = window.confirm(
-          'No se pudo enviar el formulario automáticamente debido a restricciones de seguridad. ' +
-          '¿Deseas abrir el formulario de Google directamente para completar tu registro?'
-        );
-
-        if (shouldOpenGoogleForm) {
-          // Crear URL con datos pre-llenados
-          const prefillParams = new URLSearchParams();
-          Object.entries(formDataObj).forEach(([key, value]) => {
-            if (value) {
-              prefillParams.append(key, value);
-            }
-          });
-
-          const googleFormPrefillURL = `${googleFormURL}?${prefillParams.toString()}`;
-          window.open(googleFormPrefillURL, '_blank');
-        }
-
-        throw new Error('No se pudo enviar el formulario automáticamente. Se ofreció abrir el formulario de Google directamente.');
-      }
-    } catch (error) {
-      console.error('Error al enviar formulario:', error);
-      setFormError('Ha ocurrido un error al enviar el formulario. Por favor, intenta nuevamente o contacta al administrador.');
-    }
+    setShowGoogleFormIframe(true);
+    setGoogleFormIframeURL('https://docs.google.com/forms/d/e/1FAIpQLSe-3uEhXs7UrNJsv_BPBMPnd3sNk2PipWG_rgNBnDaa_r55NA/viewform?embedded=true');
   };
 
   return (
@@ -247,7 +105,7 @@ const RegistrationSection: React.FC = () => {
               </div>
 
               {/* Payment Success Message */}
-              {formSubmitted && (
+              {showPaymentNotification && (
                 <div className="mb-6 p-4 bg-green-500/20 border border-green-500/30 rounded-xl">
                   <div className="flex items-center justify-center space-x-2 text-green-200">
                     <CheckCircle className="w-5 h-5" />
@@ -260,7 +118,7 @@ const RegistrationSection: React.FC = () => {
               )}
 
               {/* CTA Buttons */}
-              {!formSubmitted && (
+              {!showPaymentNotification && (
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-6 sm:mb-8">
                   <button
                     onClick={handleRegisterClick}
@@ -280,357 +138,6 @@ const RegistrationSection: React.FC = () => {
         </div>
       </section>
 
-      {/* Registration Form Modal */}
-      {showRegistrationForm && (
-        <div
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              setShowRegistrationForm(false);
-            }
-          }}
-        >
-          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            {/* Modal Header */}
-            <div className="bg-gradient-to-r from-red-600 to-red-700 text-white p-6 relative">
-              <button
-                onClick={() => setShowRegistrationForm(false)}
-                className="absolute top-4 right-4 w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-              <h1 className="text-2xl sm:text-3xl font-bold text-center">🌎 III FORO PANAMERICANO</h1>
-              <p className="text-center text-white/90 mt-2">DE JÓVENES POLÍTICOS - LIMA / PERÚ 2025</p>
-            </div>
-
-            {/* Form Container */}
-            <div className="p-6">
-              {/* Intro Text */}
-              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg mb-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">¡Tu voz puede transformar América! 🌎</h3>
-                <p className="text-gray-700 mb-2">
-                  Inscríbete al <strong>III Foro Panamericano de Jóvenes Políticos – Perú 2025</strong> y forma parte de una generación decidida a liderar el cambio.
-                </p>
-                <p className="text-gray-700"><strong>👉 Inscríbete ahora y haz historia.</strong></p>
-              </div>
-
-              {/* Success Message */}
-              {formSubmitted && (
-                <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-6">
-                  <div className="flex items-center">
-                    <CheckCircle className="w-5 h-5 mr-2" />
-                    <span className="font-semibold">¡Excelente! Tu inscripción ha sido enviada exitosamente.</span>
-                  </div>
-                  <p className="mt-2">Te contactaremos pronto con más información sobre el evento.</p>
-                </div>
-              )}
-
-              {/* Error Message */}
-              {formError && (
-                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6">
-                  {formError}
-                </div>
-              )}
-
-              {/* Registration Form */}
-              <form onSubmit={handleFormSubmit} className="space-y-6">
-                {/* Email */}
-                <div className="form-group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    <Mail className="w-4 h-4 inline mr-2" />
-                    Correo electrónico <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleFormInputChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors"
-                    placeholder="Tu dirección de correo electrónico"
-                    required
-                  />
-                </div>
-
-                {/* Nombre completo */}
-                <div className="form-group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    <User className="w-4 h-4 inline mr-2" />
-                    Nombre completo <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="nombre"
-                    value={formData.nombre}
-                    onChange={handleFormInputChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors"
-                    placeholder="Tu nombre completo"
-                    required
-                  />
-                </div>
-
-                {/* Fecha de nacimiento */}
-                <div className="form-group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    <CalendarIcon className="w-4 h-4 inline mr-2" />
-                    Fecha de nacimiento <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="date"
-                    name="fechaNacimiento"
-                    value={formData.fechaNacimiento}
-                    onChange={handleFormInputChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors"
-                    required
-                  />
-                </div>
-
-                {/* Nacionalidad */}
-                <div className="form-group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    <Globe className="w-4 h-4 inline mr-2" />
-                    Nacionalidad <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="nacionalidad"
-                    value={formData.nacionalidad}
-                    onChange={handleFormInputChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors"
-                    placeholder="Tu nacionalidad"
-                    required
-                  />
-                </div>
-
-                {/* Género */}
-                <div className="form-group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Género <span className="text-red-500">*</span>
-                  </label>
-                  <div className="flex gap-6">
-                    <label className="flex items-center">
-                      <input
-                        type="radio"
-                        name="genero"
-                        value="Masculino"
-                        checked={formData.genero === 'Masculino'}
-                        onChange={handleFormInputChange}
-                        className="w-4 h-4 text-blue-600"
-                        required
-                      />
-                      <span className="ml-2">Masculino</span>
-                    </label>
-                    <label className="flex items-center">
-                      <input
-                        type="radio"
-                        name="genero"
-                        value="Femenino"
-                        checked={formData.genero === 'Femenino'}
-                        onChange={handleFormInputChange}
-                        className="w-4 h-4 text-blue-600"
-                        required
-                      />
-                      <span className="ml-2">Femenino</span>
-                    </label>
-                  </div>
-                </div>
-
-                {/* Documento de identidad */}
-                <div className="form-group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Documento de identidad <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="documento"
-                    value={formData.documento}
-                    onChange={handleFormInputChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors"
-                    placeholder="Tu documento de identidad"
-                    required
-                  />
-                </div>
-
-                {/* Ocupación */}
-                <div className="form-group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Ocupación actual <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="ocupacion"
-                    value={formData.ocupacion}
-                    onChange={handleFormInputChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors"
-                    placeholder="Tu ocupación actual"
-                    required
-                  />
-                </div>
-
-                {/* Organización */}
-                <div className="form-group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    <Building className="w-4 h-4 inline mr-2" />
-                    Organización o entidad <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="organizacion"
-                    value={formData.organizacion}
-                    onChange={handleFormInputChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors"
-                    placeholder="Tu organización o entidad"
-                    required
-                  />
-                </div>
-
-                {/* Teléfono */}
-                <div className="form-group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    <Phone className="w-4 h-4 inline mr-2" />
-                    Teléfono <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    name="telefono"
-                    value={formData.telefono}
-                    onChange={handleFormInputChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors"
-                    placeholder="Tu número de teléfono"
-                    required
-                  />
-                  <small className="text-gray-500 text-sm">IMPORTANTE: Colocar el indicativo del país</small>
-                </div>
-
-                {/* Dirección */}
-                <div className="form-group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    <MapPinIcon className="w-4 h-4 inline mr-2" />
-                    Dirección (Ciudad y País) <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="direccion"
-                    value={formData.direccion}
-                    onChange={handleFormInputChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors"
-                    placeholder="Tu dirección (ciudad y país)"
-                    required
-                  />
-                </div>
-
-                {/* Cómo se enteró */}
-                <div className="form-group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    ¿Cómo se enteró del evento?
-                  </label>
-                  <textarea
-                    name="comoSeEntero"
-                    value={formData.comoSeEntero}
-                    onChange={handleFormInputChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors"
-                    placeholder="Tu respuesta"
-                    rows={3}
-                  />
-                </div>
-
-                {/* Participación en elecciones */}
-                <div className="form-group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    ¿Ha participado en ediciones anteriores? <span className="text-red-500">*</span>
-                  </label>
-                  <div className="flex gap-6">
-                    <label className="flex items-center">
-                      <input
-                        type="radio"
-                        name="participacionElecciones"
-                        value="Sí"
-                        checked={formData.participacionElecciones === 'Sí'}
-                        onChange={handleFormInputChange}
-                        className="w-4 h-4 text-blue-600"
-                        required
-                      />
-                      <span className="ml-2">Sí</span>
-                    </label>
-                    <label className="flex items-center">
-                      <input
-                        type="radio"
-                        name="participacionElecciones"
-                        value="No"
-                        checked={formData.participacionElecciones === 'No'}
-                        onChange={handleFormInputChange}
-                        className="w-4 h-4 text-blue-600"
-                        required
-                      />
-                      <span className="ml-2">No</span>
-                    </label>
-                  </div>
-                </div>
-
-                {/* Año de elecciones */}
-                {formData.participacionElecciones === 'Sí' && (
-                  <div className="form-group">
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      ¿En qué año?
-                    </label>
-                    <div className="flex gap-6">
-                      <label className="flex items-center">
-                        <input
-                          type="radio"
-                          name="añoElecciones"
-                          value="Buenos Aires 2023"
-                          checked={formData.añoElecciones === 'Buenos Aires 2023'}
-                          onChange={handleFormInputChange}
-                          className="w-4 h-4 text-blue-600"
-                        />
-                        <span className="ml-2">Buenos Aires 2023</span>
-                      </label>
-                      <label className="flex items-center">
-                        <input
-                          type="radio"
-                          name="añoElecciones"
-                          value="Buenos Aires 2024"
-                          checked={formData.añoElecciones === 'Buenos Aires 2024'}
-                          onChange={handleFormInputChange}
-                          className="w-4 h-4 text-blue-600"
-                        />
-                        <span className="ml-2">Buenos Aires 2024</span>
-                      </label>
-                    </div>
-                  </div>
-                )}
-
-                {/* Curriculum */}
-                <div className="form-group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    <FileText className="w-4 h-4 inline mr-2" />
-                    Breve descripción del Curriculum (máx. 150 palabras) <span className="text-red-500">*</span>
-                  </label>
-                  <textarea
-                    name="curriculum"
-                    value={formData.curriculum}
-                    onChange={handleFormInputChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors"
-                    placeholder="Tu respuesta"
-                    rows={4}
-                    maxLength={1000}
-                    required
-                  />
-                  <small className="text-gray-500 text-sm">Máximo 150 palabras</small>
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 hover:scale-105 shadow-lg text-lg uppercase tracking-wide"
-                >
-                  Enviar Inscripción
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Google Forms Iframe Modal */}
       {showGoogleFormIframe && (
         <div
@@ -644,46 +151,12 @@ const RegistrationSection: React.FC = () => {
           <div className="bg-white rounded-2xl max-w-4xl w-full h-[90vh] p-6 flex flex-col">
             {/* Modal Header */}
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-bold text-gray-800">Completa tu Inscripción</h2>
+              <h2 className="text-2xl font-bold text-gray-800">Formulario de Inscripción</h2>
               <button
                 onClick={() => setShowGoogleFormIframe(false)}
                 className="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors"
               >
                 <X className="w-5 h-5 text-gray-600" />
-              </button>
-            </div>
-
-            {/* Instructions */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
-              <p className="text-blue-700 text-sm">
-                <strong>Instrucciones:</strong> Los datos que completaste ya están pre-llenados en el formulario.
-                Revisa la información y haz clic en "Enviar" para completar tu inscripción.
-              </p>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex gap-3 mb-4">
-              <button
-                onClick={() => {
-                  setShowGoogleFormIframe(false);
-                  setFormSubmitted(true);
-                  setFormData({
-                    email: '', nombre: '', fechaNacimiento: '', nacionalidad: '', genero: '',
-                    documento: '', ocupacion: '', organizacion: '', telefono: '', direccion: '',
-                    comoSeEntero: '', participacionElecciones: '', añoElecciones: '', curriculum: ''
-                  });
-                  setShowRegistrationForm(false);
-                  setShowPaymentNotification(true);
-                }}
-                className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
-              >
-                Completé el Formulario
-              </button>
-              <button
-                onClick={() => setShowGoogleFormIframe(false)}
-                className="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
-              >
-                Cancelar
               </button>
             </div>
 
