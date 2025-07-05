@@ -114,37 +114,95 @@ const RegistrationSection: React.FC = () => {
       console.log('📧 Nombre + Email:', nombreConEmail);
       console.log('==========================================');
       
-      // Intentar múltiples métodos de envío
+      // Intentar múltiples métodos de envío para evitar problemas de CORS
       let success = false;
       
-      // Método 1: Usando XMLHttpRequest (más confiable para Google Forms)
+      // Método 1: Usando un proxy CORS público
       try {
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', googleFormURL, true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        const proxyURL = 'https://cors-anywhere.herokuapp.com/';
+        const response = await fetch(proxyURL + googleFormURL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Origin': window.location.origin
+          },
+          body: params.toString()
+        });
         
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState === 4) {
-            console.log('XMLHttpRequest Status:', xhr.status, xhr.statusText);
-            if (xhr.status === 0 || xhr.status === 200) {
-              success = true;
-              console.log('Formulario enviado exitosamente con XMLHttpRequest');
-            } else {
-              console.log('Error en XMLHttpRequest:', xhr.status, xhr.statusText);
-            }
-          }
-        };
-        
-        xhr.send(params.toString());
-        
-        // Esperar un poco para que se complete la petición
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        
+        if (response.ok || response.status === 0) {
+          success = true;
+          console.log('Formulario enviado exitosamente con proxy CORS');
+        } else {
+          console.log('Error con proxy CORS:', response.status, response.statusText);
+        }
       } catch (error) {
-        console.log('Error con XMLHttpRequest:', error);
+        console.log('Error con proxy CORS:', error);
       }
 
-      // Método 2: Usando fetch con URLSearchParams
+      // Método 1.5: Usando otro proxy CORS alternativo
+      if (!success) {
+        try {
+          const proxyURL2 = 'https://api.allorigins.win/raw?url=';
+          const response = await fetch(proxyURL2 + encodeURIComponent(googleFormURL), {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: params.toString()
+          });
+          
+          if (response.ok || response.status === 0) {
+            success = true;
+            console.log('Formulario enviado exitosamente con proxy CORS alternativo');
+          } else {
+            console.log('Error con proxy CORS alternativo:', response.status, response.statusText);
+          }
+        } catch (error) {
+          console.log('Error con proxy CORS alternativo:', error);
+        }
+      }
+
+      // Método 2: Usando iframe oculto (método más confiable para Google Forms)
+      if (!success) {
+        try {
+          const iframe = document.createElement('iframe');
+          iframe.style.display = 'none';
+          iframe.name = 'google-form-submit';
+          document.body.appendChild(iframe);
+          
+          const form = document.createElement('form');
+          form.method = 'POST';
+          form.action = googleFormURL;
+          form.target = 'google-form-submit';
+          
+          // Agregar todos los campos al formulario
+          Object.entries(formDataObj).forEach(([key, value]) => {
+            if (value) {
+              const input = document.createElement('input');
+              input.type = 'hidden';
+              input.name = key;
+              input.value = value;
+              form.appendChild(input);
+            }
+          });
+          
+          document.body.appendChild(form);
+          form.submit();
+          
+          // Limpiar después de un tiempo
+          setTimeout(() => {
+            document.body.removeChild(form);
+            document.body.removeChild(iframe);
+          }, 5000);
+          
+          success = true;
+          console.log('Formulario enviado exitosamente con iframe');
+        } catch (error) {
+          console.log('Error con iframe:', error);
+        }
+      }
+
+      // Método 3: Usando fetch con no-cors (último recurso)
       if (!success) {
         try {
           await fetch(googleFormURL, {
@@ -156,23 +214,9 @@ const RegistrationSection: React.FC = () => {
             mode: 'no-cors'
           });
           success = true;
-          console.log('Formulario enviado exitosamente con URLSearchParams');
+          console.log('Formulario enviado exitosamente con fetch no-cors');
         } catch (error) {
-          console.log('Error con URLSearchParams:', error);
-        }
-      }
-
-      // Método 3: Usando XMLHttpRequest como fallback
-      if (!success) {
-        try {
-          const xhr = new XMLHttpRequest();
-          xhr.open('POST', googleFormURL, true);
-          xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-          xhr.send(params.toString());
-          success = true;
-          console.log('Formulario enviado exitosamente con XMLHttpRequest');
-        } catch (error) {
-          console.log('Error con XMLHttpRequest:', error);
+          console.log('Error con fetch no-cors:', error);
         }
       }
 
@@ -187,7 +231,26 @@ const RegistrationSection: React.FC = () => {
         setShowRegistrationForm(false);
         setShowPaymentNotification(true);
       } else {
-        throw new Error('No se pudo enviar el formulario con ningún método');
+        // Si todos los métodos fallan, ofrecer abrir el formulario de Google directamente
+        const shouldOpenGoogleForm = window.confirm(
+          'No se pudo enviar el formulario automáticamente debido a restricciones de seguridad. ' +
+          '¿Deseas abrir el formulario de Google directamente para completar tu registro?'
+        );
+        
+        if (shouldOpenGoogleForm) {
+          // Crear URL con datos pre-llenados
+          const prefillParams = new URLSearchParams();
+          Object.entries(formDataObj).forEach(([key, value]) => {
+            if (value) {
+              prefillParams.append(key, value);
+            }
+          });
+          
+          const googleFormPrefillURL = `${googleFormURL}?${prefillParams.toString()}`;
+          window.open(googleFormPrefillURL, '_blank');
+        }
+        
+        throw new Error('No se pudo enviar el formulario automáticamente. Se ofreció abrir el formulario de Google directamente.');
       }
     } catch (error) {
       console.error('Error al enviar formulario:', error);
