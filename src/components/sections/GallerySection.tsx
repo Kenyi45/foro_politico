@@ -338,7 +338,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
                 <Image className="w-4 sm:w-5 h-4 sm:h-5" />
                 <span>Imágenes</span>
               </button>
-            </div>
+              </div>
             </div>
 
           {/* Tab Content */}
