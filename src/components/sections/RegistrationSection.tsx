@@ -67,9 +67,11 @@ const RegistrationSection: React.FC = () => {
     try {
       // Crear un objeto con todos los datos del formulario
       // Basado en la estructura del Google Form: https://docs.google.com/forms/d/e/1FAIpQLSe-3uEhXs7UrNJsv_BPBMPnd3sNk2PipWG_rgNBnDaa_r55NA/viewform
-      // NOTA: Hay un problema en el formulario - Email y Nacionalidad comparten el mismo entry ID
+      // SOLUCIÓN: Concatenar nombre y email en entry.1150976519 con formato "nombre - email"
+      const nombreConEmail = formData.email ? `${formData.nombre} - ${formData.email}` : formData.nombre;
+      
       const formDataObj: Record<string, string> = {
-        'entry.1150976519': formData.nombre, // Nombre completo
+        'entry.1150976519': nombreConEmail, // Nombre completo + Email concatenados
         'entry.1359745950': formData.genero, // Género
         'entry.969671877': formData.documento, // Documento de identidad
         'entry.989222933': formData.ocupacion, // Ocupación actual
@@ -78,16 +80,9 @@ const RegistrationSection: React.FC = () => {
         'entry.1612702848': formData.direccion, // Dirección
         'entry.298256039': formData.comoSeEntero || '', // Cómo te enteraste del evento
         'entry.168457685': formData.participacionElecciones, // ¿Ha participado en ediciones anteriores?
-        'entry.376236169': formData.curriculum // Breve descripción del Currículum
+        'entry.376236169': formData.curriculum, // Breve descripción del Currículum
+        'entry.1876053177': formData.nacionalidad // Nacionalidad
       };
-
-      // Manejar el conflicto entre Email y Nacionalidad (ambos usan entry.1876053177)
-      // Priorizamos el email ya que es más importante para el contacto
-      if (formData.email) {
-        formDataObj['entry.1876053177'] = formData.email;
-      } else if (formData.nacionalidad) {
-        formDataObj['entry.1876053177'] = formData.nacionalidad;
-      }
 
       // Agregar fecha de nacimiento si existe
       if (formData.fechaNacimiento) {
@@ -115,28 +110,38 @@ const RegistrationSection: React.FC = () => {
       console.log('=== ENVÍO DE FORMULARIO A GOOGLE FORMS ===');
       console.log('URL del formulario:', googleFormURL);
       console.log('Datos a enviar:', formDataObj);
-      console.log('⚠️  NOTA: Email y Nacionalidad comparten entry ID - priorizando email');
+      console.log('✅ SOLUCIÓN IMPLEMENTADA: Email concatenado con nombre en entry.1150976519');
+      console.log('📧 Nombre + Email:', nombreConEmail);
       console.log('==========================================');
       
       // Intentar múltiples métodos de envío
       let success = false;
       
-      // Método 1: Usando fetch con FormData
+      // Método 1: Usando XMLHttpRequest (más confiable para Google Forms)
       try {
-        const formData = new FormData();
-        Object.entries(formDataObj).forEach(([key, value]) => {
-          if (value) formData.append(key, value);
-        });
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', googleFormURL, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         
-        await fetch(googleFormURL, {
-          method: 'POST',
-          body: formData,
-          mode: 'no-cors'
-        });
-        success = true;
-        console.log('Formulario enviado exitosamente con FormData');
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4) {
+            console.log('XMLHttpRequest Status:', xhr.status, xhr.statusText);
+            if (xhr.status === 0 || xhr.status === 200) {
+              success = true;
+              console.log('Formulario enviado exitosamente con XMLHttpRequest');
+            } else {
+              console.log('Error en XMLHttpRequest:', xhr.status, xhr.statusText);
+            }
+          }
+        };
+        
+        xhr.send(params.toString());
+        
+        // Esperar un poco para que se complete la petición
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
       } catch (error) {
-        console.log('Error con FormData, intentando con URLSearchParams:', error);
+        console.log('Error con XMLHttpRequest:', error);
       }
 
       // Método 2: Usando fetch con URLSearchParams
@@ -192,108 +197,108 @@ const RegistrationSection: React.FC = () => {
 
   return (
     <>
-      <section id="registro" className="section-padding bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700 relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-full h-full" 
-               style={{
-                 backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-               }}
-          />
-        </div>
+    <section id="registro" className="section-padding bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-0 left-0 w-full h-full" 
+             style={{
+               backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+             }}
+        />
+      </div>
 
-        {/* Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-32 sm:w-64 h-32 sm:h-64 bg-accent-500/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-40 sm:w-80 h-40 sm:h-80 bg-gold-500/10 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 sm:w-96 h-48 sm:h-96 bg-primary-400/5 rounded-full blur-3xl"></div>
-        </div>
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-32 sm:w-64 h-32 sm:h-64 bg-accent-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-40 sm:w-80 h-40 sm:h-80 bg-gold-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 sm:w-96 h-48 sm:h-96 bg-primary-400/5 rounded-full blur-3xl"></div>
+      </div>
 
-        <div className="container-custom relative z-10">
-          {/* Section Header */}
-          <div className="text-center mb-12 sm:mb-16">
-            <div className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-accent-500/20 border border-accent-500/30 text-accent-200 mb-4 sm:mb-6">
-              <Calendar className="w-3 sm:w-4 h-3 sm:h-4 mr-2" />
-              <span className="badge-text">{t('countdown.badge')}</span>
-            </div>
-            
-            <h2 className="title-section text-white mb-4 sm:mb-6">
-              {isExpired ? t('countdown.title.started') : t('countdown.title.remaining')}
-            </h2>
-            
-            <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto mb-6 sm:mb-8 px-4">
-              {t('event.title')}
-            </p>
+      <div className="container-custom relative z-10">
+        {/* Section Header */}
+        <div className="text-center mb-12 sm:mb-16">
+          <div className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-accent-500/20 border border-accent-500/30 text-accent-200 mb-4 sm:mb-6">
+            <Calendar className="w-3 sm:w-4 h-3 sm:h-4 mr-2" />
+            <span className="badge-text">{t('countdown.badge')}</span>
           </div>
+          
+          <h2 className="title-section text-white mb-4 sm:mb-6">
+            {isExpired ? t('countdown.title.started') : t('countdown.title.remaining')}
+          </h2>
+          
+          <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto mb-6 sm:mb-8 px-4">
+            {t('event.title')}
+          </p>
+        </div>
 
-          {/* Countdown Display */}
-          {!isExpired && (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16 max-w-4xl mx-auto px-4">
-              {timeUnits.map((unit, index) => (
-                <div
-                  key={unit.label}
-                  className="text-center animate-bounce-in"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <div className="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 group">
-                    <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300">
-                      {formatTime(unit.value)}
-                    </div>
-                    <div className="text-white/70 font-medium uppercase tracking-wider text-xs sm:text-sm">
-                      {unit.label}
-                    </div>
+        {/* Countdown Display */}
+        {!isExpired && (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16 max-w-4xl mx-auto px-4">
+            {timeUnits.map((unit, index) => (
+              <div
+                key={unit.label}
+                className="text-center animate-bounce-in"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 group">
+                  <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300">
+                    {formatTime(unit.value)}
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* Registration CTA Title */}
-          <div className="mt-8 sm:mt-12 mb-8 sm:mb-12 px-4">
-            <p className="text-base sm:text-lg text-white/80 max-w-3xl mx-auto text-center">
-              {t('registration.description')}
-            </p>
-          </div>
-
-          {/* Enhanced CTA Section */}
-          <div className="text-center px-4">
-            <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl sm:rounded-2xl p-6 sm:p-8 max-w-3xl mx-auto">
-              <div className="mb-6 sm:mb-8">
-                <div className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white mb-4">
-                  <span className="w-2 h-2 bg-gold-400 rounded-full mr-2"></span>
-                  <span className="font-semibold text-xs sm:text-sm">{t('registration.badge')}</span>
+                  <div className="text-white/70 font-medium uppercase tracking-wider text-xs sm:text-sm">
+                    {unit.label}
+                  </div>
                 </div>
               </div>
+            ))}
+          </div>
+        )}
 
-              {/* Payment Success Message */}
+        {/* Registration CTA Title */}
+        <div className="mt-8 sm:mt-12 mb-8 sm:mb-12 px-4">
+          <p className="text-base sm:text-lg text-white/80 max-w-3xl mx-auto text-center">
+            {t('registration.description')}
+          </p>
+        </div>
+
+        {/* Enhanced CTA Section */}
+        <div className="text-center px-4">
+          <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl sm:rounded-2xl p-6 sm:p-8 max-w-3xl mx-auto">
+            <div className="mb-6 sm:mb-8">
+              <div className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white mb-4">
+                <span className="w-2 h-2 bg-gold-400 rounded-full mr-2"></span>
+                <span className="font-semibold text-xs sm:text-sm">{t('registration.badge')}</span>
+              </div>
+            </div>
+
+            {/* Payment Success Message */}
               {formSubmitted && (
-                <div className="mb-6 p-4 bg-green-500/20 border border-green-500/30 rounded-xl">
-                  <div className="flex items-center justify-center space-x-2 text-green-200">
-                    <CheckCircle className="w-5 h-5" />
-                    <span className="font-semibold">{t('registration.success.title')}</span>
-                  </div>
-                  <p className="text-green-300 text-sm mt-2 text-center">
-                    {t('registration.success.message')}
-                  </p>
+              <div className="mb-6 p-4 bg-green-500/20 border border-green-500/30 rounded-xl">
+                <div className="flex items-center justify-center space-x-2 text-green-200">
+                  <CheckCircle className="w-5 h-5" />
+                  <span className="font-semibold">{t('registration.success.title')}</span>
                 </div>
-              )}
+                <p className="text-green-300 text-sm mt-2 text-center">
+                  {t('registration.success.message')}
+                </p>
+              </div>
+            )}
 
-              {/* CTA Buttons */}
+            {/* CTA Buttons */}
               {!formSubmitted && (
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-6 sm:mb-8">
-                  <button
-                    onClick={handleRegisterClick}
-                    className="w-full sm:w-auto bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-xl transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
-                  >
-                    <CreditCard className="w-5 h-5" />
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-6 sm:mb-8">
+                <button
+                  onClick={handleRegisterClick}
+                  className="w-full sm:w-auto bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-xl transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
+                >
+                  <CreditCard className="w-5 h-5" />
                     <span>Registrarse Ahora</span>
-                  </button>
-                  
-                  <button className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border border-white/30 hover:border-white/50 font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-xl transition-all duration-300">
-                    {t('registration.cta.info')}
-                  </button>
-                </div>
-              )}
+                </button>
+                
+                <button className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border border-white/30 hover:border-white/50 font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-xl transition-all duration-300">
+                  {t('registration.cta.info')}
+                </button>
+              </div>
+            )}
             </div>
           </div>
         </div>
